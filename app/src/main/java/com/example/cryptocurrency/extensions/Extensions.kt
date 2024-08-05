@@ -3,12 +3,14 @@ package com.example.cryptocurrency.extensions
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.cryptocurrency.MainActivity
 import com.example.cryptocurrency.databinding.CategoryTabViewBinding
 import com.example.cryptocurrency.domain.entities.CategoriesEntity
+import com.example.cryptocurrency.domain.entities.LogMessage
 import com.google.android.material.tabs.TabLayout
 
 @SuppressLint("CommitTransaction")
@@ -52,4 +54,14 @@ fun TabLayout.setCustomCategories(list: List<CategoriesEntity>, context: Context
     requestLayout()
 
 
+}
+
+fun LogMessage.e() {
+    Log.e(tag ,message)
+}
+fun LogMessage.i() {
+    Log.i(tag ,message)
+}
+fun LogMessage.d() {
+    Log.d(tag ,message)
 }
