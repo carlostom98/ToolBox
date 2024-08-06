@@ -14,9 +14,9 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/tab_layout_dimen" />
 
-    <androidx.viewpager.widget.ViewPager
+    <FrameLayout
         android:id="@+id/screens_canvas"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:background="@color/black"
         />

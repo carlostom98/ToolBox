@@ -26,7 +26,6 @@ class MainActivity : AppCompatActivity() {
             transaction.setReorderingAllowed(true)
             transaction.replace(binding.screensCanvas.id, fragment)
             transaction.commit()
-
         }
 
         val listOfTabs: List<CategoriesEntity> = listOf(
