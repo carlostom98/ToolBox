@@ -127,21 +127,65 @@ fun something2(block: (number: Int) -> Int): Int {
 
 fun main(array: Array<String>) {
 
-    val string = "Hola".something {
-        it +"....."+ "Aca es donde se devuelve el string"
-    }
+//    val string = "Hola".something {
+//        it +"....."+ "Aca es donde se devuelve el string"
+//    }
+//
+//    val result = something2 { number ->
+//        number + 10 +15
+//    }
+//
+//    println(string)
 
-    val result = something2 { number ->
-        number + 10 +15
-    }
-
-    println(string)
+    val orderedByTitleAndAscendant = NotesType.Views(OrderType.Ascendant)
+    printType(orderedByTitleAndAscendant)
+    printType(orderedByTitleAndAscendant.copy(OrderType.Descendant))
 
 
 }
 
 fun <T, R> T.something(block: (T) -> R): R {
     return block(this)
+}
+
+sealed class NotesType(val orderType: OrderType) {
+    class Title(orderType: OrderType) : NotesType(orderType)
+    class Date(orderType: OrderType) : NotesType(orderType)
+    class Views(orderType: OrderType) : NotesType(orderType)
+
+    fun copy(orderType: OrderType): NotesType {
+        return when (this) {
+            is Date -> Date(orderType)
+            is Title -> Title(orderType)
+            is Views -> Views(orderType)
+        }
+    }
+}
+
+fun printType(notesType: NotesType) {
+    when (notesType.orderType) {
+        OrderType.Ascendant -> {
+            when (notesType) {
+                is NotesType.Date -> println("Asc, Date")
+                is NotesType.Title -> println("Asc, Title")
+                is NotesType.Views -> println("Asc, Views")
+            }
+        }
+
+        OrderType.Descendant -> {
+            when(notesType) {
+                is NotesType.Date -> println("Dsc, Date")
+                is NotesType.Title -> println("Dsc, Title")
+                is NotesType.Views -> println("Dsc, Views")
+            }
+        }
+    }
+}
+
+
+sealed class OrderType() {
+    object Ascendant : OrderType()
+    object Descendant : OrderType()
 }
 
 
