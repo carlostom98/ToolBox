@@ -125,24 +125,22 @@ fun something2(block: (number: Int) -> Int): Int {
     return block(5)
 }
 
-fun main(array: Array<String>) {
-
-//    val string = "Hola".something {
-//        it +"....."+ "Aca es donde se devuelve el string"
-//    }
+//fun main(array: Array<String>) {
 //
-//    val result = something2 { number ->
-//        number + 10 +15
-//    }
+////    val string = "Hola".something {
+////        it +"....."+ "Aca es donde se devuelve el string"
+////    }
+////
+////    val result = something2 { number ->
+////        number + 10 +15
+////    }
+////
+////    println(string)
 //
-//    println(string)
-
-    val orderedByTitleAndAscendant = NotesType.Views(OrderType.Ascendant)
-    printType(orderedByTitleAndAscendant)
-    printType(orderedByTitleAndAscendant.copy(OrderType.Descendant))
-
-
-}
+//    getPairs( "Hello" to 2)
+//
+//
+//}
 
 fun <T, R> T.something(block: (T) -> R): R {
     return block(this)
@@ -180,6 +178,10 @@ fun printType(notesType: NotesType) {
             }
         }
     }
+}
+
+fun getPairs(scan: Pair<String, Int>) {
+    println("first one ${scan.first},  secondo one ${scan.second}")
 }
 
 

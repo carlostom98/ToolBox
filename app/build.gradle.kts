@@ -63,5 +63,14 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
+    //RxKotlin
+    implementation(libs.rx.kotlin)
+    implementation(libs.rx.android)
+    implementation(libs.androidx.frgment)
+    implementation(kotlin("reflect"))
+
+    // Reflection
+    implementation(libs.reflection)
+
 
 }

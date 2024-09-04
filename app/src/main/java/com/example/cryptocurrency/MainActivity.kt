@@ -1,20 +1,20 @@
 package com.example.cryptocurrency
 
 import android.os.Bundle
-import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.cryptocurrency.databinding.ActivityMainBinding
 import com.example.cryptocurrency.domain.entities.CategoriesEntity
-import com.example.cryptocurrency.domain.entities.LogMessage
-import com.example.cryptocurrency.extensions.d
 import com.example.cryptocurrency.extensions.setCustomCategories
-import com.example.cryptocurrency.extensions.toastShort
 import com.example.cryptocurrency.presenter.Screen1
+import com.example.cryptocurrency.presenter.viewintents.UpdaterViewModel
 import com.google.android.material.tabs.TabLayout
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding
+    val viewModel: UpdaterViewModel by viewModels()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,10 +30,15 @@ class MainActivity : AppCompatActivity() {
 
         val listOfTabs: List<CategoriesEntity> = listOf(
             CategoriesEntity(isSelected = true, name = "Drink"),
-            CategoriesEntity( name = "Food"),
-            CategoriesEntity( name ="Meal"),
-            CategoriesEntity( name ="Snack"),
-            CategoriesEntity( name ="Beverages"),
+            CategoriesEntity(name = "Food"),
+            CategoriesEntity(name = "Meal"),
+            CategoriesEntity(name = "Snack"),
+            CategoriesEntity(name = "wsdfghjk"),
+            CategoriesEntity(name = "asdfghjklnc"),
+            CategoriesEntity(name = "lakajshha"),
+            CategoriesEntity(name = "asdfghjmajaja"),
+            CategoriesEntity(name = "daddadaassa"),
+            CategoriesEntity(name = "papapapasksks")
         )
 
 
@@ -41,7 +46,7 @@ class MainActivity : AppCompatActivity() {
             tabLayout.setCustomCategories(listOfTabs, this@MainActivity)
             tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
                 override fun onTabSelected(tab: TabLayout.Tab?) {
-                    LogMessage("TAB_TAG", tab?.tag.toString()).d()
+
                 }
 
                 override fun onTabUnselected(tab: TabLayout.Tab?) = Unit
@@ -53,9 +58,7 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-
     }
-
 
 
 }

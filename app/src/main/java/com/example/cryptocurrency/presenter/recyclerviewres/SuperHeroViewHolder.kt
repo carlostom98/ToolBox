@@ -8,14 +8,6 @@ import com.example.cryptocurrency.domain.entities.SuperHeroData
 class SuperHeroViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     private val binding = SuperheroRowSketchBinding.bind(view)
+    val superHeroName = binding.superheroName
 
-    fun render(superHeroData: SuperHeroData, onItemRemove: (SuperHeroData) -> Unit) {
-        with(binding) {
-            superheroName.text = superHeroData.name
-            superheroName.setOnClickListener {
-                onItemRemove(superHeroData)
-            }
-            superheroId.text = superHeroData.id
-        }
-    }
 }
