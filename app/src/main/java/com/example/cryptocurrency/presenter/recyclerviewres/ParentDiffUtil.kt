@@ -1,7 +1,7 @@
 package com.example.cryptocurrency.presenter.recyclerviewres
 
 import androidx.recyclerview.widget.DiffUtil
-import com.example.cryptocurrency.domain.AdapterItems
+import com.example.cryptocurrency.domain.interfaces.AdapterItems
 
 class ParentDiffUtil(
     private val oldList: List<AdapterItems>,

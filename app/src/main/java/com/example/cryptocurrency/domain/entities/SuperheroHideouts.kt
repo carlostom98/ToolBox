@@ -2,14 +2,13 @@ package com.example.cryptocurrency.domain.entities
 
 import com.example.cryptocurrency.domain.interfaces.AdapterItems
 
-data class SuperHeroData(val name: String, val id: String, val superPower: String = "water") :
-    AdapterItems {
+data class SuperheroHideouts(val name: String, val type: String, val superHero: SuperHeroData? = null): AdapterItems {
     override fun isItemTheSame(other: AdapterItems): Boolean {
-        return (other as? SuperHeroData)?.id == this.id
+        return (other as? SuperheroHideouts)?.name == this.name
     }
 
     override fun isContentTheSame(other: AdapterItems): Boolean {
-        return other as? SuperHeroData == this
+        return (other as? SuperheroHideouts) == this
     }
-}
 
+}

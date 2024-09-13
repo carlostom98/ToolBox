@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cryptocurrency.R
 import com.example.cryptocurrency.databinding.SuperheroRowSketchBinding
-import com.example.cryptocurrency.domain.AdapterItems
+import com.example.cryptocurrency.domain.interfaces.AdapterItems
 import com.example.cryptocurrency.domain.entities.SuperHeroData
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegate
 

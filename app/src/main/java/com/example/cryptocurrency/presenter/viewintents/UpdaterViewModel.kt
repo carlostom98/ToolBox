@@ -1,14 +1,11 @@
 package com.example.cryptocurrency.presenter.viewintents
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.cryptocurrency.data.DataFromRemote
 import com.example.cryptocurrency.data.SuperHeroesDataBase
-import com.example.cryptocurrency.data.View
-import com.example.cryptocurrency.domain.DataRepository
+import com.example.cryptocurrency.domain.interfaces.DataRepository
 import com.example.cryptocurrency.domain.RetrieveDataFromRemoteRepository
-import com.example.cryptocurrency.domain.entities.SuperHeroData
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers

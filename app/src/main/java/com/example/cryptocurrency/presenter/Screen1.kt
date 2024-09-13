@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cryptocurrency.MainActivity
 import com.example.cryptocurrency.databinding.FragmentScreen1Binding
 import com.example.cryptocurrency.domain.entities.SuperHeroData
+import com.example.cryptocurrency.domain.entities.SuperheroHideouts
 import com.example.cryptocurrency.presenter.recyclerviewres.SuperHeroAdapter
 import com.example.cryptocurrency.presenter.viewintents.MainIntent
 import com.example.cryptocurrency.presenter.viewintents.UpdaterViewModel
@@ -29,7 +30,6 @@ class Screen1 : Fragment() {
     private val viewModel: UpdaterViewModel by activityViewModels()
 
 
-
     private lateinit var activity: Activity
 
     override fun onCreateView(
@@ -40,12 +40,15 @@ class Screen1 : Fragment() {
         _binding = FragmentScreen1Binding.inflate(inflater, container, false)
         lifecycleScope.launch {
             viewModel.mainState.collect { viewState ->
-                when(viewState) {
+                when (viewState) {
                     is ViewStates.Error -> Log.e("View", "${viewState.errorMessage}")
                     ViewStates.Idle -> Log.d("View", "IDLE")
                     is ViewStates.LoadSuperheroes<*> -> {
-                        superHeroAdapter.updateList(viewState.superheroes as List<SuperHeroData>)
+                        Log.d("View", "Load Superheroes")
+                        val finalList = viewState.superheroes as List<SuperHeroData> + superheroesHideouts
+                        superHeroAdapter.updateList(finalList)
                     }
+
                     ViewStates.Loading -> Log.d("View", "IDLE")
                 }
             }
@@ -78,24 +81,14 @@ class Screen1 : Fragment() {
     }
 
     companion object {
-        private var superheroes = listOf(
-            SuperHeroData("kotlinman", "1"),
-            SuperHeroData("javaman", "2"),
-            SuperHeroData("superman", "3"),
-            SuperHeroData("androidman", "4"),
-            SuperHeroData("androidman", "5"),
-            SuperHeroData("androidman", "6"),
-            SuperHeroData("androidman", "7"),
-            SuperHeroData("androidman", "8"),
-            SuperHeroData("androidman", "9"),
-            SuperHeroData("androidman", "10"),
-            SuperHeroData("androidman", "11"),
-            SuperHeroData("androidman", "12"),
-            SuperHeroData("androidman", "13"),
-            SuperHeroData("androidman", "14"),
-            SuperHeroData("androidman", "15"),
-            SuperHeroData("androidman", "16"),
-            SuperHeroData("androidman", "17")
+        private var superheroesHideouts = listOf(
+            SuperheroHideouts("kotlinmanHideout", "1"),
+            SuperheroHideouts("Baticueva", "2"),
+            SuperheroHideouts("TorreStark", "3"),
+            SuperheroHideouts("Avengers Building", "4"),
+            SuperheroHideouts("Kamehouse", "5"),
+            SuperheroHideouts("SuperHouse", "6"),
+
 
         )
         private var superheroes2 = listOf(
