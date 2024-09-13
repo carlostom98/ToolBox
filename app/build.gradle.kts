@@ -72,5 +72,9 @@ dependencies {
     // Reflection
     implementation(libs.reflection)
 
+    // Hannesdorfmann
+    implementation(libs.hannesdorfmann)
+    implementation(libs.hannesdorfmann.binding)
+
 
 }

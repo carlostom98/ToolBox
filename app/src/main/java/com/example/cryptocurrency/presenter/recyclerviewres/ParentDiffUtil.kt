@@ -1,22 +1,22 @@
 package com.example.cryptocurrency.presenter.recyclerviewres
 
 import androidx.recyclerview.widget.DiffUtil
-import com.example.cryptocurrency.domain.entities.SuperHeroData
+import com.example.cryptocurrency.domain.AdapterItems
 
-class SuperHeroDiffUtil(
-    private val oldList: List<SuperHeroData>,
-    private val newList: List<SuperHeroData>
+class ParentDiffUtil(
+    private val oldList: List<AdapterItems>,
+    private val newList: List<AdapterItems>
 ) : DiffUtil.Callback() {
     override fun getOldListSize(): Int = oldList.size
 
     override fun getNewListSize(): Int = newList.size
 
     override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        return oldList[oldItemPosition].id == newList[newItemPosition].id
+        return oldList[oldItemPosition].isItemTheSame(newList[newItemPosition])
     }
 
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        return oldList[oldItemPosition] == newList[newItemPosition]
+        return oldList[oldItemPosition].isContentTheSame(newList[newItemPosition])
     }
 
 }

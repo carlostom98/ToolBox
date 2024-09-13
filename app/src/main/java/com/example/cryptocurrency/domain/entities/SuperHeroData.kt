@@ -1,5 +1,15 @@
 package com.example.cryptocurrency.domain.entities
 
-data class SuperHeroData(val name: String, val id: String, val superPower: String = "water"): Data
-interface Data
+import com.example.cryptocurrency.domain.AdapterItems
+
+data class SuperHeroData(val name: String, val id: String, val superPower: String = "water") :
+    AdapterItems {
+    override fun isItemTheSame(other: AdapterItems): Boolean {
+        return (other as? SuperHeroData)?.id == this.id
+    }
+
+    override fun isContentTheSame(other: AdapterItems): Boolean {
+        return other as? SuperHeroData == this
+    }
+}
 

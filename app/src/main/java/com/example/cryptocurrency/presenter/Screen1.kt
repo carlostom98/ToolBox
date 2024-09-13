@@ -51,9 +51,7 @@ class Screen1 : Fragment() {
             }
         }
 
-        superHeroAdapter = SuperHeroAdapter(
-            superheroes
-        )
+        superHeroAdapter = SuperHeroAdapter()
         return binding.root
     }
 

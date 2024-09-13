@@ -17,8 +17,6 @@ import com.google.android.material.tabs.TabLayout
 fun Fragment.changeFragment(activity: MainActivity, savedInstanceState: Bundle?) {
 //    val fragmentManager = parentFragmentManager
 //    val fragmentTransaction = fragmentManager.beginTransaction()
-
-
 }
 
 fun String.toastLong(context: Context) {

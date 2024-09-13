@@ -60,6 +60,24 @@ class UpdaterViewModel : ViewModel() {
         )
     }
 }
+//
+//fun main(array: Array<String>) {
+//    val listOfSomeData = listOf(
+//        SomeData(true, "Carlos"),
+//        SomeData(false, "Carlosss"),
+//        SomeData(true, "Andrés")
+//    )
+//
+//    val functionReference: (string: SomeData) -> Boolean = { string -> string.name == "Carlos" }
+//
+//    val data = listOfSomeData.filter(functionReference)
+//
+//    println(data[0].name)
+//}
+//
+//fun dataClassTesting(string: SomeData) = string.name == "Carlos"
+//
+//data class SomeData(val isApproved: Boolean, val name: String)
 
 //
 //fun functionRandom(isSelected: Boolean, presenter: (User) -> Boolean) {
