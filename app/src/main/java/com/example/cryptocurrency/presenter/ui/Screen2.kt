@@ -25,6 +25,7 @@ class Screen2 : Fragment() {
     private val binding: FragmentScreen2Binding get() = _binding
 
     private var currentImage: Bitmap? = null
+    private var pairClick = true
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -62,9 +63,16 @@ class Screen2 : Fragment() {
 
         with(binding) {
             actionButton.setOnClickListener {
-                lifecycleScope.launch {
-                    viewModel.userIntent.send(ImageIntents.GetLeakedImage(currentImage!!))
+                if (pairClick) {
+                    lifecycleScope.launch {
+                        viewModel.userIntent.send(ImageIntents.GetLeakedImage(currentImage!!))
+                    }
+                } else {
+                    lifecycleScope.launch {
+                        viewModel.userIntent.send(ImageIntents.GetOriginalImage(URLS.URL_IMAGE_BEACH))
+                    }
                 }
+                pairClick = !pairClick
             }
         }
     }
