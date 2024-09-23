@@ -1,13 +1,10 @@
 package com.example.cryptocurrency.presenter.viewintents.imagesintent
 
-import android.graphics.Bitmap
-import android.view.View
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.cryptocurrency.domain.usecases.GetOriginalImage
 import com.example.cryptocurrency.domain.usecases.GetProcessedImage
 import com.example.cryptocurrency.domain.usecases.UseCases
-import com.example.cryptocurrency.presenter.viewintents.mainintents.MainIntent
 import com.example.cryptocurrency.presenter.viewintents.ViewStates
 import com.example.cryptocurrency.utils.ImageProcessing
 import kotlinx.coroutines.channels.Channel
@@ -32,22 +29,23 @@ class GetImagesViewModel() : ViewModel() {
     private fun handleIntent() {
         viewModelScope.launch {
             userIntent.consumeAsFlow().collect() { intent ->
-                when(intent) {
-                    is ImageIntents.GetLeakedImage -> getImages.getProcessedImage(viewModelScope, intent.bitmap) { leakedImage ->
-                        _mainState.value = ViewStates.
+                when (intent) {
+                    is ImageIntents.GetLeakedImage -> {
+                        _mainState.value = ViewStates.Loading
+                        getImages.getProcessedImage(viewModelScope, intent.bitmap) { leakedImage ->
+                            _mainState.value = ViewStates.LoadData(leakedImage)
+                        }
                     }
-                    is ImageIntents.GetOriginalImage -> getImages.getOriginalImage(viewModelScope, intent.url) { image ->
 
+                    is ImageIntents.GetOriginalImage -> {
+                        _mainState.value = ViewStates.Loading
+                        getImages.getOriginalImage(viewModelScope, intent.url) { image ->
+                            _mainState.value = ViewStates.LoadData(image)
+                        }
                     }
                 }
             }
         }
     }
-
-
-
-
-
-
 
 }

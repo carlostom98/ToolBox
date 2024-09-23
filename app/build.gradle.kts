@@ -79,5 +79,7 @@ dependencies {
     // Coroutines
     implementation(libs.coroutines)
 
+    implementation(libs.picaso)
+
 
 }

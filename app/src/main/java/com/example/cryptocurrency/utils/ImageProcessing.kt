@@ -3,17 +3,40 @@ package com.example.cryptocurrency.utils
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
+import android.graphics.drawable.Drawable
+import android.util.Log
+import com.example.cryptocurrency.App
+import com.squareup.picasso.Callback
+import com.squareup.picasso.Picasso
+import com.squareup.picasso.Target
+import java.lang.Exception
 import java.net.URL
+import kotlin.coroutines.resume
+import kotlin.coroutines.suspendCoroutine
 
 object ImageProcessing {
 
-    fun getOriginalBitmap(url: String): Bitmap {
-        return URL(url).openStream().use {
-            BitmapFactory.decodeStream(it)
+    suspend fun getOriginalBitmap(url: String): Bitmap {
+        return suspendCoroutine { continuation ->
+            Picasso.get()
+                .load(url)
+                .into(object : Target {
+                    override fun onBitmapLoaded(bitmap: Bitmap?, from: Picasso.LoadedFrom?) {
+                        bitmap?.let(continuation::resume) ?: Log.e("IMAGE_LOADING", "Is null")
+                    }
+
+                    override fun onBitmapFailed(e: Exception?, errorDrawable: Drawable?) {
+                        Log.e("IMAGE_LOADING", "Something went wrong")
+                    }
+
+                    override fun onPrepareLoad(placeHolderDrawable: Drawable?) {
+                        Log.d("IMAGE_LOADING", "Is loading")
+                    }
+                })
         }
     }
 
-    fun applyFilter(source: Bitmap): Bitmap {
+    suspend fun applyFilter(source: Bitmap): Bitmap {
         val width = source.width
         val height = source.height
 
