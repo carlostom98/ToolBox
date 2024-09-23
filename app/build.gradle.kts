@@ -76,5 +76,8 @@ dependencies {
     implementation(libs.hannesdorfmann)
     implementation(libs.hannesdorfmann.binding)
 
+    // Coroutines
+    implementation(libs.coroutines)
+
 
 }

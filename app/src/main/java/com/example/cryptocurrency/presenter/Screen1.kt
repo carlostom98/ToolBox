@@ -44,7 +44,6 @@ class Screen1 : Fragment() {
                     is ViewStates.Error -> Log.e("View", "${viewState.errorMessage}")
                     ViewStates.Idle -> Log.d("View", "IDLE")
                     is ViewStates.LoadSuperheroes<*> -> {
-                        Log.d("View", "Load Superheroes")
                         val finalList = viewState.superheroes as List<SuperHeroData> + superheroesHideouts
                         superHeroAdapter.updateList(finalList)
                     }
