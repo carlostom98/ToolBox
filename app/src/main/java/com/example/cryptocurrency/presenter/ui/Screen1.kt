@@ -1,4 +1,4 @@
-package com.example.cryptocurrency.presenter
+package com.example.cryptocurrency.presenter.ui
 
 import android.app.Activity
 import android.os.Bundle
@@ -15,8 +15,8 @@ import com.example.cryptocurrency.databinding.FragmentScreen1Binding
 import com.example.cryptocurrency.domain.entities.SuperHeroData
 import com.example.cryptocurrency.domain.entities.SuperheroHideouts
 import com.example.cryptocurrency.presenter.recyclerviewres.SuperHeroAdapter
-import com.example.cryptocurrency.presenter.viewintents.MainIntent
-import com.example.cryptocurrency.presenter.viewintents.UpdaterViewModel
+import com.example.cryptocurrency.presenter.viewintents.mainintents.MainIntent
+import com.example.cryptocurrency.presenter.viewintents.mainintents.UpdaterViewModel
 import com.example.cryptocurrency.presenter.viewintents.ViewStates
 import kotlinx.coroutines.launch
 
@@ -43,8 +43,8 @@ class Screen1 : Fragment() {
                 when (viewState) {
                     is ViewStates.Error -> Log.e("View", "${viewState.errorMessage}")
                     ViewStates.Idle -> Log.d("View", "IDLE")
-                    is ViewStates.LoadSuperheroes<*> -> {
-                        val finalList = viewState.superheroes as List<SuperHeroData> + superheroesHideouts
+                    is ViewStates.LoadData<*> -> {
+                        val finalList = viewState.data as List<SuperHeroData> + superheroesHideouts
                         superHeroAdapter.updateList(finalList)
                     }
 

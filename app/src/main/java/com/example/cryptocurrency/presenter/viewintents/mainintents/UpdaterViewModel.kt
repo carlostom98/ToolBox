@@ -1,4 +1,4 @@
-package com.example.cryptocurrency.presenter.viewintents
+package com.example.cryptocurrency.presenter.viewintents.mainintents
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -6,6 +6,7 @@ import com.example.cryptocurrency.data.DataFromRemote
 import com.example.cryptocurrency.data.SuperHeroesDataBase
 import com.example.cryptocurrency.domain.interfaces.DataRepository
 import com.example.cryptocurrency.domain.RetrieveDataFromRemoteRepository
+import com.example.cryptocurrency.presenter.viewintents.ViewStates
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -50,7 +51,7 @@ class UpdaterViewModel : ViewModel() {
             !!.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ result ->
-                    _mainState.value = ViewStates.LoadSuperheroes(result)
+                    _mainState.value = ViewStates.LoadData(result)
                 }, { error ->
                     _mainState.value = ViewStates.Error(error.message)
                 })

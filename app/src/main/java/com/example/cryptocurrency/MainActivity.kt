@@ -6,14 +6,17 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.cryptocurrency.databinding.ActivityMainBinding
 import com.example.cryptocurrency.domain.entities.CategoriesEntity
 import com.example.cryptocurrency.extensions.setCustomCategories
-import com.example.cryptocurrency.presenter.Screen2
-import com.example.cryptocurrency.presenter.viewintents.UpdaterViewModel
+import com.example.cryptocurrency.presenter.ui.Screen2
+import com.example.cryptocurrency.presenter.viewintents.imagesintent.GetImagesViewModel
+import com.example.cryptocurrency.presenter.viewintents.mainintents.UpdaterViewModel
 import com.google.android.material.tabs.TabLayout
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    val viewModel: UpdaterViewModel by viewModels()
+    val viewModelUpdater: UpdaterViewModel by viewModels()
+    val getImagesViewModel: GetImagesViewModel by viewModels()
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
