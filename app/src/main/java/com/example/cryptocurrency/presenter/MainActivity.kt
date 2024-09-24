@@ -1,7 +1,6 @@
-package com.example.cryptocurrency
+package com.example.cryptocurrency.presenter
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -9,8 +8,6 @@ import com.example.cryptocurrency.databinding.ActivityMainBinding
 import com.example.cryptocurrency.domain.entities.CategoriesEntity
 import com.example.cryptocurrency.extensions.changeScreen
 import com.example.cryptocurrency.extensions.setCustomCategories
-import com.example.cryptocurrency.presenter.ui.DrinkFragment
-import com.example.cryptocurrency.presenter.ui.FoodFragment
 import com.example.cryptocurrency.presenter.viewintents.imagesintent.GetImagesViewModel
 import com.example.cryptocurrency.presenter.viewintents.mainintents.UpdaterViewModel
 import com.google.android.material.tabs.TabLayout

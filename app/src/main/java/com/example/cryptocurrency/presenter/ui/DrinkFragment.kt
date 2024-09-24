@@ -7,10 +7,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.cryptocurrency.MainActivity
+import com.example.cryptocurrency.presenter.MainActivity
 import com.example.cryptocurrency.databinding.FragmentScreen1Binding
 import com.example.cryptocurrency.domain.entities.SuperHeroData
 import com.example.cryptocurrency.domain.entities.SuperheroHideouts
@@ -26,7 +27,7 @@ class DrinkFragment : Fragment() {
 
     private var _binding: FragmentScreen1Binding? = null
     private val binding get() = _binding!!
-    private lateinit var superHeroAdapter: SuperHeroAdapter
+    private var superHeroAdapter: SuperHeroAdapter? = null
     private val viewModel: UpdaterViewModel by activityViewModels()
 
 
@@ -45,7 +46,11 @@ class DrinkFragment : Fragment() {
                     ViewStates.Idle -> Log.d("View", "IDLE")
                     is ViewStates.LoadData<*> -> {
                         val finalList = viewState.data as List<SuperHeroData> + superheroesHideouts
-                        superHeroAdapter.updateList(finalList)
+                        superHeroAdapter?.updateList(finalList) ?: Toast.makeText(
+                            activity,
+                            "The adapter is null",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
 
                     ViewStates.Loading -> Log.d("View", "IDLE")
@@ -55,9 +60,10 @@ class DrinkFragment : Fragment() {
         return binding.root
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         superHeroAdapter = SuperHeroAdapter()
-        if (::activity.isInitialized && ::superHeroAdapter.isInitialized) {
+        if (::activity.isInitialized && superHeroAdapter != null) {
             with(binding) {
                 recyclerView.apply {
                     layoutManager = LinearLayoutManager(activity)
@@ -75,6 +81,7 @@ class DrinkFragment : Fragment() {
 
     override fun onDestroyView() {
         _binding = null
+        superHeroAdapter = null
         super.onDestroyView()
     }
 
@@ -88,7 +95,7 @@ class DrinkFragment : Fragment() {
             SuperheroHideouts("SuperHouse", "6"),
 
 
-        )
+            )
         private var superheroes2 = listOf(
             SuperHeroData("2", "6"),
             SuperHeroData("otro", "7"),

@@ -79,7 +79,10 @@ dependencies {
     // Coroutines
     implementation(libs.coroutines)
 
-    implementation(libs.picaso)
+    // Picasso
+    implementation(libs.picasso)
 
-
+    //Retrofit 2
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.converter)
 }

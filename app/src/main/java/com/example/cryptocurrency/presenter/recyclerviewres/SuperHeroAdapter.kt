@@ -4,14 +4,7 @@ import androidx.recyclerview.widget.DiffUtil
 import com.example.cryptocurrency.domain.interfaces.AdapterItems
 import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
 
-class SuperHeroAdapter : ListDelegationAdapter<List<AdapterItems>>() {
-
-    fun updateList(newList: List<AdapterItems>) {
-        val diffResult = DiffUtil.calculateDiff(ParentDiffUtil(this.items ?: emptyList(), newList))
-        this.items = newList
-        super.setItems(items)
-        diffResult.dispatchUpdatesTo(this)
-    }
+class SuperHeroAdapter : SuperListDelegationAdapter() {
 
     private val superHeroCategoryDelegate = SuperHeroCategoryDelegate()
     private val superHeroCategoryDelegateView2 = SuperheroCategoryDelegateViewType2()
@@ -20,7 +13,6 @@ class SuperHeroAdapter : ListDelegationAdapter<List<AdapterItems>>() {
         delegatesManager.addDelegate(superHeroCategoryDelegate)
         delegatesManager.addDelegate(superHeroCategoryDelegateView2)
     }
-
 }
 
 

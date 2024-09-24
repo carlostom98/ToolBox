@@ -4,8 +4,7 @@ import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.widget.Toast
-import androidx.fragment.app.Fragment
-import com.example.cryptocurrency.MainActivity
+import com.example.cryptocurrency.presenter.MainActivity
 import com.example.cryptocurrency.databinding.CategoryTabViewBinding
 import com.example.cryptocurrency.domain.entities.CategoriesEntity
 import com.example.cryptocurrency.domain.entities.LogMessage
