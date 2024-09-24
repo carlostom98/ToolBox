@@ -17,12 +17,12 @@ import com.example.cryptocurrency.utils.URLS
 import kotlinx.coroutines.launch
 
 
-class Screen2 : Fragment() {
+class FoodFragment : Fragment() {
 
 
     private val viewModel: GetImagesViewModel by activityViewModels()
-    private lateinit var _binding: FragmentScreen2Binding
-    private val binding: FragmentScreen2Binding get() = _binding
+    private var _binding: FragmentScreen2Binding? = null
+    private val binding: FragmentScreen2Binding get() = _binding!!
 
     private var currentImage: Bitmap? = null
     private var pairClick = true
@@ -77,6 +77,10 @@ class Screen2 : Fragment() {
         }
     }
 
+    override fun onDestroyView() {
+        _binding = null
+        super.onDestroyView()
+    }
 
     private fun imageLoading() {
         binding.progressBar.visibility = View.VISIBLE

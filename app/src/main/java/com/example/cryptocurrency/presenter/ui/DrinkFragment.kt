@@ -22,7 +22,7 @@ import kotlinx.coroutines.launch
 
 
 @Suppress("UNCHECKED_CAST")
-class Screen1 : Fragment() {
+class DrinkFragment : Fragment() {
 
     private var _binding: FragmentScreen1Binding? = null
     private val binding get() = _binding!!
@@ -52,12 +52,11 @@ class Screen1 : Fragment() {
                 }
             }
         }
-
-        superHeroAdapter = SuperHeroAdapter()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        superHeroAdapter = SuperHeroAdapter()
         if (::activity.isInitialized && ::superHeroAdapter.isInitialized) {
             with(binding) {
                 recyclerView.apply {

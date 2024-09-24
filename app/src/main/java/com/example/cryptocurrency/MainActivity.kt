@@ -1,22 +1,25 @@
 package com.example.cryptocurrency
 
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.cryptocurrency.databinding.ActivityMainBinding
 import com.example.cryptocurrency.domain.entities.CategoriesEntity
+import com.example.cryptocurrency.extensions.changeScreen
 import com.example.cryptocurrency.extensions.setCustomCategories
-import com.example.cryptocurrency.presenter.ui.Screen2
+import com.example.cryptocurrency.presenter.ui.DrinkFragment
+import com.example.cryptocurrency.presenter.ui.FoodFragment
 import com.example.cryptocurrency.presenter.viewintents.imagesintent.GetImagesViewModel
 import com.example.cryptocurrency.presenter.viewintents.mainintents.UpdaterViewModel
 import com.google.android.material.tabs.TabLayout
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
+    lateinit var binding: ActivityMainBinding
     val viewModelUpdater: UpdaterViewModel by viewModels()
     val getImagesViewModel: GetImagesViewModel by viewModels()
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,11 +27,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         if (savedInstanceState == null) {
-            val transaction = supportFragmentManager.beginTransaction()
-            val fragment = Screen2()
-            transaction.setReorderingAllowed(true)
-            transaction.replace(binding.screensCanvas.id, fragment)
-            transaction.commit()
+            "Food".changeScreen(this)
         }
 
         val listOfTabs: List<CategoriesEntity> = listOf(
@@ -36,12 +35,6 @@ class MainActivity : AppCompatActivity() {
             CategoriesEntity(name = "Food"),
             CategoriesEntity(name = "Meal"),
             CategoriesEntity(name = "Snack"),
-            CategoriesEntity(name = "wsdfghjk"),
-            CategoriesEntity(name = "asdfghjklnc"),
-            CategoriesEntity(name = "lakajshha"),
-            CategoriesEntity(name = "asdfghjmajaja"),
-            CategoriesEntity(name = "daddadaassa"),
-            CategoriesEntity(name = "papapapasksks")
         )
 
 
@@ -49,7 +42,11 @@ class MainActivity : AppCompatActivity() {
             tabLayout.setCustomCategories(listOfTabs, this@MainActivity)
             tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
                 override fun onTabSelected(tab: TabLayout.Tab?) {
-
+                    tab?.let {
+                        val name = (it.tag as CategoriesEntity).name
+                        name.changeScreen(this@MainActivity)
+                    } ?: Toast.makeText(this@MainActivity, "Tab cannot be null", Toast.LENGTH_SHORT)
+                        .show()
                 }
 
                 override fun onTabUnselected(tab: TabLayout.Tab?) = Unit
@@ -59,8 +56,6 @@ class MainActivity : AppCompatActivity() {
             })
 
         }
-
-
     }
 
 

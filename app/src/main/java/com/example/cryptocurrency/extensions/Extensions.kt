@@ -1,8 +1,6 @@
 package com.example.cryptocurrency.extensions
 
-import android.annotation.SuppressLint
 import android.content.Context
-import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.widget.Toast
@@ -11,12 +9,15 @@ import com.example.cryptocurrency.MainActivity
 import com.example.cryptocurrency.databinding.CategoryTabViewBinding
 import com.example.cryptocurrency.domain.entities.CategoriesEntity
 import com.example.cryptocurrency.domain.entities.LogMessage
+import com.example.cryptocurrency.utils.ScreenManager
 import com.google.android.material.tabs.TabLayout
 
-@SuppressLint("CommitTransaction")
-fun Fragment.changeFragment(activity: MainActivity, savedInstanceState: Bundle?) {
-//    val fragmentManager = parentFragmentManager
-//    val fragmentTransaction = fragmentManager.beginTransaction()
+fun String.changeScreen(activity: MainActivity) {
+    val transaction = activity.supportFragmentManager.beginTransaction()
+    val fragment = ScreenManager.getFragment(this)
+    transaction.setReorderingAllowed(true)
+    transaction.replace(activity.binding.screensCanvas.id, fragment)
+    transaction.commit()
 }
 
 fun String.toastLong(context: Context) {

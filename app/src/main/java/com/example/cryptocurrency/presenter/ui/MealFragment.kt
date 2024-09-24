@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import com.example.cryptocurrency.R
 
 
-class Screen3 : Fragment() {
+class MealFragment : Fragment() {
 
 
     override fun onCreateView(
