@@ -29,6 +29,10 @@
         android:gravity="center"
         android:layout_width="0dp"
         android:layout_height="0dp">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerCountries"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
         <TextView
             android:id="@+id/textError"
             android:textSize="30sp"
@@ -48,14 +52,7 @@
 
 
 
-<androidx.recyclerview.widget.RecyclerView
-    android:id="@+id/recyclerCountries"
-    android:visibility="gone"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"/>
+
 
 
 
