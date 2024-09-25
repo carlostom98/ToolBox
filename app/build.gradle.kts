@@ -18,6 +18,7 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+        resValue("string", "countries_link", "https://raw.githubusercontent.com/")
     }
 
     buildTypes {

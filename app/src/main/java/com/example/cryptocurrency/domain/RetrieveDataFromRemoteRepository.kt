@@ -11,5 +11,4 @@ class RetrieveDataFromRemoteRepository (private val remoteData: DataFromRemote) 
             remoteData.create()
         }
     }
-
 }

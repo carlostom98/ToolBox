@@ -1,10 +1,14 @@
 package com.example.cryptocurrency.domain.entities
 
 import com.example.cryptocurrency.domain.interfaces.AdapterItems
+import com.google.gson.annotations.SerializedName
 
 data class CountriesEntity(
+    @SerializedName("name")
     val countryName: String?,
+    @SerializedName("capital")
     val capital: String?,
+    @SerializedName("flagPNG")
     val flag: String?,
 ) : AdapterItems {
     override fun isItemTheSame(other: AdapterItems): Boolean {

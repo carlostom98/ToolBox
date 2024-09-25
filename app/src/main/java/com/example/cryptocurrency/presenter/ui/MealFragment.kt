@@ -43,7 +43,6 @@ class MealFragment : Fragment() {
         }
 
         countriesAdapter?.let {
-            it.updateList(listOfCountries)
             loadingState(State.IS_LOADED)
         }
 
@@ -54,14 +53,6 @@ class MealFragment : Fragment() {
         _binding = null
     }
 
-    companion object {
-        val listOfCountries = listOf(
-            CountriesEntity("Colombia", "Bogotá", "YBR"),
-            CountriesEntity("Spain", "Madrid", "RYR"),
-            CountriesEntity("Germany", "Berlín", "BRY"),
-            CountriesEntity("United States", "Washington", "BRW")
-        )
-    }
 
     private val listOfActions = mapOf(
         State.IS_LOADING to { isDataLoading() },

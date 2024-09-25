@@ -32,14 +32,14 @@ class GetImagesViewModel() : ViewModel() {
                 when (intent) {
                     is ImageIntents.GetLeakedImage -> {
                         _mainState.value = ViewStates.Loading
-                        getImages.getProcessedImage(viewModelScope, intent.bitmap) { leakedImage ->
+                        getImages.getProcessedImage!!(viewModelScope, intent.bitmap) { leakedImage ->
                             _mainState.value = ViewStates.LoadData(leakedImage)
                         }
                     }
 
                     is ImageIntents.GetOriginalImage -> {
                         _mainState.value = ViewStates.Loading
-                        getImages.getOriginalImage(viewModelScope, intent.url) { image ->
+                        getImages.getOriginalImage!!(viewModelScope, intent.url) { image ->
                             _mainState.value = ViewStates.LoadData(image)
                         }
                     }
