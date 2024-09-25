@@ -44,6 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="20dp"/>
         <Button
+            android:id="@+id/refreshButton"
             android:background="@drawable/on_unselected"
             android:text="@string/refresh_button"
             android:layout_width="100dp"

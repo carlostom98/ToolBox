@@ -8,6 +8,7 @@ import com.example.cryptocurrency.databinding.ActivityMainBinding
 import com.example.cryptocurrency.domain.entities.CategoriesEntity
 import com.example.cryptocurrency.extensions.changeScreen
 import com.example.cryptocurrency.extensions.setCustomCategories
+import com.example.cryptocurrency.presenter.viewintents.getcountriesintent.GetCountriesFromRemoteViewModel
 import com.example.cryptocurrency.presenter.viewintents.imagesintent.GetImagesViewModel
 import com.example.cryptocurrency.presenter.viewintents.mainintents.UpdaterViewModel
 import com.google.android.material.tabs.TabLayout
@@ -17,6 +18,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
     val viewModelUpdater: UpdaterViewModel by viewModels()
     val getImagesViewModel: GetImagesViewModel by viewModels()
+    val getCountriesViewModel: GetCountriesFromRemoteViewModel by viewModels()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
