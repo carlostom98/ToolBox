@@ -7,6 +7,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.buffer
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.count
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
@@ -14,6 +16,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.reduce
 import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.flow.transform
+import kotlinx.coroutines.flow.zip
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withTimeout
 import kotlinx.coroutines.withTimeoutOrNull
@@ -33,23 +36,30 @@ class GetCountriesFromRemote : BaseUseCaseNoParams<Result<List<CountriesEntity>>
 
 fun main(array: Array<String>) {
     runBlocking {
-        val time = measureTimeMillis {
-            generate()
-                .buffer()
-                .collect {
-                delay(300L)
-                println(it)
-            }
+        val composeFlow = generateFlowA().combine(generateFlowB(), transform = ::transform)
+        composeFlow.collect {
+            println(it)
         }
-        println("Total time: $time")
     }
 }
 
-suspend fun generate() = flow {
+suspend fun generateFlowA() = flow {
     for (i in 1..3) {
-        delay(100L)
+        delay(500L)
         emit(i)
     }
+}
+
+suspend fun generateFlowB() = flow {
+    for (i in 4..10) {
+        delay(200L)
+        emit(i)
+    }
+}
+
+
+suspend fun transform(a: Int, b: Int): String {
+    return "flow a: $a, flow b: $b"
 }
 //
 //fun printValues(value: Any) {
