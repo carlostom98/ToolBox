@@ -15,6 +15,7 @@ import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.reduce
 import kotlinx.coroutines.flow.take
@@ -45,7 +46,14 @@ fun main(array: Array<String>) {
 
 suspend fun tryCatchExceptions() {
     (1..4).asFlow()
-        .onEach { check(it != 2) }
+        .onEach { check(it != 6) }
+        .onCompletion { completion ->
+            if (completion != null)
+                println("Flow completed with exception: ${completion.message}")
+            else {
+                println("Flow Completed successfully")
+            }
+        }
         .catch { e -> println("Exception caught: ${e.message}") }
         .collect {
             println(it)
