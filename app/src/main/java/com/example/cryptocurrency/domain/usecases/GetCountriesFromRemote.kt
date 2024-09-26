@@ -4,6 +4,7 @@ import com.example.cryptocurrency.data.retrofit.CountriesService
 import com.example.cryptocurrency.domain.entities.CountriesEntity
 import com.example.cryptocurrency.utils.BaseUseCaseNoParams
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.buffer
@@ -21,6 +22,7 @@ import kotlinx.coroutines.flow.reduce
 import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.flow.transform
 import kotlinx.coroutines.flow.zip
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withTimeout
 import kotlinx.coroutines.withTimeoutOrNull
@@ -38,11 +40,22 @@ class GetCountriesFromRemote : BaseUseCaseNoParams<Result<List<CountriesEntity>>
     }
 }
 
-//fun main(array: Array<String>) {
-//    runBlocking {
-//        tryCatchExceptions()
-//    }
-//}
+fun main(array: Array<String>) {
+    runBlocking {
+        val channel = Channel<Int>()
+        launch {
+            for (i in 1..5) {
+                delay(1000L)
+                channel.send(i)
+            }
+            channel.close()
+        }
+
+        for (i in channel){
+            println(i)
+        }
+    }
+}
 
 //suspend fun tryCatchExceptions() {
 //    (1..4).asFlow()
