@@ -18,6 +18,16 @@
         app:layout_constraintDimensionRatio="1:1"
         android:layout_height="0dp"/>
 
+    <TextView
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/textState"
+        android:textSize="30sp"
+        tools:text="State"
+        android:gravity="center"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"/>
+
     <LinearLayout
         android:visibility="gone"
         android:id="@+id/canvasData"

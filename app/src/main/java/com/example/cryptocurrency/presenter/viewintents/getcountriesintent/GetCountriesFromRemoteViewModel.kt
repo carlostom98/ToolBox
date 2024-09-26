@@ -1,8 +1,11 @@
 package com.example.cryptocurrency.presenter.viewintents.getcountriesintent
 
+import android.app.Activity
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.cryptocurrency.data.persistance.RemotePersistence
+import com.example.cryptocurrency.data.persistance.RemotePersistence.countriesValue
 import com.example.cryptocurrency.domain.usecases.GetCountriesFromRemote
 import com.example.cryptocurrency.domain.usecases.UseCases
 import com.example.cryptocurrency.presenter.viewintents.ViewStates
@@ -22,6 +25,7 @@ class GetCountriesFromRemoteViewModel: ViewModel() {
     private val _mainState = MutableStateFlow<ViewStates>(ViewStates.Loading)
     val mainState get() = _mainState.asStateFlow()
 
+
     init {
         handleIntent()
     }
@@ -35,6 +39,8 @@ class GetCountriesFromRemoteViewModel: ViewModel() {
             }
         }
     }
+
+    fun getPreference(activity: Activity) = RemotePersistence.getCustomPreference(activity)
 
     private fun getFromRemote() {
         _mainState.value = ViewStates.Loading

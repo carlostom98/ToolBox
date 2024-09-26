@@ -11,6 +11,8 @@ import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.cryptocurrency.data.persistance.RemotePersistence
+import com.example.cryptocurrency.data.persistance.RemotePersistence.countriesValue
 import com.example.cryptocurrency.presenter.MainActivity
 import com.example.cryptocurrency.databinding.FragmentScreen1Binding
 import com.example.cryptocurrency.domain.entities.SuperHeroData
@@ -29,6 +31,7 @@ class DrinkFragment : Fragment() {
     private val binding get() = _binding!!
     private var superHeroAdapter: SuperHeroAdapter? = null
     private val viewModel: UpdaterViewModel by activityViewModels()
+
 
 
     private lateinit var activity: Activity
@@ -59,6 +62,8 @@ class DrinkFragment : Fragment() {
         }
         return binding.root
     }
+
+
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

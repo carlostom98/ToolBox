@@ -1,6 +1,7 @@
 package com.example.cryptocurrency.presenter.ui
 
 import android.app.Activity
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -11,6 +12,7 @@ import androidx.activity.viewModels
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.cryptocurrency.data.persistance.RemotePersistence.countriesValue
 import com.example.cryptocurrency.databinding.FragmentScreen3Binding
 import com.example.cryptocurrency.domain.entities.CountriesEntity
 import com.example.cryptocurrency.presenter.MainActivity
@@ -31,11 +33,14 @@ class MealFragment : Fragment() {
 
     private lateinit var activity: Activity
 
+    lateinit var preference: SharedPreferences
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         activity = getActivity() as MainActivity
+        preference = getCountriesViewModel.getPreference(activity)
         _binding = FragmentScreen3Binding.inflate(inflater, container, false)
         loadingState(State.IS_LOADING)
 
@@ -58,8 +63,14 @@ class MealFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        if (preference.countriesValue) {
+            lifecycleScope.launch {
+                getCountriesViewModel.userIntent.send(CountriesIntents.GetData)
+            }
+        }
         countriesAdapter = CountriesAdapter()
-        if (::activity.isInitialized && countriesAdapter != null) {
+        if (::activity.isInitialized && countriesAdapter != null && ::preference.isInitialized) {
             with(binding) {
                 recyclerCountries.apply {
                     layoutManager = LinearLayoutManager(activity)
@@ -67,10 +78,13 @@ class MealFragment : Fragment() {
                 }
 
                 refreshButton.setOnClickListener {
+                    preference.countriesValue = true
                     lifecycleScope.launch {
                         getCountriesViewModel.userIntent.send(CountriesIntents.GetData)
                     }
                 }
+
+                textState.text = preference.countriesValue.toString()
             }
         }
 
