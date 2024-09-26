@@ -30,19 +30,21 @@ class GetCountriesFromRemoteViewModel: ViewModel() {
         viewModelScope.launch {
             userIntent.consumeAsFlow().collect { intent ->
                 when(intent) {
-                    CountriesIntents.GetData -> TODO()
+                    CountriesIntents.GetData -> getFromRemote()
                 }
             }
         }
     }
 
     private fun getFromRemote() {
+        _mainState.value = ViewStates.Loading
         getImages.getCountriesFromRemote!!(viewModelScope) { countriesResult ->
             countriesResult.fold(
                 onSuccess = { countriesList ->
                     _mainState.value = ViewStates.LoadData(countriesList)
                 },
                 onFailure = { error ->
+                    _mainState.value = ViewStates.Error(error.message)
                     Log.e("RETROFIT", "Error: ${error.message}")
                 }
             )

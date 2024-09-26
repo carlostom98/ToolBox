@@ -27,7 +27,7 @@ class MealFragment : Fragment() {
     private val binding get() = _binding!!
     private var countriesAdapter: CountriesAdapter? = null
 
-    val getCountriesViewModel: GetCountriesFromRemoteViewModel by activityViewModels()
+    private val getCountriesViewModel: GetCountriesFromRemoteViewModel by activityViewModels()
 
     private lateinit var activity: Activity
 
@@ -42,15 +42,14 @@ class MealFragment : Fragment() {
         lifecycleScope.launch {
             getCountriesViewModel.mainState.collect { mainState ->
                 when(mainState) {
-                    is ViewStates.Error -> Log.e("View", "error")
+                    is ViewStates.Error -> loadingState(State.IS_ERROR)
                     ViewStates.Idle -> Log.d("View", "idle")
                     is ViewStates.LoadData<*> -> {
-                        if (mainState.data is List<CountriesEntity>) {
-
-                        }
-                        countriesAdapter?.updateList()
+                        val listOfCountries = mainState.data as List<CountriesEntity>
+                        countriesAdapter?.updateList(listOfCountries)
+                        loadingState(State.IS_LOADED)
                     }
-                    ViewStates.Loading -> TODO()
+                    ViewStates.Loading -> loadingState(State.IS_LOADING)
                 }
             }
         }
@@ -90,6 +89,7 @@ class MealFragment : Fragment() {
     private val listOfActions = mapOf(
         State.IS_LOADING to { isDataLoading() },
         State.IS_LOADED to { isDataLoaded() },
+        State.IS_ERROR to { onErrorLoading() },
     )
 
     private fun loadingState(state: State) {
@@ -101,19 +101,31 @@ class MealFragment : Fragment() {
         with(binding) {
             progressBar.visibility = View.VISIBLE
             errorCanvas.visibility = View.GONE
+            canvasData.visibility = View.GONE
         }
     }
 
     private fun isDataLoaded() {
         with(binding) {
             progressBar.visibility = View.GONE
+            errorCanvas.visibility = View.GONE
+            canvasData.visibility = View.VISIBLE
+        }
+    }
+
+    private fun onErrorLoading() {
+        with(binding) {
+            progressBar.visibility = View.GONE
             errorCanvas.visibility = View.VISIBLE
+            "Something went wrong".also { textError.text = it }
+            canvasData.visibility = View.GONE
         }
     }
 
     enum class State {
         IS_LOADING,
-        IS_LOADED
+        IS_LOADED,
+        IS_ERROR
     }
 }
 

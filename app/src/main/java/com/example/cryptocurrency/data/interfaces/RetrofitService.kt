@@ -1,7 +1,7 @@
 package com.example.cryptocurrency.data.interfaces
 
-import com.example.cryptocurrency.data.retrofit.API
+import com.example.cryptocurrency.data.retrofit.CountriesAPI
 
 interface RetrofitService {
-    suspend fun getService(): Result<API>
+    suspend fun getService(): Result<CountriesAPI>
 }
