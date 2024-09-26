@@ -7,12 +7,15 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.buffer
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.count
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.reduce
 import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.flow.transform
@@ -36,16 +39,23 @@ class GetCountriesFromRemote : BaseUseCaseNoParams<Result<List<CountriesEntity>>
 
 fun main(array: Array<String>) {
     runBlocking {
-        val composeFlow = generateFlowA().combine(generateFlowB(), transform = ::transform)
-        composeFlow.collect {
+        tryCatchExceptions()
+    }
+}
+
+suspend fun tryCatchExceptions() {
+    (1..4).asFlow()
+        .onEach { check(it != 2) }
+        .catch { e -> println("Exception caught: ${e.message}") }
+        .collect {
             println(it)
         }
-    }
+
 }
 
 suspend fun generateFlowA() = flow {
     for (i in 1..3) {
-        delay(500L)
+        delay(300L)
         emit(i)
     }
 }
