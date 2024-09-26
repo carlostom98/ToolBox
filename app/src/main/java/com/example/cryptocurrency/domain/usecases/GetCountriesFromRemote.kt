@@ -6,6 +6,7 @@ import com.example.cryptocurrency.utils.BaseUseCaseNoParams
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.asFlow
+import kotlinx.coroutines.flow.buffer
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
@@ -16,6 +17,7 @@ import kotlinx.coroutines.flow.transform
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withTimeout
 import kotlinx.coroutines.withTimeoutOrNull
+import kotlin.system.measureTimeMillis
 
 class GetCountriesFromRemote : BaseUseCaseNoParams<Result<List<CountriesEntity>>>() {
 
@@ -31,19 +33,30 @@ class GetCountriesFromRemote : BaseUseCaseNoParams<Result<List<CountriesEntity>>
 
 fun main(array: Array<String>) {
     runBlocking {
-        val numbers = factorial(3)
-        println("Flow is about to start")
-        println("Starting flow:  ")
-
-        println(numbers)
+        val time = measureTimeMillis {
+            generate()
+                .buffer()
+                .collect {
+                delay(300L)
+                println(it)
+            }
+        }
+        println("Total time: $time")
     }
 }
 
-fun printValues(value: Any) {
-    println("The value is: $value")
+suspend fun generate() = flow {
+    for (i in 1..3) {
+        delay(100L)
+        emit(i)
+    }
 }
-
-suspend fun factorial(value: Int) = (1..value).asFlow().flowOn(Dispatchers.IO).reduce { accumulator, value ->
-    println("accumulator: $accumulator and current value: $value, result: ${accumulator * value}")
-    accumulator * value
-}
+//
+//fun printValues(value: Any) {
+//    println("The value is: $value")
+//}
+//
+//suspend fun factorial(value: Int) = (1..value).asFlow().flowOn(Dispatchers.IO).reduce { accumulator, value ->
+//    println("accumulator: $accumulator and current value: $value, result: ${accumulator * value}")
+//    accumulator * value
+//}
