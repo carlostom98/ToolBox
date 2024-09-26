@@ -5,6 +5,7 @@ import com.example.cryptocurrency.domain.entities.CountriesEntity
 import com.example.cryptocurrency.utils.BaseUseCaseNoParams
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.buffer
@@ -51,8 +52,8 @@ fun main(array: Array<String>) {
             channel.close()
         }
 
-        for (i in channel){
-            println(i)
+        channel.consumeEach {
+            println(it)
         }
     }
 }
