@@ -3,31 +3,16 @@ package com.example.cryptocurrency.domain.usecases
 import com.example.cryptocurrency.data.retrofit.CountriesService
 import com.example.cryptocurrency.domain.entities.CountriesEntity
 import com.example.cryptocurrency.utils.BaseUseCaseNoParams
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.cancelChildren
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.channels.ReceiveChannel
 import kotlinx.coroutines.channels.consumeEach
+import kotlinx.coroutines.channels.produce
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.asFlow
-import kotlinx.coroutines.flow.buffer
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.count
-import kotlinx.coroutines.flow.filter
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.onCompletion
-import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.flow.reduce
-import kotlinx.coroutines.flow.take
-import kotlinx.coroutines.flow.transform
-import kotlinx.coroutines.flow.zip
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.withTimeout
-import kotlinx.coroutines.withTimeoutOrNull
-import kotlin.system.measureTimeMillis
+import kotlin.coroutines.CoroutineContext
 
 class GetCountriesFromRemote : BaseUseCaseNoParams<Result<List<CountriesEntity>>>() {
 
@@ -43,19 +28,25 @@ class GetCountriesFromRemote : BaseUseCaseNoParams<Result<List<CountriesEntity>>
 
 fun main(array: Array<String>) {
     runBlocking {
-        val channel = Channel<Int>()
-        launch {
-            for (i in 1..5) {
-                delay(1000L)
-                channel.send(i)
-            }
-            channel.close()
+        val numbers = sendValues()
+        val squares = square(numbers)
+        for (i in 1..5) {
+            println(squares.receive())
         }
-
-        channel.consumeEach {
-            println(it)
-        }
+        println("Done!!")
+        coroutineContext.cancelChildren()
     }
+}
+
+suspend fun CoroutineScope.sendValues() = produce {
+    var i = 0
+    while (true)
+        send(i++)
+}
+
+suspend fun CoroutineScope.square(value: ReceiveChannel<Int>) = produce {
+    for (x in value)
+        send(x * x)
 }
 
 //suspend fun tryCatchExceptions() {
