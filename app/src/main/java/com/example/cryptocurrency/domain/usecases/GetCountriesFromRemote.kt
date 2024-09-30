@@ -29,16 +29,21 @@ class GetCountriesFromRemote : BaseUseCaseNoParams<Result<List<CountriesEntity>>
 
 fun main(array: Array<String>) {
     runBlocking {
-        val channel = Channel<String>()
-        launch {
-            sendString(channel, 200L, "this is the message")
+        // Capacity is reached the sender is paused
+        val channel = Channel<Int>(capacity = 5)
+        val sender = launch {
+            repeat(10) {
+                channel.send(it)
+                println("Sent: $it")
+            }
         }
-        launch {
-            sendString(channel, 500L, "this is the message 2")
-        }
-        repeat(7) { println(channel.receive()) }
 
-        coroutineContext.cancelChildren()
+        repeat(3) {
+            delay(1000L)
+            println("Received value : ${channel.receive()}")
+        }
+
+        sender.cancel()
     }
 }
 
