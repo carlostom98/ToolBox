@@ -7,6 +7,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.cancelChildren
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.ReceiveChannel
+import kotlinx.coroutines.channels.SendChannel
 import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.channels.produce
 import kotlinx.coroutines.delay
@@ -28,26 +29,26 @@ class GetCountriesFromRemote : BaseUseCaseNoParams<Result<List<CountriesEntity>>
 
 fun main(array: Array<String>) {
     runBlocking {
-        val numbers = sendValues()
-        repeat(5) { launchValues(it, numbers) }
-        delay(600L)
-        numbers.cancel()
+        val channel = Channel<String>()
+        launch {
+            sendString(channel, 200L, "this is the message")
+        }
+        launch {
+            sendString(channel, 500L, "this is the message 2")
+        }
+        repeat(7) { println(channel.receive()) }
+
+        coroutineContext.cancelChildren()
     }
 }
 
-suspend fun CoroutineScope.sendValues() = produce {
-    var i = 0
+suspend fun sendString(channel: SendChannel<String>, time: Long, s: String) {
     while (true) {
-        send(i++)
-        delay(100L)
+        delay(time)
+        channel.send(s)
     }
 }
 
-fun CoroutineScope.launchValues(id: Int, value: ReceiveChannel<Int>) = launch {
-    for (message in value){
-        println("Processor $id, received message: $message")
-    }
-}
 
 //suspend fun tryCatchExceptions() {
 //    (1..4).asFlow()
