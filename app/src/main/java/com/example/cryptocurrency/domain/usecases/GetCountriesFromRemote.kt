@@ -29,24 +29,24 @@ class GetCountriesFromRemote : BaseUseCaseNoParams<Result<List<CountriesEntity>>
 fun main(array: Array<String>) {
     runBlocking {
         val numbers = sendValues()
-        val squares = square(numbers)
-        for (i in 1..5) {
-            println(squares.receive())
-        }
-        println("Done!!")
-        coroutineContext.cancelChildren()
+        repeat(5) { launchValues(it, numbers) }
+        delay(600L)
+        numbers.cancel()
     }
 }
 
 suspend fun CoroutineScope.sendValues() = produce {
     var i = 0
-    while (true)
+    while (true) {
         send(i++)
+        delay(100L)
+    }
 }
 
-suspend fun CoroutineScope.square(value: ReceiveChannel<Int>) = produce {
-    for (x in value)
-        send(x * x)
+fun CoroutineScope.launchValues(id: Int, value: ReceiveChannel<Int>) = launch {
+    for (message in value){
+        println("Processor $id, received message: $message")
+    }
 }
 
 //suspend fun tryCatchExceptions() {
