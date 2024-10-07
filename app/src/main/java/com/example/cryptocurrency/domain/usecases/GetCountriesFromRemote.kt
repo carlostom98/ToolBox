@@ -3,17 +3,13 @@ package com.example.cryptocurrency.domain.usecases
 import com.example.cryptocurrency.data.retrofit.CountriesService
 import com.example.cryptocurrency.domain.entities.CountriesEntity
 import com.example.cryptocurrency.utils.BaseUseCaseNoParams
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.cancelChildren
-import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.channels.ReceiveChannel
-import kotlinx.coroutines.channels.SendChannel
-import kotlinx.coroutines.channels.consumeEach
-import kotlinx.coroutines.channels.produce
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import kotlin.coroutines.CoroutineContext
+import kotlinx.coroutines.withContext
+import java.util.concurrent.atomic.AtomicInteger
+import kotlin.system.measureTimeMillis
 
 class GetCountriesFromRemote : BaseUseCaseNoParams<Result<List<CountriesEntity>>>() {
 
@@ -27,32 +23,46 @@ class GetCountriesFromRemote : BaseUseCaseNoParams<Result<List<CountriesEntity>>
     }
 }
 
+
+
 fun main(array: Array<String>) {
     runBlocking {
-        // Capacity is reached the sender is paused
-        val channel = Channel<Int>(capacity = 5)
-        val sender = launch {
-            repeat(10) {
-                channel.send(it)
-                println("Sent: $it")
+        var count = AtomicInteger(0)
+        withContext(Dispatchers.Default) {
+            massiveRun { count.incrementAndGet() }
+        }
+        println("The total count is: $count")
+    }
+}
+
+suspend fun massiveRun(action: suspend() -> Unit) {
+    val n = 100
+    val k = 1000
+    val time = measureTimeMillis {
+        coroutineScope {
+            repeat(n) {
+                launch {
+                    repeat(k) { action() }
+                }
             }
         }
-
-        repeat(3) {
-            delay(1000L)
-            println("Received value : ${channel.receive()}")
-        }
-
-        sender.cancel()
     }
-}
 
-suspend fun sendString(channel: SendChannel<String>, time: Long, s: String) {
-    while (true) {
-        delay(time)
-        channel.send(s)
-    }
+    println("Time in millis: $time")
 }
+//fun CoroutineScope.squareValues(received: ReceiveChannel<Int>) = produce {
+//    for (i in received) {
+//        send(i * i)
+//    }
+//}
+//
+//suspend fun sendString(channel: SendChannel<Int>, time: Long, s: Int) {
+//    while (true) {
+//        delay(time)
+//        channel.send(s)
+//        println("Sent: $s")
+//    }
+//}
 
 
 //suspend fun tryCatchExceptions() {
