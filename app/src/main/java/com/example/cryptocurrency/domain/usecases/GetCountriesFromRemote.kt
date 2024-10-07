@@ -6,6 +6,7 @@ import com.example.cryptocurrency.utils.BaseUseCaseNoParams
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.newSingleThreadContext
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import java.util.concurrent.atomic.AtomicInteger
@@ -27,11 +28,12 @@ class GetCountriesFromRemote : BaseUseCaseNoParams<Result<List<CountriesEntity>>
 
 fun main(array: Array<String>) {
     runBlocking {
-        var count = AtomicInteger(0)
-        withContext(Dispatchers.Default) {
-            massiveRun { count.incrementAndGet() }
+        var counterContext = newSingleThreadContext("CounterContext")
+        var counter = 0
+        withContext(counterContext) {
+            massiveRun { counter ++ }
         }
-        println("The total count is: $count")
+        println("The total count is: $counter")
     }
 }
 
