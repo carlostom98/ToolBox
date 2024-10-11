@@ -8,8 +8,11 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.newSingleThreadContext
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
 import java.util.concurrent.atomic.AtomicInteger
+import kotlin.random.Random
 import kotlin.system.measureTimeMillis
 
 class GetCountriesFromRemote : BaseUseCaseNoParams<Result<List<CountriesEntity>>>() {
@@ -24,34 +27,6 @@ class GetCountriesFromRemote : BaseUseCaseNoParams<Result<List<CountriesEntity>>
     }
 }
 
-
-
-fun main(array: Array<String>) {
-    runBlocking {
-        var counterContext = newSingleThreadContext("CounterContext")
-        var counter = 0
-        withContext(counterContext) {
-            massiveRun { counter ++ }
-        }
-        println("The total count is: $counter")
-    }
-}
-
-suspend fun massiveRun(action: suspend() -> Unit) {
-    val n = 100
-    val k = 1000
-    val time = measureTimeMillis {
-        coroutineScope {
-            repeat(n) {
-                launch {
-                    repeat(k) { action() }
-                }
-            }
-        }
-    }
-
-    println("Time in millis: $time")
-}
 //fun CoroutineScope.squareValues(received: ReceiveChannel<Int>) = produce {
 //    for (i in received) {
 //        send(i * i)

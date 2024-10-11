@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.org.jetbrains.kotlin.kapt)
 }
 
 android {
@@ -86,4 +87,11 @@ dependencies {
     //Retrofit 2
     implementation(libs.retrofit)
     implementation(libs.retrofit.converter)
+
+    // Room
+    implementation(libs.roomdb)
+    implementation(libs.room.ktx)
+    //noinspection KaptUsageInsteadOfKsp
+    kapt(libs.room.katp)
+
 }
