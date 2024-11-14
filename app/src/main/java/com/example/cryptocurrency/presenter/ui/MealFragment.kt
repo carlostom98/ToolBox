@@ -78,7 +78,7 @@ class MealFragment : Fragment() {
                 }
 
                 refreshButton.setOnClickListener {
-                    preference.countriesValue = true
+                    preference.countriesValue = false
                     lifecycleScope.launch {
                         getCountriesViewModel.userIntent.send(CountriesIntents.GetData)
                     }
