@@ -13,15 +13,21 @@ import com.example.cryptocurrency.presenter.viewintents.imagesintent.GetImagesVi
 import com.example.cryptocurrency.presenter.viewintents.mainintents.UpdaterViewModel
 import com.google.android.material.tabs.TabLayout
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMainBinding
-    val viewModelUpdater: UpdaterViewModel by viewModels()
-    val getImagesViewModel: GetImagesViewModel by viewModels()
-    val getCountriesViewModel: GetCountriesFromRemoteViewModel by viewModels()
 
+    @Inject
+    lateinit var viewModelGetImages: GetImagesViewModel
+
+    @Inject
+    lateinit var updaterViewModel: UpdaterViewModel
+
+    @Inject
+    lateinit var getCountriesViewModel: GetCountriesFromRemoteViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

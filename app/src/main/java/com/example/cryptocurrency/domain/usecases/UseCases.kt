@@ -1,7 +1,9 @@
 package com.example.cryptocurrency.domain.usecases
 
-data class UseCases(
-    val getOriginalImage: GetOriginalImage? = null,
-    val getProcessedImage: GetProcessedImage? = null,
-    val getCountriesFromRemote: GetCountriesFromRemote? = null,
+import javax.inject.Inject
+
+data class UseCases @Inject constructor(
+    val getOriginalImage: GetOriginalImage,
+    val getProcessedImage: GetProcessedImage,
+    val getCountriesFromRemote: GetCountriesFromRemote,
 )

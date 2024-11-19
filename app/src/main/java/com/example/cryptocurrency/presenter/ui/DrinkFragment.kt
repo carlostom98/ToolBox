@@ -22,6 +22,7 @@ import com.example.cryptocurrency.presenter.viewintents.mainintents.MainIntent
 import com.example.cryptocurrency.presenter.viewintents.mainintents.UpdaterViewModel
 import com.example.cryptocurrency.presenter.viewintents.ViewStates
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 
 @Suppress("UNCHECKED_CAST")
@@ -30,7 +31,7 @@ class DrinkFragment : Fragment() {
     private var _binding: FragmentScreen1Binding? = null
     private val binding get() = _binding!!
     private var superHeroAdapter: SuperHeroAdapter? = null
-    private val viewModel: UpdaterViewModel by activityViewModels()
+
 
 
 

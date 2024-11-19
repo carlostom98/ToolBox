@@ -21,6 +21,7 @@ import com.example.cryptocurrency.presenter.viewintents.ViewStates
 import com.example.cryptocurrency.presenter.viewintents.getcountriesintent.CountriesIntents
 import com.example.cryptocurrency.presenter.viewintents.getcountriesintent.GetCountriesFromRemoteViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 
 class MealFragment : Fragment() {
@@ -28,8 +29,6 @@ class MealFragment : Fragment() {
     private var _binding: FragmentScreen3Binding? = null
     private val binding get() = _binding!!
     private var countriesAdapter: CountriesAdapter? = null
-
-    private val getCountriesViewModel: GetCountriesFromRemoteViewModel by activityViewModels()
 
     private lateinit var activity: Activity
 

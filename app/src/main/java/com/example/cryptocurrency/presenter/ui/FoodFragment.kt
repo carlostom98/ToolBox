@@ -15,12 +15,11 @@ import com.example.cryptocurrency.presenter.viewintents.imagesintent.GetImagesVi
 import com.example.cryptocurrency.presenter.viewintents.imagesintent.ImageIntents
 import com.example.cryptocurrency.utils.URLS
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 
 class FoodFragment : Fragment() {
 
-
-    private val viewModel: GetImagesViewModel by activityViewModels()
     private var _binding: FragmentScreen2Binding? = null
     private val binding: FragmentScreen2Binding get() = _binding!!
 

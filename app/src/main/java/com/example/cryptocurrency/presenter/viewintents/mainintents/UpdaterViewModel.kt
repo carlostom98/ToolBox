@@ -15,8 +15,9 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.consumeAsFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class UpdaterViewModel : ViewModel() {
+class UpdaterViewModel @Inject constructor(): ViewModel() {
     private var dataRepository: DataRepository? = null
     private var dataFromRemote: DataFromRemote? = null
 

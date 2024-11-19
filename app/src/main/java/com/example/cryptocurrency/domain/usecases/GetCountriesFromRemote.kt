@@ -12,10 +12,11 @@ import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
 import java.util.concurrent.atomic.AtomicInteger
+import javax.inject.Inject
 import kotlin.random.Random
 import kotlin.system.measureTimeMillis
 
-class GetCountriesFromRemote : BaseUseCaseNoParams<Result<List<CountriesEntity>>>() {
+class GetCountriesFromRemote @Inject constructor (): BaseUseCaseNoParams<Result<List<CountriesEntity>>>() {
 
     override suspend fun doWork(): Result<List<CountriesEntity>> {
         val response = CountriesService.getService().getCountries()
