@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.org.jetbrains.kotlin.kapt)
+    alias(libs.plugins.dagger.hilt)
 }
 
 android {
@@ -94,4 +95,7 @@ dependencies {
     //noinspection KaptUsageInsteadOfKsp
     kapt(libs.room.katp)
 
+    // Dagger Hilt
+    implementation(libs.daggerhilt.android)
+    kapt(libs.daggerhilt.android.compiler)
 }

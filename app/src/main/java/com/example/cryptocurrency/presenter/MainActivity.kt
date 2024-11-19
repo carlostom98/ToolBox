@@ -12,7 +12,9 @@ import com.example.cryptocurrency.presenter.viewintents.getcountriesintent.GetCo
 import com.example.cryptocurrency.presenter.viewintents.imagesintent.GetImagesViewModel
 import com.example.cryptocurrency.presenter.viewintents.mainintents.UpdaterViewModel
 import com.google.android.material.tabs.TabLayout
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMainBinding
