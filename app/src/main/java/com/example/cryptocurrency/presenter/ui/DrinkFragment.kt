@@ -17,6 +17,7 @@ import com.example.cryptocurrency.presenter.MainActivity
 import com.example.cryptocurrency.databinding.FragmentScreen1Binding
 import com.example.cryptocurrency.domain.entities.SuperHeroData
 import com.example.cryptocurrency.domain.entities.SuperheroHideouts
+import com.example.cryptocurrency.domain.entities.main
 import com.example.cryptocurrency.presenter.recyclerviewres.SuperHeroAdapter
 import com.example.cryptocurrency.presenter.viewintents.mainintents.MainIntent
 import com.example.cryptocurrency.presenter.viewintents.mainintents.UpdaterViewModel
@@ -32,10 +33,7 @@ class DrinkFragment : Fragment() {
     private val binding get() = _binding!!
     private var superHeroAdapter: SuperHeroAdapter? = null
 
-
-
-
-    private lateinit var activity: Activity
+    private lateinit var activity: MainActivity
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,7 +42,7 @@ class DrinkFragment : Fragment() {
         activity = getActivity() as MainActivity
         _binding = FragmentScreen1Binding.inflate(inflater, container, false)
         lifecycleScope.launch {
-            viewModel.mainState.collect { viewState ->
+            activity.updaterViewModel.mainState.collect { viewState ->
                 when (viewState) {
                     is ViewStates.Error -> Log.e("View", "${viewState.errorMessage}")
                     ViewStates.Idle -> Log.d("View", "IDLE")
@@ -65,8 +63,6 @@ class DrinkFragment : Fragment() {
     }
 
 
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         superHeroAdapter = SuperHeroAdapter()
         if (::activity.isInitialized && superHeroAdapter != null) {
@@ -78,7 +74,7 @@ class DrinkFragment : Fragment() {
 
                 addItems.setOnClickListener {
                     lifecycleScope.launch {
-                        viewModel.userIntent.send(MainIntent.FetchTodoTask)
+                        activity.updaterViewModel.userIntent.send(MainIntent.FetchTodoTask)
                     }
                 }
             }

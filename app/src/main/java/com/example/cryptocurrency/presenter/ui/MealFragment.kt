@@ -30,7 +30,7 @@ class MealFragment : Fragment() {
     private val binding get() = _binding!!
     private var countriesAdapter: CountriesAdapter? = null
 
-    private lateinit var activity: Activity
+    private lateinit var activity: MainActivity
 
     lateinit var preference: SharedPreferences
 
@@ -39,12 +39,12 @@ class MealFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         activity = getActivity() as MainActivity
-        preference = getCountriesViewModel.getPreference(activity)
+        preference = activity.getCountriesViewModel.getPreference(activity)
         _binding = FragmentScreen3Binding.inflate(inflater, container, false)
         loadingState(State.IS_LOADING)
 
         lifecycleScope.launch {
-            getCountriesViewModel.mainState.collect { mainState ->
+            activity.getCountriesViewModel.mainState.collect { mainState ->
                 when(mainState) {
                     is ViewStates.Error -> loadingState(State.IS_ERROR)
                     ViewStates.Idle -> Log.d("View", "idle")
@@ -65,7 +65,7 @@ class MealFragment : Fragment() {
 
         if (preference.countriesValue) {
             lifecycleScope.launch {
-                getCountriesViewModel.userIntent.send(CountriesIntents.GetData)
+                activity.getCountriesViewModel.userIntent.send(CountriesIntents.GetData)
             }
         }
         countriesAdapter = CountriesAdapter()
@@ -79,7 +79,7 @@ class MealFragment : Fragment() {
                 refreshButton.setOnClickListener {
                     preference.countriesValue = false
                     lifecycleScope.launch {
-                        getCountriesViewModel.userIntent.send(CountriesIntents.GetData)
+                        activity.getCountriesViewModel.userIntent.send(CountriesIntents.GetData)
                     }
                 }
 

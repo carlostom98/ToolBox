@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.cryptocurrency.databinding.FragmentScreen2Binding
+import com.example.cryptocurrency.presenter.MainActivity
 import com.example.cryptocurrency.presenter.viewintents.ViewStates
 import com.example.cryptocurrency.presenter.viewintents.imagesintent.GetImagesViewModel
 import com.example.cryptocurrency.presenter.viewintents.imagesintent.ImageIntents
@@ -26,10 +27,13 @@ class FoodFragment : Fragment() {
     private var currentImage: Bitmap? = null
     private var pairClick = true
 
+    private lateinit var activity: MainActivity
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        activity = getActivity() as MainActivity
         _binding = FragmentScreen2Binding.inflate(inflater, container, false)
         return binding.root
     }
@@ -37,11 +41,11 @@ class FoodFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         lifecycleScope.launch {
-            viewModel.userIntent.send(ImageIntents.GetOriginalImage(URLS.URL_IMAGE_BEACH))
+            activity.viewModelGetImages.userIntent.send(ImageIntents.GetOriginalImage(URLS.URL_IMAGE_BEACH))
         }
 
         lifecycleScope.launch {
-            viewModel.mainState.collect() { viewState ->
+            activity.viewModelGetImages.mainState.collect() { viewState ->
                 when (viewState) {
                     is ViewStates.Error -> Log.e("IMAGE_LOADING", "Something went wrong")
                     ViewStates.Idle -> Log.d("IMAGE_LOADING", "IDLE")
@@ -64,11 +68,11 @@ class FoodFragment : Fragment() {
             actionButton.setOnClickListener {
                 if (pairClick) {
                     lifecycleScope.launch {
-                        viewModel.userIntent.send(ImageIntents.GetLeakedImage(currentImage!!))
+                        activity.viewModelGetImages.userIntent.send(ImageIntents.GetLeakedImage(currentImage!!))
                     }
                 } else {
                     lifecycleScope.launch {
-                        viewModel.userIntent.send(ImageIntents.GetOriginalImage(URLS.URL_IMAGE_BEACH))
+                        activity.viewModelGetImages.userIntent.send(ImageIntents.GetOriginalImage(URLS.URL_IMAGE_BEACH))
                     }
                 }
                 pairClick = !pairClick

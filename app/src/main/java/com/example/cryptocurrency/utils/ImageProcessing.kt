@@ -9,12 +9,15 @@ import com.example.cryptocurrency.App
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.Target
+import dagger.Provides
 import java.lang.Exception
 import java.net.URL
+import javax.inject.Inject
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
-object ImageProcessing {
+
+class ImageProcessing @Inject constructor() {
 
     suspend fun getOriginalBitmap(url: String): Bitmap {
         return suspendCoroutine { continuation ->
