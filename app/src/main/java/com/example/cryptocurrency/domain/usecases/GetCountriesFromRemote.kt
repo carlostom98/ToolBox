@@ -1,25 +1,14 @@
 package com.example.cryptocurrency.domain.usecases
 
-import com.example.cryptocurrency.data.retrofit.CountriesService
+import com.example.cryptocurrency.data.retrofit.CountriesAPI
 import com.example.cryptocurrency.domain.entities.CountriesEntity
 import com.example.cryptocurrency.utils.BaseUseCaseNoParams
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.newSingleThreadContext
-import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.sync.Mutex
-import kotlinx.coroutines.sync.withLock
-import kotlinx.coroutines.withContext
-import java.util.concurrent.atomic.AtomicInteger
 import javax.inject.Inject
-import kotlin.random.Random
-import kotlin.system.measureTimeMillis
 
-class GetCountriesFromRemote @Inject constructor (): BaseUseCaseNoParams<Result<List<CountriesEntity>>>() {
+class GetCountriesFromRemote @Inject constructor (private val countriesAPI: CountriesAPI): BaseUseCaseNoParams<Result<List<CountriesEntity>>>() {
 
     override suspend fun doWork(): Result<List<CountriesEntity>> {
-        val response = CountriesService.getService().getCountries()
+        val response = countriesAPI.getCountries()
         return if (response.isSuccessful) {
             Result.success(response.body()!!)
         } else {

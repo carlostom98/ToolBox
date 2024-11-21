@@ -7,6 +7,7 @@ import com.example.cryptocurrency.data.SuperHeroesDataBase
 import com.example.cryptocurrency.domain.interfaces.DataRepository
 import com.example.cryptocurrency.domain.RetrieveDataFromRemoteRepository
 import com.example.cryptocurrency.presenter.viewintents.ViewStates
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -17,6 +18,7 @@ import kotlinx.coroutines.flow.consumeAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class UpdaterViewModel @Inject constructor(): ViewModel() {
     private var dataRepository: DataRepository? = null
     private var dataFromRemote: DataFromRemote? = null
@@ -59,73 +61,6 @@ class UpdaterViewModel @Inject constructor(): ViewModel() {
         )
     }
 }
-//
-//fun main(array: Array<String>) {
-//    val listOfSomeData = listOf(
-//        SomeData(true, "Carlos"),
-//        SomeData(false, "Carlosss"),
-//        SomeData(true, "Andrés")
-//    )
-//
-//    val functionReference: (string: SomeData) -> Boolean = { string -> string.name == "Carlos" }
-//
-//    val data = listOfSomeData.filter(functionReference)
-//
-//    println(data[0].name)
-//}
-//
-//fun dataClassTesting(string: SomeData) = string.name == "Carlos"
-//
-//data class SomeData(val isApproved: Boolean, val name: String)
-
-//
-//fun functionRandom(isSelected: Boolean, presenter: (User) -> Boolean) {
-//    val listOfUsers = listOf(
-//        User("carlos", "2", 15, 2, "HIGH"),
-//        User("hola", "3", 22, 5, "HIGH"),
-//        User("marcela", "8", 10, 4, "HIGH"),
-//        User("gringo", "6", 18, 3, "HIGH"),
-//        )
-//
-//
-//}
-//
-//
-//
-//
-//data class User(
-//    val name: String,
-//    val lastName: String,
-//    val age: Int,
-//    val id: Int,
-//    val socialStatus: String
-//)
-//
-//data class UserView(
-//    val namePrefix: String,
-//    val lastNamePrefix: String,
-//    val ageMonths: Int,
-//    val socialStatusDefined: String
-//)
-//
-//fun createUser(): User {
-//    return User(name = "Carlos", lastName = "Martinez", age = 25, id = 1020, socialStatus = "6")
-//}
-//
-//fun User.toUserViewReflection() = with(::UserView) {
-//
-//}
-//
-//class Apples(val radious: Double = 2.0) {
-//    fun news() {
-//        println("This is a healthy fruit!!! eat apples".trimIndent())
-//    }
-//}
-
-
-
-
-
 
 
 

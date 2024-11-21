@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.util.Log
 import com.example.cryptocurrency.App
+import com.example.cryptocurrency.domain.interfaces.IImageProcessing
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.Target
@@ -17,9 +18,9 @@ import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
 
-class ImageProcessing @Inject constructor() {
+class ImageProcessing @Inject constructor(): IImageProcessing {
 
-    suspend fun getOriginalBitmap(url: String): Bitmap {
+    override suspend fun getOriginalBitmap(url: String): Bitmap {
         return suspendCoroutine { continuation ->
             Picasso.get()
                 .load(url)
@@ -39,7 +40,7 @@ class ImageProcessing @Inject constructor() {
         }
     }
 
-    suspend fun applyFilter(source: Bitmap): Bitmap {
+    override suspend fun applyFilter(source: Bitmap): Bitmap {
         val width = source.width
         val height = source.height
 

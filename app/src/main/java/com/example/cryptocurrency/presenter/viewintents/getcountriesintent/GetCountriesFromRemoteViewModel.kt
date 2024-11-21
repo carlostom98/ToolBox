@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.cryptocurrency.data.persistance.RemotePersistence
 import com.example.cryptocurrency.domain.usecases.UseCases
 import com.example.cryptocurrency.presenter.viewintents.ViewStates
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -14,6 +15,7 @@ import kotlinx.coroutines.flow.consumeAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class GetCountriesFromRemoteViewModel @Inject constructor(private val useCases: UseCases): ViewModel() {
 
     val userIntent = Channel<CountriesIntents>(Channel.UNLIMITED)

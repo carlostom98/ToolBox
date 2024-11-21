@@ -20,14 +20,12 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMainBinding
 
-    @Inject
-    lateinit var viewModelGetImages: GetImagesViewModel
 
-    @Inject
-    lateinit var updaterViewModel: UpdaterViewModel
+    val viewModelGetImages: GetImagesViewModel by viewModels()
 
-    @Inject
-    lateinit var getCountriesViewModel: GetCountriesFromRemoteViewModel
+    val updaterViewModel: UpdaterViewModel by viewModels()
+
+    val getCountriesViewModel: GetCountriesFromRemoteViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

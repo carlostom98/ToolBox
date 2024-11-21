@@ -4,12 +4,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.cryptocurrency.domain.usecases.UseCases
 import com.example.cryptocurrency.presenter.viewintents.ViewStates
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.consumeAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class GetImagesViewModel @Inject constructor(private val useCases: UseCases) : ViewModel() {
 
     val userIntent = Channel<ImageIntents>(Channel.UNLIMITED)
