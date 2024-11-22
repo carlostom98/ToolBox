@@ -3,6 +3,7 @@ agp = "8.5.1"
 artifactid = "2.0.0"
 kotlin = "1.9.0"
 hilt = "2.51.1"
+hilt-lifecycle = "1.0.0-alpha01"
 
 coreKtx = "1.13.1"
 junit = "4.13.2"
