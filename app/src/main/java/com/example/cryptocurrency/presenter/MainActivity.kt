@@ -13,7 +13,6 @@ import com.example.cryptocurrency.presenter.viewintents.imagesintent.GetImagesVi
 import com.example.cryptocurrency.presenter.viewintents.mainintents.UpdaterViewModel
 import com.google.android.material.tabs.TabLayout
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {

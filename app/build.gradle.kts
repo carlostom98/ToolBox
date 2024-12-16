@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.cryptocurrency"
-        minSdk = 24
+        minSdk = 21
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -42,12 +42,13 @@ android {
 
     buildFeatures {
         viewBinding = true
+        compose = true
     }
-
-
+    
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+        kotlinCompilerExtensionVersion = "1.5.2"
     }
+
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
@@ -56,6 +57,8 @@ android {
 }
 
 dependencies {
+
+
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -98,5 +101,8 @@ dependencies {
     // Dagger Hilt
     implementation(libs.daggerhilt.android)
     kapt(libs.daggerhilt.android.compiler)
+
+    // Compose
+    implementation(libs.androidx.runtime)
 
 }
