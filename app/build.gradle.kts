@@ -65,7 +65,11 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.coroutines.core)
     testImplementation(libs.junit)
+    testImplementation(libs.mock)
+    testImplementation(libs.mock.agent)
+    testImplementation(libs.coroutines.test)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
