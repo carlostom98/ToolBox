@@ -1,7 +1,8 @@
 [versions]
 agp = "8.5.1"
 artifactid = "2.0.0"
-kotlin = "1.9.0"
+glide = "1.0.0-beta01"
+kotlin = "2.0.0"
 hilt = "2.51.1"
 hilt-lifecycle = "1.0.0-alpha01"
 
@@ -23,11 +24,15 @@ picasso = "2.8"
 retrofit = "2.6.0"
 roomversion = "2.2.2"
 mockk = "1.13.14"
+compose_boom_version = "2024.09.01"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
-androidx-runtime = { module = "androidx.compose.runtime:runtime", version.ref = "runtime" }
+androidx-compose-runtime = { module = "androidx.compose.runtime:runtime", version.ref = "runtime" }
+compose-boom = { group = "androidx.compose", name = "compose-bom", version.ref = "compose_boom_version" }
+androidx-compose-ui = { module = "androidx.compose.ui:ui", version.ref = "runtime" }
 artifactid = { module = "groupId:artifactId", version.ref = "artifactid" }
+glide = { group = "com.github.bumptech.glide", name = "compose",version.ref = "glide" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 mock = { group = "io.mockk", name = "mockk-android", version.ref = "mockk" }
 mock-agent = { group = "io.mockk", name = "mockk-agent", version.ref = "mockk" }
@@ -67,3 +72,4 @@ android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 org-jetbrains-kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 dagger-hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }

@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.org.jetbrains.kotlin.kapt)
     alias(libs.plugins.dagger.hilt)
+    alias(libs.plugins.compose.compiler)
 }
 
 android {
@@ -45,9 +46,9 @@ android {
         compose = true
     }
     
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.2"
-    }
+   composeCompiler {
+       enableStrongSkippingMode = true
+   }
 
     packaging {
         resources {
@@ -57,8 +58,6 @@ android {
 }
 
 dependencies {
-
-
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -107,6 +106,14 @@ dependencies {
     kapt(libs.daggerhilt.android.compiler)
 
     // Compose
-    implementation(libs.androidx.runtime)
+    implementation(libs.androidx.compose.runtime)
+    implementation(platform(libs.compose.boom))
+    implementation("androidx.compose.ui:ui")
+    implementation("androidx.compose.material:material")
+    implementation("androidx.compose.ui:ui-tooling")
+    implementation("androidx.compose.runtime:runtime")
+
+    // Glide
+    implementation(libs.glide)
 
 }

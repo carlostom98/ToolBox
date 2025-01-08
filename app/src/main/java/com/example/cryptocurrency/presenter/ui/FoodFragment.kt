@@ -6,15 +6,42 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.material.Button
+import androidx.compose.material.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.integration.compose.GlideImage
 import com.example.cryptocurrency.databinding.FragmentScreen2Binding
 import com.example.cryptocurrency.presenter.MainActivity
 import com.example.cryptocurrency.presenter.viewintents.ViewStates
 import com.example.cryptocurrency.presenter.viewintents.imagesintent.GetImagesViewModel
 import com.example.cryptocurrency.presenter.viewintents.imagesintent.ImageIntents
 import com.example.cryptocurrency.utils.URLS
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -39,43 +66,58 @@ class FoodFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
         lifecycleScope.launch {
             activity.viewModelGetImages.userIntent.send(ImageIntents.GetOriginalImage(URLS.URL_IMAGE_BEACH))
         }
 
-        lifecycleScope.launch {
-            activity.viewModelGetImages.mainState.collect() { viewState ->
-                when (viewState) {
-                    is ViewStates.Error -> Log.e("IMAGE_LOADING", "Something went wrong")
-                    ViewStates.Idle -> Log.d("IMAGE_LOADING", "IDLE")
-                    is ViewStates.LoadData<*> -> {
-                        loadingComplete()
-                        if (viewState.data is Bitmap) {
-                            currentImage = viewState.data
-                            binding.imageView.setImageBitmap(viewState.data)
-                        } else {
-                            Log.d("IMAGE_LOADING", "Value: ${viewState.data as String}")
+        with(binding) {
+            composeView.setContent {
+                val coroutineScope = rememberCoroutineScope()
+                var currentImage: Bitmap? by remember { mutableStateOf(null) }
+
+                Box(modifier = Modifier
+                    .fillMaxSize()
+                    .padding(20.dp),
+                    contentAlignment = Alignment.Center
+                    ){
+                    Column() {
+                        currentImage?.let {
+                            Image(
+                                bitmap = it.asImageBitmap(),
+                                contentDescription = "Image",
+                                modifier = Modifier.size(400.dp)
+                            )
+                        }
+                        Button(onClick = {
+                            if (pairClick) {
+                                coroutineScope.launch {
+                                    activity.viewModelGetImages.userIntent.send(ImageIntents.GetLeakedImage(currentImage!!))
+                                }
+                            } else {
+                                coroutineScope.launch {
+                                    activity.viewModelGetImages.userIntent.send(ImageIntents.GetOriginalImage(URLS.URL_IMAGE_BEACH))
+                                }
+                            }
+                            pairClick = !pairClick
+                        }, modifier = Modifier.wrapContentSize()) {
+                            Text(text = "Change Image filter")
                         }
                     }
 
-                    ViewStates.Loading -> imageLoading()
-                }
-            }
-        }
+                    updateViews(
+                        getImagesViewModel = activity.viewModelGetImages,
+                        loadingComplete = {
+                            loadingComplete()
+                            currentImage = it
+                        } ,
+                        imageLoading = {
+                            imageLoading()
+                        },
+                        errorLoading = {
+                            Log.e("TAG", it)
+                        })
 
-        with(binding) {
-            actionButton.setOnClickListener {
-                if (pairClick) {
-                    lifecycleScope.launch {
-                        activity.viewModelGetImages.userIntent.send(ImageIntents.GetLeakedImage(currentImage!!))
-                    }
-                } else {
-                    lifecycleScope.launch {
-                        activity.viewModelGetImages.userIntent.send(ImageIntents.GetOriginalImage(URLS.URL_IMAGE_BEACH))
-                    }
                 }
-                pairClick = !pairClick
             }
         }
     }
@@ -87,11 +129,35 @@ class FoodFragment : Fragment() {
 
     private fun imageLoading() {
         binding.progressBar.visibility = View.VISIBLE
-        binding.mainScreen2Canvas.visibility = View.GONE
+        binding.composeView.visibility = View.GONE
     }
 
     private fun loadingComplete() {
-        binding.mainScreen2Canvas.visibility = View.VISIBLE
+        binding.composeView.visibility = View.VISIBLE
         binding.progressBar.visibility = View.GONE
+    }
+}
+
+@Composable
+fun updateViews(getImagesViewModel: GetImagesViewModel,
+                loadingComplete: (Bitmap) -> Unit,
+                imageLoading: () -> Unit,
+                errorLoading: (messageError: String) -> Unit
+) {
+    LaunchedEffect(key1 = Unit) {
+        getImagesViewModel.mainState.collect(){ viewState ->
+            when (viewState) {
+                is ViewStates.Error -> errorLoading(viewState.errorMessage ?: "Error")
+                ViewStates.Idle -> Log.d("IMAGE_LOADING", "IDLE")
+                is ViewStates.LoadData<*> -> {
+                    if (viewState.data is Bitmap) {
+                        loadingComplete(viewState.data)
+                    } else {
+                        Log.d("IMAGE_LOADING", "Value: ${viewState.data as String}")
+                    }
+                }
+                ViewStates.Loading -> imageLoading()
+            }
+        }
     }
 }
