@@ -14,6 +14,7 @@ appcompat = "1.7.0"
 material = "1.12.0"
 activity = "1.9.1"
 constraintlayout = "2.1.4"
+okhttpBom = "4.10.0"
 runtime = "1.7.6"
 rx-kotlin = "3.0.0"
 reflection = "2.0.20"
@@ -34,6 +35,7 @@ androidx-compose-ui = { module = "androidx.compose.ui:ui", version.ref = "runtim
 artifactid = { module = "groupId:artifactId", version.ref = "artifactid" }
 glide = { group = "com.github.bumptech.glide", name = "compose",version.ref = "glide" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
+logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor" }
 mock = { group = "io.mockk", name = "mockk-android", version.ref = "mockk" }
 mock-agent = { group = "io.mockk", name = "mockk-agent", version.ref = "mockk" }
 coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutines" }
@@ -42,6 +44,8 @@ androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "j
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+okhttp = { module = "com.squareup.okhttp3:okhttp" }
+okhttp-bom = { module = "com.squareup.okhttp3:okhttp-bom", version.ref = "okhttpBom" }
 reflection = { group = "org.jetbrains.kotlin", name = "kotlin-reflect", version.ref = "reflection"}
 
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
@@ -73,3 +77,4 @@ jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = 
 org-jetbrains-kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 dagger-hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+android-library = { id = "com.android.library", version.ref = "agp" }

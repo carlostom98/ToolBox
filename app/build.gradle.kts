@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.cryptocurrency"
+    namespace = "com.carams.cryptocurrency"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.cryptocurrency"
+        applicationId = "com.carams.cryptocurrency"
         minSdk = 21
         targetSdk = 34
         versionCode = 1
@@ -96,10 +96,10 @@ dependencies {
     implementation(libs.retrofit.converter)
 
     // OkHttp
-    implementation(platform("com.squareup.okhttp3:okhttp-bom:4.10.0"))
+    implementation(platform(libs.okhttp.bom))
     // define any required OkHttp artifacts without version
-    implementation("com.squareup.okhttp3:okhttp")
-    implementation("com.squareup.okhttp3:logging-interceptor")
+    implementation(libs.okhttp)
+    implementation(libs.logging.interceptor)
 
     // Room
     implementation(libs.roomdb)
