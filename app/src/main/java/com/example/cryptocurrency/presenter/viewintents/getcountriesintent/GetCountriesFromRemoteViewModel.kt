@@ -41,7 +41,7 @@ class GetCountriesFromRemoteViewModel @Inject constructor(private val useCases: 
 
     private fun getFromRemote() {
         _mainState.value = ViewStates.Loading
-        useCases.getCountriesFromRemote!!(viewModelScope) { countriesResult ->
+        useCases.getCountriesFromRemote(viewModelScope) { countriesResult ->
             countriesResult.fold(
                 onSuccess = { countriesList ->
                     _mainState.value = ViewStates.LoadData(countriesList)

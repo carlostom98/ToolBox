@@ -1,5 +1,6 @@
 package com.example.cryptocurrency
 
+import android.util.Log
 import com.example.cryptocurrency.data.retrofit.CountriesAPI
 import com.example.cryptocurrency.domain.entities.CountriesEntity
 import com.example.cryptocurrency.domain.usecases.GetCountriesFromRemote
@@ -13,6 +14,9 @@ import io.mockk.unmockkAll
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.runTest
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.ResponseBody.Companion.toResponseBody
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -45,7 +49,7 @@ class UseCasesTestingClass {
     }
 
     @Test
-    fun responseSuccessfullyRetrieved(): Unit = runBlocking {
+    fun responseSuccessfullyRetrieved(): Unit = runTest {
         // Given
         coEvery { countriesApiMock.getCountries() } returns Response.success(listOfCountriesMocked)
         // When
@@ -64,4 +68,51 @@ class UseCasesTestingClass {
 
     }
 
+    @Test
+    fun responseExceptionRetrieved(): Unit = runTest {
+        // Given
+        val mockedErrorMessage = "mockkError"
+
+        coEvery { countriesApiMock.getCountries() } throws Exception(mockedErrorMessage)
+        // When
+        val partialResult = CompletableDeferred<Result<List<CountriesEntity>>>()
+        getCountriesFromRemote(this) {
+            partialResult.complete(it)
+        }
+        val result = partialResult.await()
+        // Then
+        coVerify (exactly = 1) { countriesApiMock.getCountries() }
+        assert(result.isFailure)
+        result.onFailure { errorMessage ->
+                assert(errorMessage.message == mockedErrorMessage)
+        }
+    }
+
+    @Test
+    fun responseSuccessfullyWithErrorCode(): Unit = runTest {
+        // Given
+        val errorCode = 400
+        val mockedErrorMessage = """
+            {
+                "message": "mockkError"
+            }
+        """.trimIndent()
+
+        coEvery { countriesApiMock.getCountries() } returns Response.error(errorCode, mockedErrorMessage.toResponseBody())
+        // When
+        val partialResult = CompletableDeferred<Result<List<CountriesEntity>>>()
+        getCountriesFromRemote(this) {
+            partialResult.complete(it)
+        }
+        val result = partialResult.await()
+        // Then
+        coVerify (exactly = 1) { countriesApiMock.getCountries() }
+        assert(result.isFailure)
+        result.onFailure { errorMessage ->
+            assert(errorMessage.message == "Response Error Code: $errorCode")
+        }
+    }
+
 }
+
+fun String.convertInResponseBody() = this.toResponseBody("text/plain".toMediaTypeOrNull())

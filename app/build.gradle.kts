@@ -95,6 +95,12 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.retrofit.converter)
 
+    // OkHttp
+    implementation(platform("com.squareup.okhttp3:okhttp-bom:4.10.0"))
+    // define any required OkHttp artifacts without version
+    implementation("com.squareup.okhttp3:okhttp")
+    implementation("com.squareup.okhttp3:logging-interceptor")
+
     // Room
     implementation(libs.roomdb)
     implementation(libs.room.ktx)
