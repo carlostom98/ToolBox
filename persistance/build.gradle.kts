@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.carams.persistance"
+    namespace = "com.poc.persistance"
     compileSdk = 34
 
     defaultConfig {

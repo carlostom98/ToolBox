@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    namespace = "com.carams.cryptocurrency"
+    namespace = "com.poc.postitapp"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.carams.cryptocurrency"
+        applicationId = "com.poc.postitapp"
         minSdk = 21
         targetSdk = 34
         versionCode = 1

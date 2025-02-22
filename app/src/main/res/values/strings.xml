@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CryptoCurrency</string>
+    <string name="app_name">PostItApp</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="knock_superhero_text">Knock superhero</string>
