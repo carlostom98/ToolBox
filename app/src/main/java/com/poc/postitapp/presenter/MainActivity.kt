@@ -7,6 +7,7 @@ import com.poc.postitapp.databinding.ActivityMainBinding
 import com.poc.postitapp.presenter.viewintents.getcountriesintent.GetCountriesFromRemoteViewModel
 import com.poc.postitapp.presenter.viewintents.imagesintent.GetImagesViewModel
 import com.poc.postitapp.presenter.viewintents.mainintents.UpdaterViewModel
+import com.poc.postitapp.utils.extensions.changeScreen
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -14,24 +15,14 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMainBinding
 
-
-    val viewModelGetImages: GetImagesViewModel by viewModels()
-
-    val updaterViewModel: UpdaterViewModel by viewModels()
-
-    val getCountriesViewModel: GetCountriesFromRemoteViewModel by viewModels()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         if (savedInstanceState == null) {
-            "Fr".changeScreen(this)
+            EntryFragment().changeScreen(this)
         }
-
-
     }
-
-
 }
 
 

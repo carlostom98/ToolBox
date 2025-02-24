@@ -1,11 +1,11 @@
 package com.poc.postitapp.utils.extensions
 
+import androidx.fragment.app.Fragment
 import com.poc.postitapp.presenter.MainActivity
 
-fun String.changeScreen(activity: MainActivity) {
+fun Fragment.changeScreen(activity: MainActivity) {
     val transaction = activity.supportFragmentManager.beginTransaction()
-    val fragment = ScreenManager.getFragment(this)
     transaction.setReorderingAllowed(true)
-    transaction.replace(activity.binding.screensCanvas.id, fragment)
+    transaction.replace(activity.binding.screensCanvas.id, this)
     transaction.commit()
 }
