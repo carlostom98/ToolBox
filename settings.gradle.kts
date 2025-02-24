@@ -20,6 +20,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "CryptoCurrency"
+rootProject.name = "PostItApp"
 include(":app")
 include(":persistance")

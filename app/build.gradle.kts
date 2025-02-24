@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.devtools.ksp)
     alias(libs.plugins.org.jetbrains.kotlin.kapt)
     alias(libs.plugins.dagger.hilt)
     alias(libs.plugins.compose.compiler)
@@ -101,12 +102,6 @@ dependencies {
     implementation(libs.okhttp)
     implementation(libs.logging.interceptor)
 
-    // Room
-    implementation(libs.roomdb)
-    implementation(libs.room.ktx)
-    //noinspection KaptUsageInsteadOfKsp
-    kapt(libs.room.katp)
-
     // Dagger Hilt
     implementation(libs.daggerhilt.android)
     kapt(libs.daggerhilt.android.compiler)
@@ -121,5 +116,8 @@ dependencies {
 
     // Glide
     implementation(libs.glide)
+
+    // Modules
+    implementation(project(":persistance"))
 
 }
