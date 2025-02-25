@@ -6,6 +6,9 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class CRUDPostItRepository @Inject constructor(private val dao: PostItDao): ICRUDPostItRepository {
+
+    override fun getAllSortedByTitle(): Flow<List<PostItEntity>> = dao.getAllSortedByTitle()
+
     override fun getAll(): Flow<List<PostItEntity>> = dao.getAll()
 
     override fun getById(id: Int): Flow<PostItEntity> = dao.getById(id)

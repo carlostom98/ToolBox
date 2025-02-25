@@ -21,6 +21,18 @@ abstract class BaseUseCase<in Parameter, out Output> where Output : Any {
     }
 }
 
+abstract class BaseUseCaseMainThread<in Parameter, out Output> where Output : Any {
+
+    abstract fun doWork(parameter: Parameter): Output
+
+    operator fun invoke(
+        parameter: Parameter,
+        onDataRetrieved: (Output) -> Unit
+    ) {
+        onDataRetrieved(doWork(parameter))
+    }
+}
+
 abstract class BaseUseCaseNoParams<out Output> where Output: Any {
     private val coroutineScopeMain = CoroutineScope(Dispatchers.Main)
 

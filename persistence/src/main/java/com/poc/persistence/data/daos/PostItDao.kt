@@ -14,6 +14,9 @@ interface PostItDao {
     @Query("SELECT * FROM postit")
     fun getAll(): Flow<List<PostItEntity>>
 
+    @Query("SELECT * FROM postit ORDER BY title ASC")
+    fun getAllSortedByTitle(): Flow<List<PostItEntity>>
+
     @Query("SELECT * FROM postit WHERE id = :id")
     fun getById(id: Int): Flow<PostItEntity>
 

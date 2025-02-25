@@ -17,4 +17,7 @@ class RoomPersistenceRepository(private val crudPostItRepository: ICRUDPostItRep
     override suspend fun delete(postIt: PostItEntity) {
         crudPostItRepository.delete(postIt)
     }
+
+    override fun getAllSortedByTitle(): Flow<List<PostItEntity>> = crudPostItRepository.getAllSortedByTitle()
+
 }
