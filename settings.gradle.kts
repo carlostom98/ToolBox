@@ -22,4 +22,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "PostItApp"
 include(":app")
-include(":persistance")
+include(":persistence")

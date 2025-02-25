@@ -116,8 +116,8 @@ dependencies {
 
     // Glide
     implementation(libs.glide)
+    implementation(project(":persistence"))
 
     // Modules
-    implementation(project(":persistance"))
 
 }
