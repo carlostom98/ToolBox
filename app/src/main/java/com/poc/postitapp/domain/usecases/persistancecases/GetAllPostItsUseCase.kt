@@ -7,8 +7,9 @@ import com.poc.postitapp.domain.entities.UseCaseResponse
 import com.poc.postitapp.utils.BaseUseCase
 import com.poc.postitapp.utils.BaseUseCaseMainThread
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
-class GetAllPostItsUseCase(private val repository: IRoomPersistenceRepository): BaseUseCaseMainThread<SortedBy, Flow<List<PostItEntity>>>() {
+class GetAllPostItsUseCase @Inject constructor (private val repository: IRoomPersistenceRepository): BaseUseCaseMainThread<SortedBy, Flow<List<PostItEntity>>>() {
 
     private val sortedBy = mapOf(
         SortedBy.TITLE to { getSortedByTitle() } ,

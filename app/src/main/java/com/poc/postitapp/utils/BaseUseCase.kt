@@ -26,11 +26,9 @@ abstract class BaseUseCaseMainThread<in Parameter, out Output> where Output : An
     abstract fun doWork(parameter: Parameter): Output
 
     operator fun invoke(
-        parameter: Parameter,
-        onDataRetrieved: (Output) -> Unit
-    ) {
-        onDataRetrieved(doWork(parameter))
-    }
+        parameter: Parameter
+    ): Output = doWork(parameter)
+
 }
 
 abstract class BaseUseCaseNoParams<out Output> where Output: Any {
