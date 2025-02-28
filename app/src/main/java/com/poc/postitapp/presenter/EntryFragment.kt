@@ -24,6 +24,7 @@ import com.poc.persistence.domain.entities.PostItEntity
 import com.poc.persistence.domain.entities.UrgencyLevel
 import com.poc.postitapp.R
 import com.poc.postitapp.databinding.FragmentEntryBinding
+import com.poc.postitapp.presenter.screens.postItScreen
 import com.poc.postitapp.presenter.viewintents.crudintent.CRUDIntents
 
 class EntryFragment : Fragment() {
@@ -46,31 +47,7 @@ class EntryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         with(binding) {
             composeView.setContent {
-
-                var textFieldOne by remember {
-                    mutableStateOf("")
-                }
-                    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                        Row(modifier = Modifier.wrapContentHeight()) {
-                        Button(onClick = { activity.manageDataViewModel.handleIntent(
-                            CRUDIntents.UpsertPostIt(
-                                PostItEntity(
-                                    0,
-                                    title = textFieldOne,
-                                    urgencyLevel = UrgencyLevel.HIGH,
-                                    color = "#FFFFFF",
-                                    description = "Hello this is my first PostIt"
-                                )
-                            )
-                        )}) {
-                            Text(text = "Click me")
-                        }
-
-                        TextField(value = textFieldOne, onValueChange = {
-                            textFieldOne = it
-                        })
-                    }
-                }
+                postItScreen(activity.manageDataViewModel)
             }
         }
     }
