@@ -14,13 +14,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavHostController
 import com.poc.persistence.domain.entities.PostItEntity
 import com.poc.persistence.domain.entities.UrgencyLevel
 import com.poc.postitapp.presenter.viewintents.crudintent.CRUDIntents
 import com.poc.postitapp.presenter.viewintents.crudintent.ManageDataViewModel
 
 @Composable
-fun postItScreen(manageDataViewModel: ManageDataViewModel) {
+fun PostItScreen(manageDataViewModel: ManageDataViewModel, navController: NavHostController) {
     var textFieldOne by remember {
         mutableStateOf("")
     }
