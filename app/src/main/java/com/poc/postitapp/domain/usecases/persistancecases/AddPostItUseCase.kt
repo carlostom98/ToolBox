@@ -9,7 +9,12 @@ import javax.inject.Inject
 class AddPostItUseCase @Inject constructor (private val repository: IRoomPersistenceRepository): BaseUseCase<PostItEntity, UseCaseResponse>() {
     override suspend fun doWork(parameter: PostItEntity): UseCaseResponse {
         return try {
-            repository.insertOrUpdate(parameter)
+            if (parameter.color != null) {
+                repository.insertOrUpdate(parameter)
+            } else {
+                val auxPostIt = parameter.copy(color = 0xFFFFFF)
+                repository.insertOrUpdate(auxPostIt)
+            }
             UseCaseResponse.Success
         } catch (e: Exception) {
             UseCaseResponse.Error

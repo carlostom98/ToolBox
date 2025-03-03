@@ -17,7 +17,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.text.style.TextIndent
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.motion.widget.MotionScene.Transition.TransitionOnClick
 import com.poc.persistence.domain.entities.PostItEntity
 
@@ -34,9 +39,9 @@ fun PostItList(modifier: Modifier, postIts: List<PostItEntity>, onClick: (PostIt
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun ListRow(postIt: PostItEntity, onClick: (PostItEntity) -> Unit ) {
+fun ListRow(postIt: PostItEntity, onClick: (PostItEntity) -> Unit) {
     Card(
-        onClick = { onClick(postIt)},
+        onClick = { onClick(postIt) },
         modifier = Modifier
             .padding(horizontal = 10.dp, vertical = 8.dp)
             .fillMaxWidth(),
@@ -52,8 +57,19 @@ fun ListRow(postIt: PostItEntity, onClick: (PostItEntity) -> Unit ) {
                     .fillMaxWidth()
                     .align(Alignment.CenterVertically)
             ) {
-                Text(text = postIt.title ?: "")
-                Text(text = postIt.description ?: "")
+                Text(
+                    text = postIt.title ?: "", style = TextStyle(
+                        color = Color.Black,
+                        fontSize = 25.sp,
+                        fontStyle = FontStyle.Italic,
+                    )
+                )
+                Text(
+                    text = postIt.description ?: "", style = TextStyle(
+                        color = Color(postIt.color ?: 0xFFFFFF),
+                        fontSize = 16.sp
+                    )
+                )
             }
         }
     }
