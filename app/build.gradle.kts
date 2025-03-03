@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.org.jetbrains.kotlin.kapt)
     alias(libs.plugins.dagger.hilt)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.jetbrains.serialization)
 }
 
 android {
@@ -118,8 +119,13 @@ dependencies {
 
     // Glide
     implementation(libs.glide)
-    implementation(project(":persistence"))
+
+    // Kotlin serialization
+    implementation(libs.kotlinx.serialization.json)
 
     // Modules
+    implementation(project(":persistence"))
+
+
 
 }

@@ -21,22 +21,22 @@ import com.poc.postitapp.presenter.viewintents.crudintent.CRUDIntents
 import com.poc.postitapp.presenter.viewintents.crudintent.ManageDataViewModel
 
 @Composable
-fun PostItScreen(manageDataViewModel: ManageDataViewModel, navController: NavHostController) {
+fun PostItScreen(manageDataViewModel: ManageDataViewModel, onClickDetail: (PostItEntity) -> Unit) {
     var textFieldOne by remember {
         mutableStateOf("")
     }
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         Row(modifier = Modifier.wrapContentHeight()) {
-            Button(onClick = { manageDataViewModel.handleIntent(
-                CRUDIntents.UpsertPostIt(
+            Button(onClick = {
+                onClickDetail(
                     PostItEntity(
-                        title = textFieldOne,
-                        urgencyLevel = UrgencyLevel.HIGH,
-                        color = "#FFFFFF",
-                        description = "Hello this is my first PostIt"
+                        title = "PostIt",
+                        description = "New PostIt",
+                        color = "#FF23",
+                        urgencyLevel = UrgencyLevel.HIGH
                     )
                 )
-            )}) {
+            }) {
                 Text(text = "Click me")
             }
 
