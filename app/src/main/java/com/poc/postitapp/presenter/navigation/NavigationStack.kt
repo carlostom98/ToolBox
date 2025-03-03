@@ -7,6 +7,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import com.poc.persistence.domain.entities.PostItEntity
 import com.poc.postitapp.presenter.navigation.custom.CustomNavTypePostIt
+import com.poc.postitapp.presenter.screens.CreatePostItScreen
 import com.poc.postitapp.presenter.screens.DetailScreen
 import com.poc.postitapp.presenter.screens.PostItScreen
 import com.poc.postitapp.presenter.viewintents.crudintent.ManageDataViewModel
@@ -30,6 +31,12 @@ fun NavigationStack(manageDataViewModel: ManageDataViewModel) {
         ) { backStackEntry ->
             val detail = backStackEntry.toRoute<DetailScreen>()
             DetailScreen(manageDataViewModel, detail.postItEntity)
+        }
+
+        composable<CreatePostItScreen> {
+            CreatePostItScreen {
+
+            }
         }
     }
 }

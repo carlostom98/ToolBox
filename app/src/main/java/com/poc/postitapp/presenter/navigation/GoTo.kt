@@ -13,3 +13,6 @@ data object PostItScreen
 
 @Serializable
 data class DetailScreen(val postItEntity: PostItEntity)
+
+@Serializable
+data object CreatePostItScreen

@@ -1,24 +1,18 @@
 package com.poc.postitapp.presenter.viewintents.crudintent
 
-import android.view.View
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.collectAsState
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.poc.persistence.domain.entities.PostItEntity
 import com.poc.postitapp.domain.entities.SortedBy
 import com.poc.postitapp.domain.entities.UseCaseResponse
 import com.poc.postitapp.domain.usecases.UseCases
 import com.poc.postitapp.presenter.viewintents.ViewStates
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -34,7 +28,7 @@ class ManageDataViewModel @Inject constructor(private val useCases: UseCases): V
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 
     private val _mainState = MutableStateFlow<ViewStates>(ViewStates.Loading)
-    val mainState = combine(_contacts) { contacts ->
+    val mainState = _contacts.map { contacts ->
         ViewStates.LoadData(contacts)
     }.catch {
         ViewStates.Error(it.message)
