@@ -27,13 +27,8 @@ fun PostItScreen(manageDataViewModel: ManageDataViewModel, onClickDetail: (PostI
     val listener  = object : ListenViewState {
         @Composable
         override fun OnSuccess(postIts: List<PostItEntity>) {
-            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                LazyColumn(contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)) {
-                    items(items = postIts, itemContent = {
-                        Text(text = it.title ?: "")
-                        Text(text = it.description ?: "")
-                    })
-                }
+            PostItList(modifier = Modifier, postIts = postIts) { postIt ->
+                onClickDetail(postIt)
             }
         }
 

@@ -17,7 +17,7 @@ import kotlin.reflect.typeOf
 fun NavigationStack(manageDataViewModel: ManageDataViewModel) {
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = CreatePostItScreen) {
+    NavHost(navController = navController, startDestination = PostItScreen) {
         composable<PostItScreen> {
             PostItScreen(manageDataViewModel) { postItEntity ->
                 navController.navigate(DetailScreen(postItEntity))
