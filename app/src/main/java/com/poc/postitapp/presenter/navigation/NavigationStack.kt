@@ -1,5 +1,6 @@
 package com.poc.postitapp.presenter.navigation
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -14,7 +15,7 @@ import com.poc.postitapp.presenter.viewintents.crudintent.ManageDataViewModel
 import kotlin.reflect.typeOf
 
 @Composable
-fun NavigationStack(manageDataViewModel: ManageDataViewModel) {
+fun NavigationStack(manageDataViewModel: ManageDataViewModel, paddingValues: PaddingValues) {
     val navController = rememberNavController()
 
     NavHost(navController = navController, startDestination = PostItScreen) {

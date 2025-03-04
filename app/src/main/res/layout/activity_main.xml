@@ -9,11 +9,6 @@
     tools:context=".presenter.MainActivity"
     >
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tab_layout"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/tab_layout_dimen" />
-
     <FrameLayout
         android:id="@+id/screens_canvas"
         android:layout_width="match_parent"

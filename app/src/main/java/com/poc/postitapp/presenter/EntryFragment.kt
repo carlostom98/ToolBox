@@ -4,14 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.material3.Scaffold
+import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
-import com.poc.postitapp.databinding.FragmentEntryBinding
+
 import com.poc.postitapp.presenter.navigation.NavigationStack
+import com.poc.postitapp.presenter.theme.AppTheme
 
 class EntryFragment : Fragment() {
-
-    private var _binding: FragmentEntryBinding? = null
-    private val binding get() = _binding!!
 
     private lateinit var activity: MainActivity
 
@@ -19,15 +19,18 @@ class EntryFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        activity = getActivity() as MainActivity
-        _binding = FragmentEntryBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        with(binding) {
-            composeView.setContent {
-                NavigationStack(manageDataViewModel = activity.manageDataViewModel)
+        this.activity = getActivity() as MainActivity
+        return ComposeView(activity).apply {
+            setContent {
+                AppTheme {
+                    Scaffold(
+                        content = { paddingValues ->
+                            NavigationStack(
+                                manageDataViewModel = activity.manageDataViewModel,
+                                paddingValues = paddingValues
+                            )
+                        })
+                }
             }
         }
     }
