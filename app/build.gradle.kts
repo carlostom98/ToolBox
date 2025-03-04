@@ -112,9 +112,9 @@ dependencies {
     implementation(libs.androidx.compose.navigation)
     implementation(platform(libs.compose.boom))
     implementation("androidx.compose.ui:ui")
-    implementation("androidx.compose.material:material")
     implementation("androidx.compose.ui:ui-tooling")
     implementation("androidx.compose.runtime:runtime")
+    implementation("androidx.compose.material3:material3")
 
 
     // Glide

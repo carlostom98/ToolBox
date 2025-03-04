@@ -19,9 +19,11 @@ fun NavigationStack(manageDataViewModel: ManageDataViewModel) {
 
     NavHost(navController = navController, startDestination = PostItScreen) {
         composable<PostItScreen> {
-            PostItScreen(manageDataViewModel) { postItEntity ->
+            PostItScreen(manageDataViewModel, onClickDetail = { postItEntity ->
                 navController.navigate(DetailScreen(postItEntity))
-            }
+            }, onClickNewPostIt = {
+                navController.navigate(CreatePostItScreen)
+            })
         }
 
         composable<DetailScreen>(
