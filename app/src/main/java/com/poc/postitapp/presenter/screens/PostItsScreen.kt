@@ -1,7 +1,9 @@
 package com.poc.postitapp.presenter.screens
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -26,7 +28,7 @@ fun PostItScreen(manageDataViewModel: ManageDataViewModel, onClickDetail: (PostI
     val listener  = object : ListenViewState {
         @Composable
         override fun OnSuccess(postIts: List<PostItEntity>) {
-            PostItList(modifier = Modifier, postIts = postIts, onClick = { postIt ->
+            PostItList(modifier = Modifier.background(MaterialTheme.colorScheme.primary).fillMaxSize().padding(10.dp), postIts = postIts, onClick = { postIt ->
                 onClickDetail(postIt)
             }, onClickCreateNew = {
                 onClickNewPostIt()

@@ -11,6 +11,7 @@ import com.poc.postitapp.presenter.navigation.custom.CustomNavTypePostIt
 import com.poc.postitapp.presenter.screens.CreatePostItScreen
 import com.poc.postitapp.presenter.screens.DetailScreen
 import com.poc.postitapp.presenter.screens.PostItScreen
+import com.poc.postitapp.presenter.viewintents.crudintent.CRUDIntents
 import com.poc.postitapp.presenter.viewintents.crudintent.ManageDataViewModel
 import kotlin.reflect.typeOf
 
@@ -37,7 +38,9 @@ fun NavigationStack(manageDataViewModel: ManageDataViewModel, paddingValues: Pad
         }
 
         composable<CreatePostItScreen> {
-            CreatePostItScreen(manageDataViewModel)
+            CreatePostItScreen() { postItEntity ->
+                manageDataViewModel.handleIntent(CRUDIntents.UpsertPostIt(postItEntity))
+            }
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.poc.postitapp.presenter.screens
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -16,6 +17,7 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.Card
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -29,7 +31,7 @@ import com.poc.persistence.domain.entities.PostItEntity
 
 @Composable
 fun PostItList(modifier: Modifier, postIts: List<PostItEntity>, onClick: (PostItEntity) -> Unit, onClickCreateNew: () -> Unit) {
-    Box(modifier = Modifier.fillMaxSize().padding(10.dp), contentAlignment = Alignment.Center) {
+    Box(modifier = modifier, contentAlignment = Alignment.Center) {
         LazyColumn(contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)) {
             items(items = postIts, itemContent = {
                 ListRow(postIt = it, onClick)
@@ -53,7 +55,7 @@ fun FloatButton(modifier: Modifier, onClick: () -> Unit) {
 fun ListRow(postIt: PostItEntity, onClick: (PostItEntity) -> Unit) {
 
     Card(
-        onClick = { },
+        onClick = { onClick(postIt) },
         modifier = Modifier
             .padding(horizontal = 10.dp, vertical = 8.dp)
             .fillMaxWidth()
