@@ -38,6 +38,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -167,7 +168,7 @@ fun CreatePostItScreen(onClickSave: (PostItEntity) -> Unit) {
             )
 
             DropDownMenuPicker(text = "Pick A Color", spacerDistance, Tools.listOfColorsToPick) {
-
+                postItEntity = postItEntity.copy(color = it.toArgb().toLong())
             }
 
             Spacer(
@@ -178,7 +179,7 @@ fun CreatePostItScreen(onClickSave: (PostItEntity) -> Unit) {
 
 
             DropDownMenuPicker(text = "Pick An Urgency Level", spacerDistance, UrgencyLevel.entries.toList()) {
-
+                postItEntity = postItEntity.copy(urgencyLevel = it)
             }
 
             Spacer(

@@ -15,6 +15,8 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardColors
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -37,7 +39,10 @@ fun PostItList(modifier: Modifier, postIts: List<PostItEntity>, onClick: (PostIt
                 ListRow(postIt = it, onClick)
             })
         }
-        FloatButton(modifier = Modifier.align(Alignment.BottomEnd).size(70.dp).offset(x = (-20).dp, y = (-20).dp)) {
+        FloatButton(modifier = Modifier
+            .align(Alignment.BottomEnd)
+            .size(70.dp)
+            .offset(x = (-20).dp, y = (-20).dp)) {
             onClickCreateNew()
         }
     }
@@ -58,7 +63,10 @@ fun ListRow(postIt: PostItEntity, onClick: (PostItEntity) -> Unit) {
         onClick = { onClick(postIt) },
         modifier = Modifier
             .padding(horizontal = 10.dp, vertical = 8.dp)
-            .fillMaxWidth()
+            .fillMaxWidth(),
+        colors = CardDefaults.cardColors(
+            containerColor = postIt.color?.let { Color(it) } ?: Color.White
+        )
     ) {
         Row {
             Column(
@@ -76,7 +84,7 @@ fun ListRow(postIt: PostItEntity, onClick: (PostItEntity) -> Unit) {
                 )
                 Text(
                     text = postIt.description ?: "", style = TextStyle(
-                        color = Color(postIt.color ?: 0xFFFFFF),
+                        color = Color.Black,
                         fontSize = 16.sp
                     )
                 )
