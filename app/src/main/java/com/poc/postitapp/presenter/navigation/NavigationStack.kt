@@ -1,7 +1,10 @@
 package com.poc.postitapp.presenter.navigation
 
+import android.content.Context
+import android.widget.Toast
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -13,10 +16,11 @@ import com.poc.postitapp.presenter.screens.DetailScreen
 import com.poc.postitapp.presenter.screens.PostItScreen
 import com.poc.postitapp.presenter.viewintents.crudintent.CRUDIntents
 import com.poc.postitapp.presenter.viewintents.crudintent.ManageDataViewModel
+import com.poc.postitapp.utils.extensions.shortToast
 import kotlin.reflect.typeOf
 
 @Composable
-fun NavigationStack(manageDataViewModel: ManageDataViewModel, paddingValues: PaddingValues) {
+fun NavigationStack(manageDataViewModel: ManageDataViewModel, paddingValues: PaddingValues, context: Context = LocalContext.current) {
     val navController = rememberNavController()
 
     NavHost(navController = navController, startDestination = PostItScreen) {
@@ -39,7 +43,13 @@ fun NavigationStack(manageDataViewModel: ManageDataViewModel, paddingValues: Pad
 
         composable<CreatePostItScreen> {
             CreatePostItScreen() { postItEntity ->
-                manageDataViewModel.handleIntent(CRUDIntents.UpsertPostIt(postItEntity))
+                with(postItEntity) {
+                    if (title != null && description != null && color != null && urgencyLevel != null) {
+                        manageDataViewModel.handleIntent(CRUDIntents.UpsertPostIt(postItEntity))
+                    } else {
+                        "Please fill all the requirements".shortToast(context)
+                    }
+                }
             }
         }
     }

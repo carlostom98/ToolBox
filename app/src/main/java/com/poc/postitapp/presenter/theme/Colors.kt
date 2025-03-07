@@ -18,6 +18,7 @@ val LightOnBackground = Color(0xFF000000)
 val LightOnSurface = Color(0xFF000000)
 val LightOnError = Color(0xFFFFFFFF)
 
+
 // Dark Colors
 val DarkPrimary = Color(0xFF6200EE)
 val DarkSecondary = Color(0xFF03DAC5)
@@ -55,3 +56,12 @@ val DarkColors = darkColorScheme(
     onSurface = DarkOnSurface,
     onError = DarkOnError
 )
+
+
+// Picker Colors
+
+val SoftYellow = Color(0xFFFDFD96)
+val SoftGreen = Color(0xFF77DD77)
+val SoftBlue = Color(0xFF84B6F4)
+val SoftPink = Color(0xFFfdcae1)
+val SoftRed = Color(0xFFff6961)

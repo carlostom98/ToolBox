@@ -44,7 +44,7 @@ fun PostItScreen(manageDataViewModel: ManageDataViewModel, onClickDetail: (PostI
 
         @Composable
         override fun OnLoading() {
-            LoadingScreen(modifier = Modifier.size(80.dp), strokeWidth = 20.dp, MaterialTheme.colorScheme.primary)
+            LoadingScreen(modifier = Modifier.size(80.dp), strokeWidth = 20.dp, MaterialTheme.colorScheme.secondary)
         }
 
     }

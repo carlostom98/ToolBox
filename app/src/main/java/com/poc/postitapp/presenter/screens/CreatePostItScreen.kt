@@ -10,13 +10,20 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonColors
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
@@ -35,21 +42,24 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.poc.persistence.domain.entities.PostItEntity
 import com.poc.persistence.domain.entities.UrgencyLevel
 import com.poc.postitapp.presenter.viewintents.crudintent.ManageDataViewModel
+import com.poc.postitapp.utils.extensions.Tools
 
 @Composable
 fun CreatePostItScreen(onClickSave: (PostItEntity) -> Unit) {
     var postItEntity by remember {
         mutableStateOf(
             PostItEntity(
-                title = "",
-                description = "",
-                color = 0xFFFFFF,
-                urgencyLevel = UrgencyLevel.LOW
+                title = null,
+                description = null,
+                color = null,
+                urgencyLevel = null
             )
         )
     }
@@ -156,21 +166,41 @@ fun CreatePostItScreen(onClickSave: (PostItEntity) -> Unit) {
                     .height(spacerDistance)
             )
 
-            DropDownMenuPicker(text = "Pick A Color")
+            DropDownMenuPicker(text = "Pick A Color", spacerDistance, Tools.listOfColorsToPick) {
 
-            DropDownMenuPicker(text = "Pick An UrgencyLevel")
+            }
 
-            Button(
-                onClick = { onClickSave(postItEntity) },
+            Spacer(
                 modifier = Modifier
-                    .background(MaterialTheme.colorScheme.secondary),
-                shape = RoundedCornerShape(15.dp)
+                    .fillMaxWidth()
+                    .height(spacerDistance)
+            )
+
+
+            DropDownMenuPicker(text = "Pick An Urgency Level", spacerDistance, UrgencyLevel.entries.toList()) {
+
+            }
+
+            Spacer(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(spacerDistance)
+            )
+
+            OutlinedButton(
+                onClick = { onClickSave(postItEntity) },
+                shape = ButtonDefaults.outlinedShape,
+                enabled = true,
+                colors = ButtonDefaults.outlinedButtonColors(
+                    containerColor = MaterialTheme.colorScheme.secondary
+                )
             ) {
                 Text(
-                    text = "Save PostIt",
+                    text = "Save Content",
                     style = TextStyle(
-                        color = Color.Black,
-                        fontWeight = FontWeight.Bold
+                        color = Color.DarkGray,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 20.sp
                     )
                 )
             }
@@ -180,16 +210,72 @@ fun CreatePostItScreen(onClickSave: (PostItEntity) -> Unit) {
 }
 
 @Composable
-fun DropDownMenuPicker(text: String) {
-    Row(modifier = Modifier.fillMaxWidth()) {
-        Text(
-            text = text,
-            fontStyle = FontStyle.Italic,
-            fontSize = 20.sp,
-            style = TextStyle(
-                color = Color.DarkGray
+fun <T> DropDownMenuPicker(text: String, spacerDistance: Dp, options: List<T>,  onItemClick: (T) -> Unit) {
+    Row(modifier = Modifier.wrapContentHeight(), verticalAlignment = Alignment.CenterVertically) {
+        Box(modifier = Modifier.width(300.dp)) {
+            Text(
+                text = text,
+                fontStyle = FontStyle.Italic,
+                fontSize = 25.sp,
+                style = TextStyle(
+                    color = Color.DarkGray,
+                    fontWeight = FontWeight.Bold
+                )
             )
+        }
+
+        Spacer(
+            modifier = Modifier
+                .width(spacerDistance)
         )
+
+        MyDropDownMenu(options = options) {
+            onItemClick(it)
+        }
+    }
+}
+
+@Composable
+fun <T> MyDropDownMenu(options: List<T>, onItemClick: (T) -> Unit) {
+    val expanded = remember { mutableStateOf(false) }
+    val selectedOption = remember { mutableStateOf(options[0]) }
+
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier.wrapContentSize()
+    ) {
+
+        Button(onClick = { expanded.value = true }, colors = ButtonDefaults.buttonColors(
+            containerColor = MaterialTheme.colorScheme.secondary,
+            disabledContainerColor = Color.LightGray
+        )) {
+            Text(text = "Pick One", style = TextStyle(
+                color = Color.Black,
+                fontSize = 15.sp,
+                fontWeight = FontWeight.Bold
+            )
+            )
+        }
+
+        DropdownMenu(
+            expanded = expanded.value,
+            onDismissRequest = { expanded.value = false }
+        ) {
+            options.forEach { option ->
+                DropdownMenuItem(onClick = {
+                    selectedOption.value = option
+                    expanded.value = false
+                    onItemClick(option)
+                }, modifier = Modifier.width(100.dp).height(60.dp), text = {
+                    when(option) {
+                        is UrgencyLevel -> {
+                            Text(text = option.toString())
+                        }
+                        is Color -> Box(modifier = Modifier.fillMaxWidth().height(50.dp).background(option))
+                    }
+                })
+            }
+        }
     }
 }
 
