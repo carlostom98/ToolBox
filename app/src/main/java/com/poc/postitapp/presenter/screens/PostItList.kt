@@ -1,6 +1,10 @@
 package com.poc.postitapp.presenter.screens
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -14,14 +18,25 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardColors
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.SwipeToDismissBox
+import androidx.compose.material3.SwipeToDismissBoxState
+import androidx.compose.material3.SwipeToDismissBoxValue
 import androidx.compose.material3.Text
+import androidx.compose.material3.rememberSwipeToDismissBoxState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -30,19 +45,34 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.poc.persistence.domain.entities.PostItEntity
+import kotlinx.coroutines.delay
 
 @Composable
-fun PostItList(modifier: Modifier, postIts: List<PostItEntity>, onClick: (PostItEntity) -> Unit, onClickCreateNew: () -> Unit) {
+fun PostItList(
+    modifier: Modifier,
+    postIts: List<PostItEntity>,
+    onClick: (PostItEntity) -> Unit,
+    onDelete: (PostItEntity) -> Unit,
+    onClickCreateNew: () -> Unit
+) {
     Box(modifier = modifier, contentAlignment = Alignment.Center) {
         LazyColumn(contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)) {
-            items(items = postIts, itemContent = {
-                ListRow(postIt = it, onClick)
+            items(items = postIts, itemContent = { item ->
+                SwipeToDeleteContainer(onDelete = {
+                    onDelete(item)
+                }) {
+                    ListRow(postIt = item) {
+                        onClick(item)
+                    }
+                }
             })
         }
-        FloatButton(modifier = Modifier
-            .align(Alignment.BottomEnd)
-            .size(70.dp)
-            .offset(x = (-20).dp, y = (-20).dp)) {
+        FloatButton(
+            modifier = Modifier
+                .align(Alignment.BottomEnd)
+                .size(70.dp)
+                .offset(x = (-20).dp, y = (-20).dp)
+        ) {
             onClickCreateNew()
         }
     }
@@ -52,6 +82,78 @@ fun PostItList(modifier: Modifier, postIts: List<PostItEntity>, onClick: (PostIt
 fun FloatButton(modifier: Modifier, onClick: () -> Unit) {
     FloatingActionButton(modifier = modifier, onClick = { onClick() }) {
         Icon(Icons.Filled.Add, "Floating action button.")
+    }
+}
+
+
+@Composable
+fun SwipeToDeleteContainer(
+    onDelete: () -> Unit,
+    animationDuration: Int = 500,
+    content: @Composable () -> Unit
+) {
+
+    var isRemoved by remember {
+        mutableStateOf(false)
+    }
+
+    val state = rememberSwipeToDismissBoxState(
+        confirmValueChange = { value ->
+            if (value == SwipeToDismissBoxValue.EndToStart) {
+                isRemoved = true
+                true
+            } else {
+                false
+            }
+        }
+    )
+
+    AnimatedVisibility(
+        visible = !isRemoved, exit = shrinkVertically(
+            animationSpec = tween(durationMillis = animationDuration),
+            shrinkTowards = Alignment.Top
+        )
+    ) {
+
+        SwipeToDismissBox(state = state, backgroundContent = {
+            DeleteBackGround(swipeDismissState = state)
+        }, content = {
+            content()
+        })
+    }
+    
+    LaunchedEffect(key1 = isRemoved) {
+        if (isRemoved) {
+            delay(animationDuration.toLong())
+            onDelete()
+        }
+    }
+
+}
+
+@Composable
+fun DeleteBackGround(swipeDismissState: SwipeToDismissBoxState) {
+    val color = when (swipeDismissState.dismissDirection) {
+        SwipeToDismissBoxValue.StartToEnd -> MaterialTheme.colorScheme.secondary
+        SwipeToDismissBoxValue.EndToStart -> MaterialTheme.colorScheme.secondary
+        SwipeToDismissBoxValue.Settled -> Color.Transparent
+    }
+
+    Row(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(color)
+            .padding(12.dp, 8.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.End
+    ) {
+
+        Icon(
+            imageVector = Icons.Default.Delete,
+            contentDescription = "Delete item",
+            tint = Color.Black
+        )
+
     }
 }
 

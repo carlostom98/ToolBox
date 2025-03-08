@@ -14,6 +14,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.poc.persistence.domain.entities.PostItEntity
 import com.poc.postitapp.presenter.screens.listeners.ListenViewState
@@ -22,16 +24,21 @@ import com.poc.postitapp.presenter.viewintents.crudintent.CRUDIntents
 import com.poc.postitapp.presenter.viewintents.crudintent.ManageDataViewModel
 
 @Composable
-fun PostItScreen(manageDataViewModel: ManageDataViewModel, onClickDetail: (PostItEntity) -> Unit, onClickNewPostIt: () -> Unit) {
+fun PostItScreen(manageDataViewModel: ManageDataViewModel, onClickDetail: (PostItEntity) -> Unit, onClickNewPostIt: () -> Unit, onDelete: (PostItEntity) -> Unit) {
     manageDataViewModel.handleIntent(CRUDIntents.GetAllData)
     val postItsData = manageDataViewModel.mainState.collectAsState()
     val listener  = object : ListenViewState {
         @Composable
         override fun OnSuccess(postIts: List<PostItEntity>) {
-            PostItList(modifier = Modifier.background(MaterialTheme.colorScheme.primary).fillMaxSize().padding(10.dp), postIts = postIts, onClick = { postIt ->
+            PostItList(modifier = Modifier
+                .background(MaterialTheme.colorScheme.primary)
+                .fillMaxSize()
+                .padding(10.dp), postIts = postIts, onClick = { postIt ->
                 onClickDetail(postIt)
             }, onClickCreateNew = {
                 onClickNewPostIt()
+            }, onDelete = {
+                onDelete(it)
             })
         }
 

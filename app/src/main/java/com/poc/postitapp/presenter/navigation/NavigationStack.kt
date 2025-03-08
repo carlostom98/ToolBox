@@ -29,6 +29,8 @@ fun NavigationStack(manageDataViewModel: ManageDataViewModel, paddingValues: Pad
                 navController.navigate(DetailScreen(postItEntity))
             }, onClickNewPostIt = {
                 navController.navigate(CreatePostItScreen)
+            }, onDelete = { postIt ->
+                manageDataViewModel.handleIntent(CRUDIntents.DeletePostIt(postIt))
             })
         }
 
