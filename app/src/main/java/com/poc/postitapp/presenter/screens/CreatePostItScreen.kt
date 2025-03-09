@@ -1,5 +1,6 @@
 package com.poc.postitapp.presenter.screens
 
+import android.content.Context
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -13,11 +14,9 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
@@ -27,12 +26,11 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextFieldColors
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -43,17 +41,22 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.poc.persistence.domain.entities.PostItEntity
 import com.poc.persistence.domain.entities.UrgencyLevel
-import com.poc.postitapp.presenter.viewintents.crudintent.ManageDataViewModel
+import com.poc.postitapp.presenter.screens.listeners.ListenViewState
+import com.poc.postitapp.presenter.screens.manageresult.ManageStateValue
+import com.poc.postitapp.presenter.screens.manageresult.listenerCreatePostItScreen
+import com.poc.postitapp.presenter.viewintents.ViewStates
 import com.poc.postitapp.utils.extensions.Tools
+import com.poc.postitapp.utils.extensions.shortToast
 
 @Composable
-fun CreatePostItScreen(onClickSave: (PostItEntity) -> Unit) {
+fun CreatePostItScreen(viewState: State<ViewStates>, context: Context, onClickSave: (PostItEntity) -> Unit) {
+
+    ManageStateValue(viewState.value, listenerCreatePostItScreen(context))
     var postItEntity by remember {
         mutableStateOf(
             PostItEntity(
@@ -178,7 +181,11 @@ fun CreatePostItScreen(onClickSave: (PostItEntity) -> Unit) {
             )
 
 
-            DropDownMenuPicker(text = "Pick An Urgency Level", spacerDistance, UrgencyLevel.entries.toList()) {
+            DropDownMenuPicker(
+                text = "Pick An Urgency Level",
+                spacerDistance,
+                UrgencyLevel.entries.toList()
+            ) {
                 postItEntity = postItEntity.copy(urgencyLevel = it)
             }
 
@@ -210,8 +217,14 @@ fun CreatePostItScreen(onClickSave: (PostItEntity) -> Unit) {
     }
 }
 
+
 @Composable
-fun <T> DropDownMenuPicker(text: String, spacerDistance: Dp, options: List<T>,  onItemClick: (T) -> Unit) {
+fun <T> DropDownMenuPicker(
+    text: String,
+    spacerDistance: Dp,
+    options: List<T>,
+    onItemClick: (T) -> Unit
+) {
     Row(modifier = Modifier.wrapContentHeight(), verticalAlignment = Alignment.CenterVertically) {
         Box(modifier = Modifier.width(300.dp)) {
             Text(
@@ -246,15 +259,18 @@ fun <T> MyDropDownMenu(options: List<T>, onItemClick: (T) -> Unit) {
         modifier = Modifier.wrapContentSize()
     ) {
 
-        Button(onClick = { expanded.value = true }, colors = ButtonDefaults.buttonColors(
-            containerColor = MaterialTheme.colorScheme.secondary,
-            disabledContainerColor = Color.LightGray
-        )) {
-            Text(text = "Pick One", style = TextStyle(
-                color = Color.Black,
-                fontSize = 15.sp,
-                fontWeight = FontWeight.Bold
+        Button(
+            onClick = { expanded.value = true }, colors = ButtonDefaults.buttonColors(
+                containerColor = MaterialTheme.colorScheme.secondary,
+                disabledContainerColor = Color.LightGray
             )
+        ) {
+            Text(
+                text = "Pick One", style = TextStyle(
+                    color = Color.Black,
+                    fontSize = 15.sp,
+                    fontWeight = FontWeight.Bold
+                )
             )
         }
 
@@ -267,12 +283,20 @@ fun <T> MyDropDownMenu(options: List<T>, onItemClick: (T) -> Unit) {
                     selectedOption.value = option
                     expanded.value = false
                     onItemClick(option)
-                }, modifier = Modifier.width(100.dp).height(60.dp), text = {
-                    when(option) {
+                }, modifier = Modifier
+                    .width(100.dp)
+                    .height(60.dp), text = {
+                    when (option) {
                         is UrgencyLevel -> {
                             Text(text = option.toString())
                         }
-                        is Color -> Box(modifier = Modifier.fillMaxWidth().height(50.dp).background(option))
+
+                        is Color -> Box(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(50.dp)
+                                .background(option)
+                        )
                     }
                 })
             }

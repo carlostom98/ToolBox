@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.shareIn
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -33,6 +34,8 @@ class ManageDataViewModel @Inject constructor(private val useCases: UseCases): V
     }.catch {
         ViewStates.Error(it.message)
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), ViewStates.Loading)
+
+    val mainStateShared = _mainState.shareIn(viewModelScope, SharingStarted.Lazily, replay = 1)
 
 
     fun handleIntent(intent: CRUDIntents) {

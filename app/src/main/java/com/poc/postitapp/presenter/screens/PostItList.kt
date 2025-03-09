@@ -42,6 +42,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.poc.persistence.domain.entities.PostItEntity
@@ -56,16 +58,25 @@ fun PostItList(
     onClickCreateNew: () -> Unit
 ) {
     Box(modifier = modifier, contentAlignment = Alignment.Center) {
-        LazyColumn(contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)) {
-            items(items = postIts, itemContent = { item ->
-                SwipeToDeleteContainer(onDelete = {
-                    onDelete(item)
-                }) {
-                    ListRow(postIt = item) {
-                        onClick(item)
+        if (postIts.isNotEmpty()) {
+            LazyColumn(contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)) {
+                items(items = postIts, itemContent = { item ->
+                    SwipeToDeleteContainer(onDelete = {
+                        onDelete(item)
+                    }) {
+                        ListRow(postIt = item) {
+                            onClick(item)
+                        }
                     }
-                }
-            })
+                })
+            }
+        } else {
+            Text(text = "You are updated", style = TextStyle(
+                color = MaterialTheme.colorScheme.secondary,
+                fontSize = 30.sp,
+                fontStyle = FontStyle.Italic,
+                textDecoration = TextDecoration.Underline
+            ))
         }
         FloatButton(
             modifier = Modifier
