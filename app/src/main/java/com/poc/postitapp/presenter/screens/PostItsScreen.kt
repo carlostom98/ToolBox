@@ -2,6 +2,7 @@ package com.poc.postitapp.presenter.screens
 
 import android.content.Context
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.State
 import com.poc.persistence.data.entitiesdb.PostItVO
 import com.poc.postitapp.domain.entities.PostItEntity
@@ -20,7 +21,9 @@ fun PostItScreen(
     onDelete: (PostItEntity) -> Unit,
     context: Context
 ) {
-    manageDataViewModel.handleIntent(CRUDIntents.GetAllData)
+    LaunchedEffect(key1 = Unit) {
+        manageDataViewModel.handleIntent(CRUDIntents.GetAllData)
+    }
     ManageStateValue(
         viewState.value,
         listenerPostItsScreen(
