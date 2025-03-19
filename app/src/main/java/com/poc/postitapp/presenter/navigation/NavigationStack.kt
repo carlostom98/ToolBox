@@ -28,7 +28,7 @@ fun NavigationStack(
 ) {
     val navController = rememberNavController()
     val mainState = manageDataViewModel.mainState.collectAsState()
-    val mainStateShared = manageDataViewModel.mainStateShared.collectAsState(ViewStates.Loading)
+
 
     NavHost(navController = navController, startDestination = PostItScreen) {
         composable<PostItScreen> {
@@ -57,7 +57,7 @@ fun NavigationStack(
         }
 
         composable<CreatePostItScreen> {
-            CreatePostItScreen(mainStateShared, context) { postItEntity ->
+            CreatePostItScreen(mainState, context) { postItEntity ->
                 with(postItEntity) {
                     if (title != null && description != null && color != null && urgencyLevel != null) {
                         manageDataViewModel.handleIntent(CRUDIntents.UpsertPostIt(postItEntity))

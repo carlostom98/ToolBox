@@ -2,72 +2,75 @@ package com.poc.postitapp.presenter.viewintents.crudintent
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.poc.postitapp.domain.entities.PostItEntity
 import com.poc.postitapp.domain.entities.SortedBy
 import com.poc.postitapp.domain.entities.UseCaseResponse
 import com.poc.postitapp.domain.usecases.UseCases
+import com.poc.postitapp.presenter.viewintents.ViewModelResponse
 import com.poc.postitapp.presenter.viewintents.ViewStates
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.shareIn
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
 @HiltViewModel
-class ManageDataViewModel @Inject constructor(private val useCases: UseCases): ViewModel() {
+class ManageDataViewModel @Inject constructor(private val useCases: UseCases) : ViewModel() {
 
     private val _sortedBy = MutableStateFlow(SortedBy.DEFAULT)
 
-    private val _contacts = _sortedBy.flatMapLatest { sortedBy ->
-        useCases.getAllPostItsUseCase(sortedBy)
-    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
+    private val _postItsSortedBy = _sortedBy.flatMapLatest { sortedBy ->
+        useCases.getAllPostItsUseCase(sortedBy).let {
+            if (it is UseCaseResponse.Success<Flow<List<PostItEntity>>>) it.response else emptyFlow()
+        } ?: emptyFlow()
+        }.catch {
+            ViewStates.Error("Something went wrong")
+        }
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 
-    private val _mainState = MutableStateFlow<ViewStates>(ViewStates.Loading)
-    val mainState = _contacts.map { contacts ->
-        ViewStates.LoadData(contacts)
-    }.catch {
-        ViewStates.Error(it.message)
-    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), ViewStates.Loading)
+    private val _isSuccessfulResponse = MutableStateFlow(false)
 
-    val mainStateShared = _mainState.shareIn(viewModelScope, SharingStarted.Lazily, replay = 1)
+    val mainState = _postItsSortedBy.combine(_isSuccessfulResponse) { postItSortedBy, isSuccessFullResponse ->
+            ViewStates.LoadData(ViewModelResponse(postItSortedBy, isSuccessFullResponse))
+        }.catch {
+            ViewStates.Error("Something went wrong")
+        }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), ViewStates.Loading)
 
 
     fun handleIntent(intent: CRUDIntents) {
-        _mainState.value = ViewStates.Loading
-        when(intent) {
+        when (intent) {
             is CRUDIntents.DeletePostIt -> {
                 viewModelScope.launch {
-                    useCases.deletePostItUseCase(this, intent.data) { useCaseResponse ->
-                        handleMainStateResult(useCaseResponse)
+                    when (useCases.deletePostItUseCase(intent.data)) {
+                        UseCaseResponse.Error -> _isSuccessfulResponse.value = false
+                        is UseCaseResponse.Success -> _isSuccessfulResponse.value = true
                     }
                 }
             }
+
             CRUDIntents.GetAllData -> {
                 _sortedBy.value = SortedBy.DEFAULT
             }
+
             CRUDIntents.GetAllDataSorted -> {
                 _sortedBy.value = SortedBy.TITLE
             }
+
             is CRUDIntents.UpsertPostIt -> {
                 viewModelScope.launch {
-                    useCases.addPostItUseCase(this, intent.data) { useCaseResponse ->
-                        handleMainStateResult(useCaseResponse)
+                    when (useCases.addPostItUseCase(intent.data)) {
+                        UseCaseResponse.Error -> _isSuccessfulResponse.value = false
+                        is UseCaseResponse.Success -> _isSuccessfulResponse.value = true
                     }
                 }
             }
-        }
-    }
-
-    private fun handleMainStateResult(useCaseResponse: UseCaseResponse) {
-        when(useCaseResponse){
-            UseCaseResponse.Error -> _mainState.value = ViewStates.Error("Error Modifying Data")
-            UseCaseResponse.Success -> _mainState.value = ViewStates.LoadData(null)
         }
     }
 }

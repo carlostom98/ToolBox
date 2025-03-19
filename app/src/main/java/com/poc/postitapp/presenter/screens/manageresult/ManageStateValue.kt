@@ -27,7 +27,7 @@ fun ManageStateValue(viewState: ViewStates, listener: ListenViewState) =
         }
 
         is ViewStates.LoadData -> {
-            listener.OnSuccess(postIts = viewState.data ?: emptyList())
+            listener.OnSuccess(postIts = viewState.data.postItsList?: emptyList())
         }
 
         ViewStates.Loading -> {

@@ -4,18 +4,26 @@ import com.poc.persistence.data.entitiesdb.PostItVO
 import com.poc.postitapp.domain.entities.PostItEntity
 import com.poc.postitapp.domain.interfaces.IRoomPersistenceRepository
 import com.poc.postitapp.domain.entities.SortedBy
+import com.poc.postitapp.domain.entities.UseCaseResponse
 import com.poc.postitapp.domain.interfaces.BaseUseCaseMainThread
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class GetAllPostItsUseCase @Inject constructor (private val repository: IRoomPersistenceRepository): BaseUseCaseMainThread<SortedBy, Flow<List<PostItEntity>>>() {
+class GetAllPostItsUseCase @Inject constructor (private val repository: IRoomPersistenceRepository) {
 
     private val sortedBy = mapOf(
         SortedBy.TITLE to { getSortedByTitle() } ,
         SortedBy.DEFAULT to { getSortedByDefault() }
     )
 
-    override fun doWork(parameter: SortedBy): Flow<List<PostItEntity>>  = sortedBy[parameter]?.invoke() ?: getSortedByDefault()
+    operator fun invoke(parameter: SortedBy): UseCaseResponse<Flow<List<PostItEntity>>>  {
+       return try {
+            val result = sortedBy[parameter]?.invoke() ?: getSortedByDefault()
+            UseCaseResponse.Success(result)
+        } catch (error: Throwable) {
+            throw error
+        }
+    }
 
 
     private fun getSortedByTitle() = repository.getAllSortedByTitle()

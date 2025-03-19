@@ -7,16 +7,16 @@ import com.poc.postitapp.domain.entities.UseCaseResponse
 import com.poc.postitapp.domain.interfaces.BaseUseCase
 import javax.inject.Inject
 
-class AddPostItUseCase @Inject constructor (private val repository: IRoomPersistenceRepository): BaseUseCase<PostItEntity, UseCaseResponse>() {
-    override suspend fun doWork(parameter: PostItEntity): UseCaseResponse {
+class AddPostItUseCase @Inject constructor (private val repository: IRoomPersistenceRepository) {
+    suspend operator fun invoke(postItEntity: PostItEntity): UseCaseResponse<Boolean> {
         return try {
-            if (parameter.color != null) {
-                repository.insertOrUpdate(parameter)
+            if (postItEntity.color != null) {
+                repository.insertOrUpdate(postItEntity)
             } else {
-                val auxPostIt = parameter.copy(color = 0xFFFFFF)
+                val auxPostIt = postItEntity.copy(color = 0xFFFFFF)
                 repository.insertOrUpdate(auxPostIt)
             }
-            UseCaseResponse.Success
+            UseCaseResponse.Success(true)
         } catch (e: Exception) {
             UseCaseResponse.Error
         }
