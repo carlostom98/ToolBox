@@ -1,11 +1,10 @@
 package com.poc.postitapp.domain.usecases.persistancecases
 
-import com.poc.persistence.domain.entities.PostItEntity
-import com.poc.postitapp.data.persistance.IRoomPersistenceRepository
+import com.poc.persistence.data.entitiesdb.PostItVO
+import com.poc.postitapp.domain.entities.PostItEntity
+import com.poc.postitapp.domain.interfaces.IRoomPersistenceRepository
 import com.poc.postitapp.domain.entities.SortedBy
-import com.poc.postitapp.domain.entities.UseCaseResponse
-import com.poc.postitapp.utils.BaseUseCase
-import com.poc.postitapp.utils.BaseUseCaseMainThread
+import com.poc.postitapp.domain.interfaces.BaseUseCaseMainThread
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

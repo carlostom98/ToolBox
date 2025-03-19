@@ -1,7 +1,7 @@
 package com.poc.persistence.data.converters
 
 import androidx.room.TypeConverter
-import com.poc.persistence.domain.entities.UrgencyLevel
+import com.poc.persistence.data.entitiesdb.UrgencyLevel
 
 class UrgencyLevelConverter {
     // Convert to String, to save in database

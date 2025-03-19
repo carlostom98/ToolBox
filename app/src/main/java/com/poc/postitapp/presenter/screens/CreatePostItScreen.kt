@@ -44,14 +44,13 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.poc.persistence.domain.entities.PostItEntity
-import com.poc.persistence.domain.entities.UrgencyLevel
-import com.poc.postitapp.presenter.screens.listeners.ListenViewState
+import com.poc.persistence.data.entitiesdb.PostItVO
+import com.poc.persistence.data.entitiesdb.UrgencyLevel
+import com.poc.postitapp.domain.entities.PostItEntity
 import com.poc.postitapp.presenter.screens.manageresult.ManageStateValue
 import com.poc.postitapp.presenter.screens.manageresult.listenerCreatePostItScreen
 import com.poc.postitapp.presenter.viewintents.ViewStates
 import com.poc.postitapp.utils.extensions.Tools
-import com.poc.postitapp.utils.extensions.shortToast
 
 @Composable
 fun CreatePostItScreen(viewState: State<ViewStates>, context: Context, onClickSave: (PostItEntity) -> Unit) {

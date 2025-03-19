@@ -1,6 +1,6 @@
 package com.poc.postitapp.presenter.viewintents.crudintent
 
-import com.poc.persistence.domain.entities.PostItEntity
+import com.poc.postitapp.domain.entities.PostItEntity
 
 sealed class CRUDIntents {
     data object GetAllData : CRUDIntents()

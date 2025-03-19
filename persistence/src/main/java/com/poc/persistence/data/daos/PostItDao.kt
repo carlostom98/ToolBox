@@ -5,25 +5,25 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.poc.persistence.domain.entities.PostItEntity
+import com.poc.persistence.data.entitiesdb.PostItVO
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface PostItDao {
 
     @Query("SELECT * FROM postit")
-    fun getAll(): Flow<List<PostItEntity>>
+    fun getAll(): Flow<List<PostItVO>>
 
     @Query("SELECT * FROM postit ORDER BY title ASC")
-    fun getAllSortedByTitle(): Flow<List<PostItEntity>>
+    fun getAllSortedByTitle(): Flow<List<PostItVO>>
 
     @Query("SELECT * FROM postit WHERE id = :id")
-    fun getById(id: Int): Flow<PostItEntity>
+    fun getById(id: Int): Flow<PostItVO>
 
     @Insert (onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(postIt: PostItEntity)
+    suspend fun insert(postIt: PostItVO)
 
     @Delete
-    suspend fun delete(postIt: PostItEntity)
+    suspend fun delete(postIt: PostItVO)
 
 }

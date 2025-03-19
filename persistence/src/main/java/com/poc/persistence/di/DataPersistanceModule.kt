@@ -4,8 +4,10 @@ import android.content.Context
 import androidx.room.Room
 import com.poc.persistence.data.daos.PostItDao
 import com.poc.persistence.data.database.AppDatabase
-import com.poc.persistence.domain.repository.CRUDPostItRepository
-import com.poc.persistence.domain.repository.ICRUDPostItRepository
+import com.poc.persistence.data.datasource.CRUDPostItRoomDataSource
+import com.poc.persistence.data.repository.CRUDPostItRepository
+import com.poc.persistence.domain.interfaces.ICRUDPostItRepository
+import com.poc.persistence.domain.interfaces.PostItDataSource
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -33,7 +35,11 @@ object DataPersistanceModule {
 
     @Provides
     @Singleton
-    fun provideRepository(postItDao: PostItDao): ICRUDPostItRepository = CRUDPostItRepository(postItDao)
+    fun provideRoomDataSource(postItDao: PostItDao): PostItDataSource = CRUDPostItRoomDataSource(postItDao)
+
+    @Provides
+    @Singleton
+    fun provideRepository(roomDataSource: PostItDataSource): ICRUDPostItRepository = CRUDPostItRepository(roomDataSource)
 
 
 }

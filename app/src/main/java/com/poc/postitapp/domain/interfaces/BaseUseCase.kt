@@ -1,4 +1,4 @@
-package com.poc.postitapp.utils
+package com.poc.postitapp.domain.interfaces
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

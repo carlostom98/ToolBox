@@ -1,9 +1,7 @@
 package com.poc.postitapp.presenter.navigation
 
-import androidx.navigation.NavType
-import androidx.navigation.navArgument
-import com.poc.persistence.domain.entities.PostItEntity
-import com.poc.postitapp.presenter.navigation.custom.CustomNavTypePostIt
+import com.poc.persistence.data.entitiesdb.PostItVO
+import com.poc.postitapp.domain.entities.PostItEntity
 import kotlinx.serialization.Serializable
 
 

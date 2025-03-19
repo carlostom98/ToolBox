@@ -9,7 +9,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
-import com.poc.persistence.domain.entities.PostItEntity
+import com.poc.postitapp.domain.entities.PostItEntity
 import com.poc.postitapp.presenter.navigation.custom.CustomNavTypePostIt
 import com.poc.postitapp.presenter.screens.CreatePostItScreen
 import com.poc.postitapp.presenter.screens.DetailScreen

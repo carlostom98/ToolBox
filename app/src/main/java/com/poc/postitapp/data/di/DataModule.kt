@@ -1,7 +1,7 @@
 package com.poc.postitapp.data.di
 
-import com.poc.persistence.domain.repository.ICRUDPostItRepository
-import com.poc.postitapp.data.persistance.IRoomPersistenceRepository
+import com.poc.persistence.domain.interfaces.ICRUDPostItRepository
+import com.poc.postitapp.domain.interfaces.IRoomPersistenceRepository
 import com.poc.postitapp.data.persistance.RoomPersistenceRepository
 import dagger.Module
 import dagger.Provides

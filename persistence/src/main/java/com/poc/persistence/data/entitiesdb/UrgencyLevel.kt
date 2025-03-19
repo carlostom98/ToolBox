@@ -1,4 +1,4 @@
-package com.poc.persistence.domain.entities
+package com.poc.persistence.data.entitiesdb
 
 import kotlinx.serialization.Serializable
 

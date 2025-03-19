@@ -5,10 +5,10 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.poc.persistence.data.converters.UrgencyLevelConverter
 import com.poc.persistence.data.daos.PostItDao
-import com.poc.persistence.domain.entities.PostItEntity
+import com.poc.persistence.data.entitiesdb.PostItVO
 
 
-@Database(entities = [PostItEntity::class], version = 1)
+@Database(entities = [PostItVO::class], version = 1)
 @TypeConverters(UrgencyLevelConverter::class)
 abstract class AppDatabase: RoomDatabase() {
     abstract fun getPostItDao(): PostItDao

@@ -3,7 +3,8 @@ package com.poc.postitapp.presenter.screens
 import android.content.Context
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
-import com.poc.persistence.domain.entities.PostItEntity
+import com.poc.persistence.data.entitiesdb.PostItVO
+import com.poc.postitapp.domain.entities.PostItEntity
 import com.poc.postitapp.presenter.screens.manageresult.ManageStateValue
 import com.poc.postitapp.presenter.screens.manageresult.listenerPostItsScreen
 import com.poc.postitapp.presenter.viewintents.ViewStates

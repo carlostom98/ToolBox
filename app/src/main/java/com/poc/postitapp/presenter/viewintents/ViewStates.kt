@@ -1,6 +1,7 @@
 package com.poc.postitapp.presenter.viewintents
 
-import com.poc.persistence.domain.entities.PostItEntity
+import com.poc.persistence.data.entitiesdb.PostItVO
+import com.poc.postitapp.domain.entities.PostItEntity
 
 sealed class ViewStates  () {
     data object Loading: ViewStates()

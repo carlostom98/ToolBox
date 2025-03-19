@@ -1,6 +1,6 @@
 package com.poc.postitapp.domain.di
 
-import com.poc.postitapp.data.persistance.IRoomPersistenceRepository
+import com.poc.postitapp.domain.interfaces.IRoomPersistenceRepository
 import com.poc.postitapp.domain.usecases.UseCases
 import com.poc.postitapp.domain.usecases.persistancecases.AddPostItUseCase
 import com.poc.postitapp.domain.usecases.persistancecases.DeletePostItUseCase
