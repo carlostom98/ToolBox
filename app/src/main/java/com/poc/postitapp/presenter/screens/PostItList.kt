@@ -1,8 +1,5 @@
 package com.poc.postitapp.presenter.screens
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -31,10 +28,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.rememberSwipeToDismissBoxState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -43,9 +36,7 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.poc.persistence.data.entitiesdb.PostItVO
 import com.poc.postitapp.domain.entities.PostItEntity
-import kotlinx.coroutines.delay
 
 @Composable
 fun PostItList(
@@ -69,12 +60,14 @@ fun PostItList(
                 })
             }
         } else {
-            Text(text = "You are updated", style = TextStyle(
-                color = MaterialTheme.colorScheme.secondary,
-                fontSize = 30.sp,
-                fontStyle = FontStyle.Italic,
-                textDecoration = TextDecoration.Underline
-            ))
+            Text(
+                text = "You are updated", style = TextStyle(
+                    color = MaterialTheme.colorScheme.secondary,
+                    fontSize = 30.sp,
+                    fontStyle = FontStyle.Italic,
+                    textDecoration = TextDecoration.Underline
+                )
+            )
         }
         FloatButton(
             modifier = Modifier
@@ -98,45 +91,26 @@ fun FloatButton(modifier: Modifier, onClick: () -> Unit) {
 @Composable
 fun SwipeToDeleteContainer(
     onDelete: () -> Unit,
-    animationDuration: Int = 1000,
     content: @Composable () -> Unit
 ) {
+    val state = rememberSwipeToDismissBoxState()
 
-    var isRemoved by remember {
-        mutableStateOf(false)
-    }
+    SwipeToDismissBox(state = state, backgroundContent = {
+        DeleteBackGround(swipeDismissState = state)
+    }, content = {
+        content()
+    }, enableDismissFromStartToEnd = false)
 
-    val state = rememberSwipeToDismissBoxState(
-        confirmValueChange = { value ->
-            if (value == SwipeToDismissBoxValue.EndToStart) {
-                isRemoved = true
-                true
-            } else {
-                false
+    when (state.currentValue) {
+        SwipeToDismissBoxValue.StartToEnd -> {}
+        SwipeToDismissBoxValue.EndToStart -> {
+            LaunchedEffect(key1 = state.currentValue) {
+                onDelete()
+                state.snapTo(SwipeToDismissBoxValue.Settled)
             }
         }
-    )
 
-    AnimatedVisibility(
-        visible = !isRemoved, exit = shrinkVertically(
-            animationSpec = tween(durationMillis = animationDuration),
-            shrinkTowards = Alignment.Top
-        )
-    ) {
-
-        SwipeToDismissBox(state = state, backgroundContent = {
-            DeleteBackGround(swipeDismissState = state)
-        }, content = {
-            content()
-        }, enableDismissFromStartToEnd = false)
-    }
-    
-    LaunchedEffect(key1 = isRemoved) {
-        if (isRemoved) {
-            delay(animationDuration.toLong())
-            onDelete()
-            isRemoved = false
-        }
+        SwipeToDismissBoxValue.Settled -> {}
     }
 
 }
@@ -164,7 +138,6 @@ fun DeleteBackGround(swipeDismissState: SwipeToDismissBoxState) {
             contentDescription = "Delete item",
             tint = Color.Black
         )
-
     }
 }
 
