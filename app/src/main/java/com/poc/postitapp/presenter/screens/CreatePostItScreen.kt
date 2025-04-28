@@ -55,7 +55,15 @@ import com.poc.postitapp.utils.extensions.Tools
 @Composable
 fun CreatePostItScreen(viewState: State<ViewStates>, context: Context, onClickSave: (PostItEntity) -> Unit) {
 
-    ManageStateValue(viewState.value, listenerCreatePostItScreen(context))
+    var dataSaved by remember {
+        mutableStateOf(false)
+    }
+
+    if (dataSaved) {
+        ManageStateValue(viewState.value, listenerCreatePostItScreen(context))
+        dataSaved = false
+    }
+
     var postItEntity by remember {
         mutableStateOf(
             PostItEntity(
@@ -195,7 +203,10 @@ fun CreatePostItScreen(viewState: State<ViewStates>, context: Context, onClickSa
             )
 
             OutlinedButton(
-                onClick = { onClickSave(postItEntity) },
+                onClick = {
+                    onClickSave(postItEntity)
+                    dataSaved = true
+                          },
                 shape = ButtonDefaults.outlinedShape,
                 enabled = true,
                 colors = ButtonDefaults.outlinedButtonColors(
