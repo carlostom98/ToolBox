@@ -53,7 +53,9 @@ fun NavigationStack(
             )
         ) { backStackEntry ->
             val detail = backStackEntry.toRoute<DetailScreen>()
-            DetailScreen(manageDataViewModel, detail.postItEntity)
+            DetailScreen(detail.postItEntity, saveData = {
+                manageDataViewModel.handleIntent(CRUDIntents.UpsertPostIt(it))
+            })
         }
 
         composable<CreatePostItScreen> {
