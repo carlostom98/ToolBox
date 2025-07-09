@@ -1,11 +1,9 @@
 package com.poc.postitapp.domain.usecases.persistancecases
 
-import com.poc.persistence.data.entitiesdb.PostItVO
 import com.poc.postitapp.domain.entities.PostItEntity
-import com.poc.postitapp.domain.interfaces.IRoomPersistenceRepository
 import com.poc.postitapp.domain.entities.SortedBy
 import com.poc.postitapp.domain.entities.UseCaseResponse
-import com.poc.postitapp.domain.interfaces.BaseUseCaseMainThread
+import com.poc.postitapp.domain.interfaces.IRoomPersistenceRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
@@ -27,6 +25,6 @@ class GetAllPostItsUseCase @Inject constructor (private val repository: IRoomPer
 
 
     private fun getSortedByTitle() = repository.getAllSortedByTitle()
-    private fun getSortedByDefault() = repository.getAllSortedByTitle()
+    private fun getSortedByDefault() = repository.getAll()
 
 }

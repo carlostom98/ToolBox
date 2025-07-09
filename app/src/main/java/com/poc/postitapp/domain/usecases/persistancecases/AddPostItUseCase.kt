@@ -1,10 +1,8 @@
 package com.poc.postitapp.domain.usecases.persistancecases
 
-import com.poc.persistence.data.entitiesdb.PostItVO
 import com.poc.postitapp.domain.entities.PostItEntity
-import com.poc.postitapp.domain.interfaces.IRoomPersistenceRepository
 import com.poc.postitapp.domain.entities.UseCaseResponse
-import com.poc.postitapp.domain.interfaces.BaseUseCase
+import com.poc.postitapp.domain.interfaces.IRoomPersistenceRepository
 import javax.inject.Inject
 
 class AddPostItUseCase @Inject constructor (private val repository: IRoomPersistenceRepository) {

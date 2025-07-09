@@ -1,4 +1,4 @@
-package com.poc.postitapp
+package com.poc.postitapp.presenter
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

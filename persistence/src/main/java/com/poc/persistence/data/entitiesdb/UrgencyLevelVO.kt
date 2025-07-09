@@ -3,7 +3,7 @@ package com.poc.persistence.data.entitiesdb
 import kotlinx.serialization.Serializable
 
 @Serializable
-enum class UrgencyLevel {
+enum class UrgencyLevelVO {
     HIGH,
     MEDIUM,
     LOW
