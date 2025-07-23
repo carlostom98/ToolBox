@@ -2,20 +2,13 @@ package com.poc.postitapp.presenter.screens
 
 import android.content.Context
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.State
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import com.poc.persistence.data.entitiesdb.PostItVO
-import com.poc.postitapp.domain.entities.PostItEntity
+import com.poc.domain.entities.PostItEntity
 import com.poc.postitapp.presenter.screens.manageresult.ManageStateValue
 import com.poc.postitapp.presenter.screens.manageresult.listenerPostItsScreen
-import com.poc.postitapp.presenter.viewintents.ViewStates
-import com.poc.postitapp.presenter.viewintents.crudintent.CRUDIntents
-import com.poc.postitapp.presenter.viewintents.crudintent.ManageDataViewModel
+import com.poc.viewmodel.viewintents.ViewStates
+import com.poc.viewmodel.viewintents.crudintent.CRUDIntents
+import com.poc.viewmodel.viewintents.crudintent.ManageDataViewModel
 
 @Composable
 fun PostItScreen(

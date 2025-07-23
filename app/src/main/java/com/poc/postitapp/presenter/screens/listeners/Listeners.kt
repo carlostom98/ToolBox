@@ -1,8 +1,7 @@
 package com.poc.postitapp.presenter.screens.listeners
 
 import androidx.compose.runtime.Composable
-import com.poc.persistence.data.entitiesdb.PostItVO
-import com.poc.postitapp.domain.entities.PostItEntity
+import com.poc.domain.entities.PostItEntity
 
 interface ListenViewState {
     @Composable

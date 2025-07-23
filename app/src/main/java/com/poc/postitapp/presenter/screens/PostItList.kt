@@ -36,7 +36,7 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.poc.postitapp.domain.entities.PostItEntity
+import com.poc.domain.entities.PostItEntity
 
 @Composable
 fun PostItList(

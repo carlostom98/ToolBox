@@ -105,6 +105,7 @@ dependencies {
 
     // Dagger Hilt
     implementation(libs.daggerhilt.android)
+    implementation(libs.daggerhilt.compose.compiler)
     kapt(libs.daggerhilt.android.compiler)
 
     // Compose
@@ -123,6 +124,11 @@ dependencies {
 
     // Kotlin serialization
     implementation(libs.kotlinx.serialization.json)
+
+
+    //Modules
+    implementation(project(":viewmodel"))
+    implementation(project(":domain"))
 
 
 

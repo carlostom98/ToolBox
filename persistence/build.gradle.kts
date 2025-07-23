@@ -58,6 +58,6 @@ dependencies {
     // Kotlin serialization
     implementation(libs.kotlinx.serialization.json)
 
-    // Modules
-    implementation(project(":app"))
+//    // Modules
+    implementation(project(":domain"))
 }

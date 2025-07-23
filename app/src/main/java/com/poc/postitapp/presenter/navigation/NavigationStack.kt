@@ -5,19 +5,20 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.platform.LocalContext
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
-import com.poc.postitapp.domain.entities.PostItEntity
+import com.poc.domain.entities.PostItEntity
 import com.poc.postitapp.presenter.navigation.custom.CustomNavTypePostIt
 import com.poc.postitapp.presenter.screens.CreatePostItScreen
 import com.poc.postitapp.presenter.screens.DetailScreen
 import com.poc.postitapp.presenter.screens.PostItScreen
-import com.poc.postitapp.presenter.viewintents.ViewStates
-import com.poc.postitapp.presenter.viewintents.crudintent.CRUDIntents
-import com.poc.postitapp.presenter.viewintents.crudintent.ManageDataViewModel
+import com.poc.viewmodel.viewintents.crudintent.CRUDIntents
+import com.poc.viewmodel.viewintents.crudintent.ManageDataViewModel
 import com.poc.postitapp.utils.extensions.shortToast
+import com.poc.viewmodel.viewintents.createoeditintent.CreateOrEditPostItViewModel
 import kotlin.reflect.typeOf
 
 @Composable
@@ -59,7 +60,7 @@ fun NavigationStack(
         }
 
         composable<CreatePostItScreen> {
-            CreatePostItScreen(mainState, context) { postItEntity ->
+            CreatePostItScreen(createOrEditPostItViewModel = hiltViewModel<CreateOrEditPostItViewModel>(),mainState, context) { postItEntity ->
                 with(postItEntity) {
                     if (title != null && description != null && color != null && urgencyLevel != null) {
                         manageDataViewModel.handleIntent(CRUDIntents.UpsertPostIt(postItEntity))

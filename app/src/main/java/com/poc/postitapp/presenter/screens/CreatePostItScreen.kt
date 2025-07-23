@@ -11,15 +11,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CheckCircle
-import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.DropdownMenu
-import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
@@ -28,9 +23,11 @@ import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -41,21 +38,23 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.poc.persistence.data.entitiesdb.PostItVO
-import com.poc.persistence.data.entitiesdb.UrgencyLevel
-import com.poc.postitapp.domain.entities.PostItEntity
+import com.poc.domain.entities.PostItEntity
+import com.poc.domain.entities.UrgencyLevel
+
 import com.poc.postitapp.presenter.screens.atoms.DropDownMenuPicker
-import com.poc.postitapp.presenter.screens.atoms.MyDropDownMenu
 import com.poc.postitapp.presenter.screens.manageresult.ManageStateValue
 import com.poc.postitapp.presenter.screens.manageresult.listenerCreatePostItScreen
-import com.poc.postitapp.presenter.viewintents.ViewStates
+import com.poc.viewmodel.viewintents.ViewStates
 import com.poc.postitapp.utils.extensions.Tools
+import com.poc.viewmodel.viewintents.createoeditintent.CreateOrEditIntent
+import com.poc.viewmodel.viewintents.createoeditintent.CreateOrEditPostItViewModel
 
 @Composable
-fun CreatePostItScreen(viewState: State<ViewStates>, context: Context, onClickSave: (PostItEntity) -> Unit) {
+fun CreatePostItScreen(createOrEditPostItViewModel: CreateOrEditPostItViewModel, viewState: State<ViewStates>, context: Context, onClickSave: (PostItEntity) -> Unit) {
+
+    val postItEntity by createOrEditPostItViewModel.postItEntity.collectAsState()
 
     var dataSaved by remember {
         mutableStateOf(false)
@@ -64,17 +63,6 @@ fun CreatePostItScreen(viewState: State<ViewStates>, context: Context, onClickSa
     if (dataSaved) {
         ManageStateValue(viewState.value, listenerCreatePostItScreen(context))
         dataSaved = false
-    }
-
-    var postItEntity by remember {
-        mutableStateOf(
-            PostItEntity(
-                title = null,
-                description = null,
-                color = null,
-                urgencyLevel = null
-            )
-        )
     }
 
     var onFocusedTitle by remember {
@@ -143,7 +131,7 @@ fun CreatePostItScreen(viewState: State<ViewStates>, context: Context, onClickSa
                     onFocusedTitle = true
                     onFocusedDescription = false
                 }, value = postItEntity.title ?: "", onValueChange = {
-                postItEntity = postItEntity.copy(title = it)
+                createOrEditPostItViewModel.handleIntent(CreateOrEditIntent.AddTitle(it))
             }, label = { Text(text = "Title") },
                 colors = outlinedSelectedColors,
                 textStyle = TextStyle(
@@ -163,7 +151,7 @@ fun CreatePostItScreen(viewState: State<ViewStates>, context: Context, onClickSa
                     .fillMaxWidth(),
                 value = postItEntity.description ?: "",
                 onValueChange = {
-                    postItEntity = postItEntity.copy(description = it)
+                    createOrEditPostItViewModel.handleIntent(CreateOrEditIntent.AddDescription(it))
                 },
                 label = { Text(text = "Description") },
                 colors = outlinedSelectedColors,
@@ -180,7 +168,7 @@ fun CreatePostItScreen(viewState: State<ViewStates>, context: Context, onClickSa
             )
 
             DropDownMenuPicker(text = "Pick A Color", spacerDistance, Tools.listOfColorsToPick) {
-                postItEntity = postItEntity.copy(color = it.toArgb().toLong())
+                createOrEditPostItViewModel.handleIntent(CreateOrEditIntent.SetColor(it.toArgb().toLong()))
             }
 
             Spacer(
@@ -195,7 +183,7 @@ fun CreatePostItScreen(viewState: State<ViewStates>, context: Context, onClickSa
                 spacerDistance,
                 UrgencyLevel.entries.toList()
             ) {
-                postItEntity = postItEntity.copy(urgencyLevel = it)
+                createOrEditPostItViewModel.handleIntent(CreateOrEditIntent.SetUrgencyLevel(it))
             }
 
             Spacer(
@@ -208,6 +196,7 @@ fun CreatePostItScreen(viewState: State<ViewStates>, context: Context, onClickSa
                 onClick = {
                     onClickSave(postItEntity)
                     dataSaved = true
+                    createOrEditPostItViewModel.handleIntent(CreateOrEditIntent.resetPostItEntity)
                           },
                 shape = ButtonDefaults.outlinedShape,
                 enabled = true,

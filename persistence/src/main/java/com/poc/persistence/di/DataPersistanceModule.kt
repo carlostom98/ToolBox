@@ -2,11 +2,11 @@ package com.poc.persistence.di
 
 import android.content.Context
 import androidx.room.Room
+import com.poc.data.interfaces.ICRUDPostItRepository
 import com.poc.persistence.data.daos.PostItDao
 import com.poc.persistence.data.database.AppDatabase
 import com.poc.persistence.data.datasource.CRUDPostItRoomDataSource
 import com.poc.persistence.data.repository.CRUDPostItRepository
-import com.poc.persistence.domain.interfaces.ICRUDPostItRepository
 import com.poc.persistence.domain.interfaces.PostItDataSource
 import dagger.Module
 import dagger.Provides
@@ -17,7 +17,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object DataPersistanceModule {
+object RoomModule {
 
     @Provides
     @Singleton

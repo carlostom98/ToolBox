@@ -11,12 +11,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.poc.persistence.data.entitiesdb.PostItVO
-import com.poc.postitapp.domain.entities.PostItEntity
+import com.poc.domain.entities.PostItEntity
 import com.poc.postitapp.presenter.screens.LoadingScreen
 import com.poc.postitapp.presenter.screens.PostItList
 import com.poc.postitapp.presenter.screens.listeners.ListenViewState
-import com.poc.postitapp.presenter.viewintents.ViewStates
+import com.poc.viewmodel.viewintents.ViewStates
 import com.poc.postitapp.utils.extensions.shortToast
 
 @Composable
