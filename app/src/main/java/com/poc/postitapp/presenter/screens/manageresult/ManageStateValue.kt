@@ -61,7 +61,8 @@ fun listenerPostItsScreen(
     context: Context,
     onClickDetail: (PostItEntity) -> Unit,
     onClickNewPostIt: () -> Unit,
-    onDelete: (PostItEntity) -> Unit
+    onDelete: (PostItEntity) -> Unit,
+    onSortedTypeSelected: (String) -> Unit
     ) = object : ListenViewState {
     @Composable
     override fun OnSuccess(postIts: List<PostItEntity>) {
@@ -74,7 +75,7 @@ fun listenerPostItsScreen(
             onClickNewPostIt()
         }, onDelete = {
             onDelete(it)
-        })
+        }, onSortedTypeSelected = onSortedTypeSelected)
         "Data retrieved successfully".shortToast(context)
     }
 

@@ -11,10 +11,10 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface PostItDao {
 
-    @Query("SELECT * FROM postit")
+    @Query("SELECT * FROM postit ORDER BY title ASC")
     fun getAll(): Flow<List<PostItVO>>
 
-    @Query("SELECT * FROM postit ORDER BY title ASC")
+    @Query("SELECT * FROM postit ORDER BY title DESC")
     fun getAllSortedByTitle(): Flow<List<PostItVO>>
 
     @Query("SELECT * FROM postit WHERE id = :id")

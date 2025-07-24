@@ -35,7 +35,6 @@ fun NavigationStack(
         composable<PostItScreen> {
             PostItScreen(
                 context = context,
-                manageDataViewModel = manageDataViewModel,
                 viewState = mainState,
                 onClickDetail = { postItEntity ->
                     navController.navigate(DetailScreen(postItEntity))
@@ -45,6 +44,11 @@ fun NavigationStack(
                 },
                 onDelete = { postIt ->
                     manageDataViewModel.handleIntent(CRUDIntents.DeletePostIt(postIt))
+                }, onSortedTypeSelected = {
+                    when (it) {
+                        "Option 1" -> manageDataViewModel.handleIntent(CRUDIntents.GetAllData)
+                        "Option 2" -> manageDataViewModel.handleIntent(CRUDIntents.GetAllDataSorted)
+                    }
                 })
         }
 

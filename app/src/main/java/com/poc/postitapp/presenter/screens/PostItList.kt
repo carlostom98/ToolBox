@@ -37,6 +37,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.poc.domain.entities.PostItEntity
+import com.poc.postitapp.presenter.screens.molecules.RadioButtonCustomized
 
 @Composable
 fun PostItList(
@@ -44,20 +45,26 @@ fun PostItList(
     postIts: List<PostItEntity>,
     onClick: (PostItEntity) -> Unit,
     onDelete: (PostItEntity) -> Unit,
-    onClickCreateNew: () -> Unit
+    onClickCreateNew: () -> Unit,
+    onSortedTypeSelected: (String) -> Unit
 ) {
-    Box(modifier = modifier, contentAlignment = Alignment.Center) {
+    Box(modifier = modifier) {
         if (postIts.isNotEmpty()) {
-            LazyColumn(contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)) {
-                items(items = postIts, itemContent = { item ->
-                    SwipeToDeleteContainer(onDelete = {
-                        onDelete(item)
-                    }) {
-                        ListRow(postIt = item) {
-                            onClick(item)
+            Column {
+                RadioButtonCustomized(listOf("Option 1","Option 2", "Option 3")) {
+                    onSortedTypeSelected(it)
+                }
+                LazyColumn(contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)) {
+                    items(items = postIts, itemContent = { item ->
+                        SwipeToDeleteContainer(onDelete = {
+                            onDelete(item)
+                        }) {
+                            ListRow(postIt = item) {
+                                onClick(item)
+                            }
                         }
-                    }
-                })
+                    })
+                }
             }
         } else {
             Text(

@@ -12,15 +12,13 @@ import com.poc.viewmodel.viewintents.crudintent.ManageDataViewModel
 
 @Composable
 fun PostItScreen(
-    manageDataViewModel: ManageDataViewModel,
     viewState: State<ViewStates>,
     onClickDetail: (PostItEntity) -> Unit,
     onClickNewPostIt: () -> Unit,
     onDelete: (PostItEntity) -> Unit,
+    onSortedTypeSelected: (String) -> Unit,
     context: Context
 ) {
-
-    manageDataViewModel.handleIntent(CRUDIntents.GetAllData)
 
     ManageStateValue(
         viewState.value,
@@ -28,7 +26,8 @@ fun PostItScreen(
             context = context,
             onClickDetail = onClickDetail,
             onClickNewPostIt = onClickNewPostIt,
-            onDelete
+            onDelete,
+            onSortedTypeSelected = onSortedTypeSelected
         )
     )
 }
