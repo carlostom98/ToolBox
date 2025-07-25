@@ -1,4 +1,4 @@
-package com.poc.viewmodel.viewintents.createoeditintent
+package com.poc.viewmodel.viewintents.createoreditintent
 
 import com.poc.domain.entities.UrgencyLevel
 

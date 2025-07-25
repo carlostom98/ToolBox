@@ -1,4 +1,4 @@
-package com.poc.viewmodel.viewintents.createoeditintent
+package com.poc.viewmodel.viewintents.createoreditintent
 
 import androidx.lifecycle.ViewModel
 import com.poc.domain.entities.PostItEntity

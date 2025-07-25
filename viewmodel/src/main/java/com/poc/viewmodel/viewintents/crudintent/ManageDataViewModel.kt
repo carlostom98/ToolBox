@@ -52,12 +52,8 @@ class ManageDataViewModel @Inject constructor(private val useCases: UseCases) : 
                 }
             }
 
-            CRUDIntents.GetAllData -> {
-                _sortedBy.value = SortedBy.DEFAULT
-            }
-
-            CRUDIntents.GetAllDataSorted -> {
-                _sortedBy.value = SortedBy.TITLE
+            is CRUDIntents.GetAllData -> {
+                _sortedBy.value = intent.sortedVy
             }
 
             is CRUDIntents.UpsertPostIt -> {

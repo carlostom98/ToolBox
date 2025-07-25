@@ -27,7 +27,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -48,8 +47,8 @@ import com.poc.postitapp.presenter.screens.manageresult.ManageStateValue
 import com.poc.postitapp.presenter.screens.manageresult.listenerCreatePostItScreen
 import com.poc.viewmodel.viewintents.ViewStates
 import com.poc.postitapp.utils.extensions.Tools
-import com.poc.viewmodel.viewintents.createoeditintent.CreateOrEditIntent
-import com.poc.viewmodel.viewintents.createoeditintent.CreateOrEditPostItViewModel
+import com.poc.viewmodel.viewintents.createoreditintent.CreateOrEditIntent
+import com.poc.viewmodel.viewintents.createoreditintent.CreateOrEditPostItViewModel
 
 @Composable
 fun CreatePostItScreen(createOrEditPostItViewModel: CreateOrEditPostItViewModel, viewState: State<ViewStates>, context: Context, onClickSave: (PostItEntity) -> Unit) {

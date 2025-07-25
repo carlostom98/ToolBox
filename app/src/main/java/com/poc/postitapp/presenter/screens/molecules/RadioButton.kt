@@ -12,17 +12,22 @@ import androidx.compose.material3.RadioButton
 import androidx.compose.material3.RadioButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.poc.domain.entities.SortedBy
+import com.poc.viewmodel.viewintents.HandleSortedByStateViewModel
+import kotlinx.coroutines.flow.collect
 
 @Composable
-fun RadioButtonCustomized(options: List<String>, onRatioButtonSelected: (String) -> Unit) {
+fun RadioButtonCustomized(handleSortedByStateViewModel: HandleSortedByStateViewModel = hiltViewModel(), options: List<SortedBy>, onRatioButtonSelected: (SortedBy) -> Unit) {
 
-    val (selectedOption, onOptionSelected) = remember { mutableStateOf(options[0]) }
+    val selectedOption = handleSortedByStateViewModel.sortedBy.collectAsState()
 
     Column(modifier = Modifier.selectableGroup()) {
         options.forEach { option ->
@@ -30,9 +35,9 @@ fun RadioButtonCustomized(options: List<String>, onRatioButtonSelected: (String)
                 .fillMaxWidth()
                 .height(60.dp)
                 .selectable(
-                    selected = (option == selectedOption),
+                    selected = (option == selectedOption.value),
                     onClick = {
-                        onOptionSelected(option)
+                        handleSortedByStateViewModel.setState(option)
                         onRatioButtonSelected(option)
                     },
                     role = Role.RadioButton
@@ -40,7 +45,7 @@ fun RadioButtonCustomized(options: List<String>, onRatioButtonSelected: (String)
                 .padding(horizontal = 16.dp),
                 verticalAlignment = Alignment.CenterVertically) {
                 RadioButton(
-                    selected = (option == selectedOption),
+                    selected = (option == selectedOption.value),
                     colors = RadioButtonDefaults.colors(
                         selectedColor = MaterialTheme.colorScheme.secondary,
                         unselectedColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
@@ -48,7 +53,7 @@ fun RadioButtonCustomized(options: List<String>, onRatioButtonSelected: (String)
                     onClick = null
                 )
                 Text(
-                    text = option,
+                    text = option.toString(),
                     style = MaterialTheme.typography.bodyLarge,
                     modifier = Modifier.padding(start = 8.dp)
                 )

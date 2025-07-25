@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.poc.domain.entities.PostItEntity
+import com.poc.domain.entities.SortedBy
 import com.poc.postitapp.presenter.screens.LoadingScreen
 import com.poc.postitapp.presenter.screens.PostItList
 import com.poc.postitapp.presenter.screens.listeners.ListenViewState
@@ -62,7 +63,7 @@ fun listenerPostItsScreen(
     onClickDetail: (PostItEntity) -> Unit,
     onClickNewPostIt: () -> Unit,
     onDelete: (PostItEntity) -> Unit,
-    onSortedTypeSelected: (String) -> Unit
+    onSortedTypeSelected: (SortedBy) -> Unit
     ) = object : ListenViewState {
     @Composable
     override fun OnSuccess(postIts: List<PostItEntity>) {

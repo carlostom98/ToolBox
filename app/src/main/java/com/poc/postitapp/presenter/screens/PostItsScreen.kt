@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import com.poc.domain.entities.PostItEntity
+import com.poc.domain.entities.SortedBy
 import com.poc.postitapp.presenter.screens.manageresult.ManageStateValue
 import com.poc.postitapp.presenter.screens.manageresult.listenerPostItsScreen
 import com.poc.viewmodel.viewintents.ViewStates
@@ -16,7 +17,7 @@ fun PostItScreen(
     onClickDetail: (PostItEntity) -> Unit,
     onClickNewPostIt: () -> Unit,
     onDelete: (PostItEntity) -> Unit,
-    onSortedTypeSelected: (String) -> Unit,
+    onSortedTypeSelected: (SortedBy) -> Unit,
     context: Context
 ) {
 

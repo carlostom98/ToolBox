@@ -11,6 +11,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import com.poc.domain.entities.PostItEntity
+import com.poc.domain.entities.SortedBy
 import com.poc.postitapp.presenter.navigation.custom.CustomNavTypePostIt
 import com.poc.postitapp.presenter.screens.CreatePostItScreen
 import com.poc.postitapp.presenter.screens.DetailScreen
@@ -18,7 +19,7 @@ import com.poc.postitapp.presenter.screens.PostItScreen
 import com.poc.viewmodel.viewintents.crudintent.CRUDIntents
 import com.poc.viewmodel.viewintents.crudintent.ManageDataViewModel
 import com.poc.postitapp.utils.extensions.shortToast
-import com.poc.viewmodel.viewintents.createoeditintent.CreateOrEditPostItViewModel
+import com.poc.viewmodel.viewintents.createoreditintent.CreateOrEditPostItViewModel
 import kotlin.reflect.typeOf
 
 @Composable
@@ -45,10 +46,7 @@ fun NavigationStack(
                 onDelete = { postIt ->
                     manageDataViewModel.handleIntent(CRUDIntents.DeletePostIt(postIt))
                 }, onSortedTypeSelected = {
-                    when (it) {
-                        "Option 1" -> manageDataViewModel.handleIntent(CRUDIntents.GetAllData)
-                        "Option 2" -> manageDataViewModel.handleIntent(CRUDIntents.GetAllDataSorted)
-                    }
+                    manageDataViewModel.handleIntent(CRUDIntents.GetAllData(it))
                 })
         }
 

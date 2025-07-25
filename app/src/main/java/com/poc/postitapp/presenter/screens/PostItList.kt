@@ -37,6 +37,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.poc.domain.entities.PostItEntity
+import com.poc.domain.entities.SortedBy
 import com.poc.postitapp.presenter.screens.molecules.RadioButtonCustomized
 
 @Composable
@@ -46,12 +47,12 @@ fun PostItList(
     onClick: (PostItEntity) -> Unit,
     onDelete: (PostItEntity) -> Unit,
     onClickCreateNew: () -> Unit,
-    onSortedTypeSelected: (String) -> Unit
+    onSortedTypeSelected: (SortedBy) -> Unit
 ) {
     Box(modifier = modifier) {
         if (postIts.isNotEmpty()) {
             Column {
-                RadioButtonCustomized(listOf("Option 1","Option 2", "Option 3")) {
+                RadioButtonCustomized(options = SortedBy.entries) {
                     onSortedTypeSelected(it)
                 }
                 LazyColumn(contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)) {
