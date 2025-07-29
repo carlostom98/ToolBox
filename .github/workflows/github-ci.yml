@@ -11,9 +11,11 @@ on:
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
+    environment: production
     env: 
       user_name: Carlos
       age: 26
+      base_url: ${{ vars.BASE_URL }}
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
@@ -29,3 +31,4 @@ jobs:
       - name: Variables
         run: |
           echo "Hello $user_name now I know you're older than $age"
+          echo "CONNECTING TO $base_url"
