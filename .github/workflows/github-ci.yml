@@ -28,4 +28,4 @@ jobs:
       - run: echo "🍏 This job's status is ${{ job.status }}."
       - name: Variables
         run: |
-          echo Hello $user_name now I know you're older than $age
+          echo "Hello $user_name now I know you're older than $age"
