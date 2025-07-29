@@ -27,6 +27,6 @@ jobs:
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
       - name: Variables
+        if: ${{env.age == 26}}
         run: |
-          if: ${{env.age == 26}}
           echo Hello $user_name now I know you're older than $age
