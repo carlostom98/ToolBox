@@ -32,9 +32,20 @@ jobs:
         run: |
           echo "Hello $user_name now I know you're older than $age"
           echo "CONNECTING TO $base_url"
+
+  Build:
+      needs: [Explore-GitHub-Actions]
+      runs-on: ubuntu-latest
+
+      steps:
+        - name: checkout yhe main branch
+          uses: actions/checkout@v2
+
+        - name: gradle build
+          run: ./gradlew build
           
   Unit-Test:
-    needs: [Explore-GitHub-Actions]
+    needs: [Build]
     runs-on: ubuntu-latest
     steps:
       - name: checkout the main branch
