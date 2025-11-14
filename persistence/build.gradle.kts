@@ -58,6 +58,13 @@ dependencies {
     // Kotlin serialization
     implementation(libs.kotlinx.serialization.json)
 
-//    // Modules
+    //Retrofit 2
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.converter)
+
+    // OkHttp
+    implementation(platform(libs.okhttp.bom))
+
+   // Modules
     implementation(project(":domain"))
 }

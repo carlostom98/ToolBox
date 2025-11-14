@@ -1,7 +1,7 @@
-package com.poc.persistence.data.datasource
+package com.poc.persistence.data.room.datasource
 
-import com.poc.persistence.data.daos.PostItDao
-import com.poc.persistence.data.entitiesdb.PostItVO
+import com.poc.persistence.data.room.daos.PostItDao
+import com.poc.persistence.data.entities.PostItVO
 import com.poc.persistence.domain.interfaces.PostItDataSource
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject

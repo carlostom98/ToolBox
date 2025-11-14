@@ -1,6 +1,6 @@
 package com.poc.persistence.domain.interfaces
 
-import com.poc.persistence.data.entitiesdb.PostItVO
+import com.poc.persistence.data.entities.PostItVO
 import kotlinx.coroutines.flow.Flow
 
 interface PostItDataSource {

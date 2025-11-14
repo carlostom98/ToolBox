@@ -19,7 +19,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "PostItApp"
+rootProject.name = "ToolboxApp"
 include(":app")
 include(":persistence")
 include(":dimodule")

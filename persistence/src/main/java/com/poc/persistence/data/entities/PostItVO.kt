@@ -1,4 +1,4 @@
-package com.poc.persistence.data.entitiesdb
+package com.poc.persistence.data.entities
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
