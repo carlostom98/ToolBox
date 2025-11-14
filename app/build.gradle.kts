@@ -9,11 +9,11 @@ plugins {
 }
 
 android {
-    namespace = "com.poc.postitapp"
+    namespace = "com.poc.toolboxapp"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.poc.postitapp"
+        applicationId = "com.poc.toolboxapp"
         minSdk = 21
         targetSdk = 34
         versionCode = 1
@@ -46,6 +46,7 @@ android {
     buildFeatures {
         viewBinding = true
         compose = true
+        buildConfig = true
     }
     
    composeCompiler {
@@ -93,12 +94,6 @@ dependencies {
     // Picasso
     implementation(libs.picasso)
 
-    //Retrofit 2
-    implementation(libs.retrofit)
-    implementation(libs.retrofit.converter)
-
-    // OkHttp
-    implementation(platform(libs.okhttp.bom))
     // define any required OkHttp artifacts without version
     implementation(libs.okhttp)
     implementation(libs.logging.interceptor)

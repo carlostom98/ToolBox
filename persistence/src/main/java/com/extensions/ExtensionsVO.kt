@@ -2,8 +2,8 @@ package com.extensions
 
 import com.poc.domain.entities.PostItEntity
 import com.poc.domain.entities.UrgencyLevel
-import com.poc.persistence.data.entitiesdb.PostItVO
-import com.poc.persistence.data.entitiesdb.UrgencyLevelVO
+import com.poc.persistence.data.entities.PostItVO
+import com.poc.persistence.data.entities.UrgencyLevelVO
 
 
 fun PostItVO.toPostItEntity() = PostItEntity().copy(

@@ -1,11 +1,11 @@
-package com.poc.persistence.data.daos
+package com.poc.persistence.data.room.daos
 
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.poc.persistence.data.entitiesdb.PostItVO
+import com.poc.persistence.data.entities.PostItVO
 import kotlinx.coroutines.flow.Flow
 
 @Dao
