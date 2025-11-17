@@ -38,7 +38,7 @@ class GetAlbumsDetailedUseCase @Inject constructor(
                 }
 
         } catch (e: Exception) {
-            Response.Error(e.message!!)
+            Response.Error(e.message ?: "Something went wrong")
         }
     }
 }

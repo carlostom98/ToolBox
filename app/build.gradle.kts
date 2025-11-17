@@ -10,12 +10,12 @@ plugins {
 
 android {
     namespace = "com.poc.toolboxapp"
-    compileSdk = 34
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.poc.toolboxapp"
         minSdk = 21
-        targetSdk = 34
+        targetSdk = 36
         versionCode = 1
         versionName = "1.0"
 
@@ -91,9 +91,6 @@ dependencies {
     // Coroutines
     implementation(libs.coroutines)
 
-    // Picasso
-    implementation(libs.picasso)
-
     // define any required OkHttp artifacts without version
     implementation(libs.okhttp)
     implementation(libs.logging.interceptor)
@@ -106,6 +103,8 @@ dependencies {
     // Compose
     implementation(libs.androidx.compose.runtime)
     implementation(libs.androidx.compose.navigation)
+    implementation(libs.compose.coil)
+    implementation(libs.compose.coil.okhttp)
     implementation(platform(libs.compose.boom))
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-tooling")
@@ -113,9 +112,6 @@ dependencies {
     implementation("androidx.compose.material3:material3")
     implementation("androidx.compose.foundation:foundation")
 
-
-    // Glide
-    implementation(libs.glide)
 
     // Kotlin serialization
     implementation(libs.kotlinx.serialization.json)

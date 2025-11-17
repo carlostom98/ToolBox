@@ -23,7 +23,9 @@ class PersistencePhotosRepository(
             it.voToPhotosEntity()
         }
 
-        emit(Result.success(cache))
+        if (cache.isNotEmpty()) {
+            emit(Result.success(cache))
+        }
 
         try {
             val remote = apiService.getPhotosData()

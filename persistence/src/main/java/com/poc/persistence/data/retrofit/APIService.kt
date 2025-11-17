@@ -7,8 +7,8 @@ import retrofit2.http.GET
 
 interface APIService {
     @GET("albums")
-    fun getAlbumsData(): Response<List<AlbumVO>>
+    suspend fun getAlbumsData(): Response<List<AlbumVO>>
 
     @GET("photos")
-    fun getPhotosData(): Response<List<PhotosVO>>
+    suspend fun getPhotosData(): Response<List<PhotosVO>>
 }

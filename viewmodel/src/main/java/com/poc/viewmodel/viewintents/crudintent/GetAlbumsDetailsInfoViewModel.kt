@@ -12,9 +12,13 @@ import javax.inject.Inject
 
 
 @HiltViewModel
-class ManageDataViewModel @Inject constructor(private val getAlbumsDetailedUseCase: GetAlbumsDetailedUseCase) : ViewModel() {
+class GetAlbumsDetailsInfoViewModel @Inject constructor(private val getAlbumsDetailedUseCase: GetAlbumsDetailedUseCase) : ViewModel() {
     private val _response = MutableStateFlow<Response<List<AlbumDetailedEntity>>>(Response.Loading)
     val response get() = _response.asStateFlow()
+
+    init {
+        handleIntent(UserIntent.GetAllData)
+    }
 
     fun handleIntent(userIntent: UserIntent) {
         when(userIntent) {

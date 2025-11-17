@@ -2,9 +2,7 @@ package com.poc.toolboxapp.presenter
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.poc.viewmodel.viewintents.crudintent.ManageDataViewModel
 import com.poc.toolboxapp.utils.extensions.changeScreen
 import com.poc.toolboxapp.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint

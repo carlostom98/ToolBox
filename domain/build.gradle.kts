@@ -8,7 +8,7 @@ plugins {
 
 android {
     namespace = "com.poc.domain"
-    compileSdk = 34
+    compileSdk = 36
 
     defaultConfig {
         minSdk = 21
