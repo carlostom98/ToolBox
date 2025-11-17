@@ -13,7 +13,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMainBinding
-    val manageDataViewModel: ManageDataViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

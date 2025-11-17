@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -17,7 +18,6 @@ import com.poc.viewmodel.viewintents.crudintent.ManageDataViewModel
 
 @Composable
 fun NavigationStack(
-    manageDataViewModel: ManageDataViewModel,
     paddingValues: PaddingValues,
     context: Context = LocalContext.current
 ) {
@@ -26,7 +26,7 @@ fun NavigationStack(
     NavHost(navController = navController, startDestination = HomeScreen) {
         composable<HomeScreen> {
             LoadingScreen(
-                modifier = Modifier.fillMaxSize().padding(30.dp),
+                modifier = Modifier.size(130.dp),
                 strokeWidth = 20.dp,
                 MaterialTheme.colorScheme.primary
             )

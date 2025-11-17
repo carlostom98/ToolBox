@@ -41,7 +41,6 @@ class EntryFragment : Fragment() {
                         content = { paddingValues ->
                             Box(modifier = Modifier.fillMaxSize().padding(paddingValues)) {
                                 NavigationStack(
-                                    manageDataViewModel = activity.manageDataViewModel,
                                     paddingValues = paddingValues
                                 )
                             }
