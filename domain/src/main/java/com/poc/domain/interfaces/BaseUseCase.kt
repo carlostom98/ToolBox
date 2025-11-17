@@ -1,5 +1,6 @@
 package com.poc.domain.interfaces
 
+import com.poc.domain.entities.Response
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -21,24 +22,14 @@ abstract class BaseUseCase<in Parameter, out Output> where Output : Any {
     }
 }
 
-abstract class BaseUseCaseMainThread<in Parameter, out Output> where Output : Any {
-
-    abstract fun doWork(parameter: Parameter): Output
-
-    operator fun invoke(
-        parameter: Parameter
-    ): Output = doWork(parameter)
-
-}
-
 abstract class BaseUseCaseNoParams<out Output> where Output: Any {
     private val coroutineScopeMain = CoroutineScope(Dispatchers.Main)
 
-    abstract suspend fun doWork(): Output
+    abstract suspend fun doWork(): Response<Output>
 
     operator fun invoke(
         coroutineScope: CoroutineScope,
-        onDataRetrieved: (Output) -> Unit
+        onDataRetrieved: (Response<Output>) -> Unit
     ) {
         val deferred = coroutineScope.async { doWork() }
         coroutineScopeMain.launch { onDataRetrieved(deferred.await()) }

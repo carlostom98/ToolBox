@@ -2,12 +2,10 @@ package com.poc.persistence.di
 
 import android.content.Context
 import androidx.room.Room
-import com.poc.data.interfaces.ICRUDPostItRepository
-import com.poc.persistence.data.room.daos.PostItDao
+import com.poc.data.interfaces.IPersistenceRepository
+import com.poc.persistence.data.room.daos.PhotosDao
 import com.poc.persistence.data.room.database.AppDatabase
-import com.poc.persistence.data.room.datasource.CRUDPostItRoomDataSource
-import com.poc.persistence.data.repository.CRUDPostItRepository
-import com.poc.persistence.domain.interfaces.PostItDataSource
+import com.poc.persistence.data.repository.PersistencePhotosRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -31,15 +29,13 @@ object RoomModule {
 
     @Provides
     @Singleton
-    fun provideDao(appDatabase: AppDatabase) = appDatabase.getPostItDao()
+    fun providePhotosDao(appDatabase: AppDatabase) = appDatabase.getPhotosDao()
+
 
     @Provides
     @Singleton
-    fun provideRoomDataSource(postItDao: PostItDao): PostItDataSource = CRUDPostItRoomDataSource(postItDao)
+    fun provideAlbumsDao(appDatabase: AppDatabase) = appDatabase.getAlbumsDao()
 
-    @Provides
-    @Singleton
-    fun provideRepository(roomDataSource: PostItDataSource): ICRUDPostItRepository = CRUDPostItRepository(roomDataSource)
 
 
 }
