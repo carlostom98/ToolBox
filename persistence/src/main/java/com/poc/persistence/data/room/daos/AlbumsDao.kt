@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface AlbumsDao {
-    @Query("SELECT * FROM photos ORDER BY id DESC")
+    @Query("SELECT * FROM albums ORDER BY id DESC")
     fun getAll(): Flow<List<AlbumVO>>
 
     @Insert (onConflict = OnConflictStrategy.REPLACE)

@@ -9,7 +9,7 @@ import com.poc.domain.interfaces.BaseUseCaseNoParams
 import kotlinx.coroutines.flow.firstOrNull
 import javax.inject.Inject
 
-class GetAlbumsDetailedEntityList @Inject constructor(
+class GetAlbumsDetailedUseCase @Inject constructor(
     private val repositoryPhotos: IPersistenceRepository<PhotosEntity>,
     private val repositoryAlbums: IPersistenceRepository<AlbumEntity>,
 ) : BaseUseCaseNoParams<List<AlbumDetailedEntity>>() {

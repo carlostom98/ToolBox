@@ -4,10 +4,7 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
-data object PostItScreen
+data object HomeScreen
 
 @Serializable
-data class DetailScreen(val postItEntity: PostItEntity)
-
-@Serializable
-data object CreatePostItScreen
+data class DetailScreen(val message: String)

@@ -1,6 +1,8 @@
 package com.poc.domain.entities
 
 
+
+
 data class AlbumDetailedEntity(
     val title: String,
     val id: Int,

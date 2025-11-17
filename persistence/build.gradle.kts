@@ -28,7 +28,7 @@ android {
             buildConfigField("String", "BASE_URL", "\"https://jsonplaceholder.typicode.com/\"")
         }
         debug {
-            buildConfigField("String", "BASE_URL", "\"http://10.0.2.2:3002/v1/albums\"")
+            buildConfigField("String", "BASE_URL", "\"http://10.0.2.2:3002/v1/\"")
         }
     }
     compileOptions {
