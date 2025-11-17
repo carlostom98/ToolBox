@@ -34,7 +34,6 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.poc.domain.entities.PostItEntity
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable

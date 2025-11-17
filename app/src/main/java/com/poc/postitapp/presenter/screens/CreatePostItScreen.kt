@@ -39,8 +39,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.poc.domain.entities.PostItEntity
-import com.poc.domain.entities.UrgencyLevel
 
 import com.poc.postitapp.presenter.screens.atoms.DropDownMenuPicker
 import com.poc.postitapp.presenter.screens.manageresult.ManageStateValue

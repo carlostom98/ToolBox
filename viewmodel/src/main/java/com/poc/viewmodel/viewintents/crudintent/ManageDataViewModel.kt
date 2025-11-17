@@ -2,9 +2,7 @@ package com.poc.viewmodel.viewintents.crudintent
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.poc.domain.entities.PostItEntity
-import com.poc.domain.entities.SortedBy
-import com.poc.domain.entities.UseCaseResponse
+import com.poc.domain.entities.Response
 import com.poc.domain.usecases.UseCases
 import com.poc.viewmodel.viewintents.ViewModelResponse
 import com.poc.viewmodel.viewintents.ViewStates
@@ -28,7 +26,7 @@ class ManageDataViewModel @Inject constructor(private val useCases: UseCases) : 
 
     private val _postItsSortedBy = _sortedBy.flatMapLatest { sortedBy ->
         useCases.getAllPostItsUseCase(sortedBy).let {
-            if (it is UseCaseResponse.Success<Flow<List<PostItEntity>>>) it.response else emptyFlow()
+            if (it is Response.Success<Flow<List<PostItEntity>>>) it.response else emptyFlow()
             } ?: emptyFlow()
         }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 
@@ -46,8 +44,8 @@ class ManageDataViewModel @Inject constructor(private val useCases: UseCases) : 
             is CRUDIntents.DeletePostIt -> {
                 viewModelScope.launch {
                     when (useCases.deletePostItUseCase(intent.data)) {
-                        UseCaseResponse.Error -> _isSuccessfulResponse.value = false
-                        is UseCaseResponse.Success -> _isSuccessfulResponse.value = true
+                        Response.Error -> _isSuccessfulResponse.value = false
+                        is Response.Success -> _isSuccessfulResponse.value = true
                     }
                 }
             }
@@ -59,8 +57,8 @@ class ManageDataViewModel @Inject constructor(private val useCases: UseCases) : 
             is CRUDIntents.UpsertPostIt -> {
                 viewModelScope.launch {
                     when (useCases.addPostItUseCase(intent.data)) {
-                        UseCaseResponse.Error -> _isSuccessfulResponse.value = false
-                        is UseCaseResponse.Success -> _isSuccessfulResponse.value = true
+                        Response.Error -> _isSuccessfulResponse.value = false
+                        is Response.Success -> _isSuccessfulResponse.value = true
                     }
                 }
             }

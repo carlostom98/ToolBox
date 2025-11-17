@@ -1,7 +1,5 @@
 package com.poc.viewmodel.viewintents.createoreditintent
 
-import com.poc.domain.entities.UrgencyLevel
-
 sealed class CreateOrEditIntent {
     data class AddTitle(val title: String) : CreateOrEditIntent()
     data class AddDescription(val description: String) : CreateOrEditIntent()

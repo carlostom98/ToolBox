@@ -2,18 +2,18 @@ package com.poc.persistence.data.room.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import androidx.room.TypeConverters
-import com.poc.persistence.data.converters.UrgencyLevelConverter
-import com.poc.persistence.data.room.daos.PostItDao
-import com.poc.persistence.data.entities.PostItVO
+import com.poc.persistence.data.entities.AlbumVO
+import com.poc.persistence.data.entities.PhotosVO
+import com.poc.persistence.data.room.daos.AlbumsDao
+import com.poc.persistence.data.room.daos.PhotosDao
 
 
-@Database(entities = [PostItVO::class], version = 1)
-@TypeConverters(UrgencyLevelConverter::class)
+@Database(entities = [AlbumVO::class, PhotosVO::class], version = 1)
 abstract class AppDatabase: RoomDatabase() {
-    abstract fun getPostItDao(): PostItDao
+    abstract fun getPhotosDao(): PhotosDao
+    abstract fun getAlbumsDao(): AlbumsDao
 
     companion object {
-        const val DATABASE_NAME: String = "post-it-db"
+        const val DATABASE_NAME: String = "persistence-db"
     }
 }

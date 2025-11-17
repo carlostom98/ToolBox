@@ -3,7 +3,6 @@ package com.poc.postitapp.presenter.navigation.custom
 import android.net.Uri
 import android.os.Bundle
 import androidx.navigation.NavType
-import com.poc.domain.entities.PostItEntity
 import kotlinx.serialization.json.Json
 
 object CustomNavTypePostIt {

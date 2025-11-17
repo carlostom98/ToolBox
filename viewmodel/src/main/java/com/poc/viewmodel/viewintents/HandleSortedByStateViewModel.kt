@@ -1,7 +1,6 @@
 package com.poc.viewmodel.viewintents
 
 import androidx.lifecycle.ViewModel
-import com.poc.domain.entities.SortedBy
 import kotlinx.coroutines.flow.MutableStateFlow
 
 class HandleSortedByStateViewModel: ViewModel() {

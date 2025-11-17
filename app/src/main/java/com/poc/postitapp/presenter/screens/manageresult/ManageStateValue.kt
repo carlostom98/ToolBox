@@ -11,8 +11,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.poc.domain.entities.PostItEntity
-import com.poc.domain.entities.SortedBy
 import com.poc.postitapp.presenter.screens.LoadingScreen
 import com.poc.postitapp.presenter.screens.PostItList
 import com.poc.postitapp.presenter.screens.listeners.ListenViewState

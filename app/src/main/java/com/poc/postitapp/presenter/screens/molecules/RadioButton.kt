@@ -20,7 +20,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.poc.domain.entities.SortedBy
 import com.poc.viewmodel.viewintents.HandleSortedByStateViewModel
 import kotlinx.coroutines.flow.collect
 

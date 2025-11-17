@@ -1,7 +1,5 @@
 package com.poc.viewmodel.viewintents
 
-import com.poc.domain.entities.PostItEntity
-
 
 sealed class ViewStates  () {
     data object Loading: ViewStates()
