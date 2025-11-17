@@ -1,4 +1,4 @@
-package com.poc.postitapp.presenter.navigation
+package com.poc.toolboxapp.presenter.navigation
 
 import kotlinx.serialization.Serializable
 

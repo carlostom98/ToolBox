@@ -1,10 +1,11 @@
-package com.poc.postitapp.presenter
+package com.poc.toolboxapp.presenter
 
 import android.os.Bundle
+import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.poc.viewmodel.viewintents.crudintent.ManageDataViewModel
-import com.poc.postitapp.utils.extensions.changeScreen
+import com.poc.toolboxapp.utils.extensions.changeScreen
 import com.poc.toolboxapp.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -18,6 +19,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        supportActionBar?.hide()
+        enableEdgeToEdge()
         if (savedInstanceState == null) {
             EntryFragment().changeScreen(this)
         }

@@ -1,4 +1,4 @@
-package com.poc.postitapp.rules
+package com.poc.toolboxapp.rules
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi

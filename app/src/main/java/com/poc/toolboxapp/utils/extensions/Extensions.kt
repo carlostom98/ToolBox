@@ -1,9 +1,9 @@
-package com.poc.postitapp.utils.extensions
+package com.poc.toolboxapp.utils.extensions
 
 import android.content.Context
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.poc.postitapp.presenter.MainActivity
+import com.poc.toolboxapp.presenter.MainActivity
 
 fun Fragment.changeScreen(activity: MainActivity) {
     val transaction = activity.supportFragmentManager.beginTransaction()

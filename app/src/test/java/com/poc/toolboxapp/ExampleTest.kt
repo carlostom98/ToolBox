@@ -1,4 +1,4 @@
-package com.poc.postitapp
+package com.poc.toolboxapp
 
 import org.junit.Before
 import org.junit.Test

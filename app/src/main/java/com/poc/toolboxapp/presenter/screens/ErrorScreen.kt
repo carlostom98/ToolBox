@@ -1,4 +1,4 @@
-package com.poc.postitapp.presenter.screens
+package com.poc.toolboxapp.presenter.screens
 
 import androidx.compose.runtime.Composable
 

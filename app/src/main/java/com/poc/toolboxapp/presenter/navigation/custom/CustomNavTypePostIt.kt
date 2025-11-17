@@ -1,9 +1,4 @@
-package com.poc.postitapp.presenter.navigation.custom
-
-import android.net.Uri
-import android.os.Bundle
-import androidx.navigation.NavType
-import kotlinx.serialization.json.Json
+package com.poc.toolboxapp.presenter.navigation.custom
 
 object CustomNavTypePostIt {
 

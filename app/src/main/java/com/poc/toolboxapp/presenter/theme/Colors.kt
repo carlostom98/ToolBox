@@ -1,14 +1,13 @@
-package com.poc.postitapp.presenter.theme
+package com.poc.toolboxapp.presenter.theme
 
-import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.ui.graphics.Color
 
 
 // Light Colors
-val LightPrimary = Color(0xFFBB86FC)
-val LightSecondary = Color(0xFF03DAC5)
+val LightPrimary = Color(0xFF4CAF50)
+val LightSecondary = Color(0xFF80E27E)
 val LightBackground = Color(0xFFFFFFFF)
 val LightSurface = Color(0xFFFFFFFF)
 val LightError = Color(0xFFB00020)
@@ -20,12 +19,12 @@ val LightOnError = Color(0xFFFFFFFF)
 
 
 // Dark Colors
-val DarkPrimary = Color(0xFF6200EE)
-val DarkSecondary = Color(0xFF03DAC5)
+val DarkPrimary = Color(0xFF388E3C)
+val DarkSecondary = Color(0xFF69F0AE)
 val DarkBackground = Color(0xFF121212)
 val DarkSurface = Color(0xFF121212)
 val DarkError = Color(0xFFCF6679)
-val DarkOnPrimary = Color(0xFF000000)
+val DarkOnPrimary = Color(0xFFFFFFFF)
 val DarkOnSecondary = Color(0xFF000000)
 val DarkOnBackground = Color(0xFFFFFFFF)
 val DarkOnSurface = Color(0xFFFFFFFF)
