@@ -3,7 +3,6 @@ package com.poc.viewmodel.viewintents.crudintent
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.poc.domain.entities.Response
-import com.poc.domain.usecases.UseCases
 import com.poc.viewmodel.viewintents.ViewModelResponse
 import com.poc.viewmodel.viewintents.ViewStates
 import dagger.hilt.android.lifecycle.HiltViewModel

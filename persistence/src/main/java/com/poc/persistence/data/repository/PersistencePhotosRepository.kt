@@ -17,33 +17,32 @@ import kotlin.collections.orEmpty
 class PersistencePhotosRepository(
     private val photosDao: PhotosDao,
     private val apiService: APIService
-    ): IPersistenceRepository<PhotosVO, PhotosEntity> {
-    override fun getAll(): Flow<Response<List<PhotosEntity>>> = flow {
-        emit(Response.Loading)
+    ): IPersistenceRepository<PhotosEntity> {
+    override fun getAll(): Flow<Result<List<PhotosEntity>>> = flow {
         val cache = photosDao.getAll().firstOrNull().orEmpty().map {
             it.voToPhotosEntity()
         }
 
-        emit(Response.Success(cache))
+        emit(Result.success(cache))
 
         try {
             val remote = apiService.getPhotosData()
             if (remote.isSuccessful) {
                 remote.body()?.let {
                     photosDao.insert(it)
-                }  ?: emit(Response.Error("Api body is NULL"))
+                }  ?: emit(Result.failure(Throwable("Api body is NULL")))
             } else {
-                emit(Response.Error("Error recovering API Data"))
+                emit(Result.failure(Throwable("Error recovering API Data")))
             }
 
         } catch (e: Exception) {
-            emit(Response.Error(e.message!!))
+            emit(Result.failure(Throwable(e.message!!)))
         }
 
 
         emitAll(  photosDao.getAll().map { list ->
             val mapped = list.map { it.voToPhotosEntity() }
-            Response.Success(mapped)
+            Result.success(mapped)
         })
     }
 

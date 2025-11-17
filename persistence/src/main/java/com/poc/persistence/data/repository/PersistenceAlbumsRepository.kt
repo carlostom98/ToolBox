@@ -14,34 +14,34 @@ import kotlinx.coroutines.flow.map
 
 class PersistenceAlbumsRepository( private val albumsDao: AlbumsDao,
                                    private val apiService: APIService
-): IPersistenceRepository<AlbumVO, AlbumEntity> {
+): IPersistenceRepository<AlbumEntity> {
 
-    override fun getAll(): Flow<Response<List<AlbumEntity>>> = flow {
-        emit(Response.Loading)
+    override fun getAll(): Flow<Result<List<AlbumEntity>>> = flow {
+
         val cache = albumsDao.getAll().firstOrNull().orEmpty().map {
             it.voToAlbumEntity()
         }
 
-        emit(Response.Success(cache))
+        emit(Result.success(cache))
 
         try {
             val remote = apiService.getAlbumsData()
             if (remote.isSuccessful) {
                 remote.body()?.let {
                     albumsDao.insert(it)
-                }  ?: emit(Response.Error("Api body is NULL"))
+                }  ?: emit(Result.failure(Throwable("Api body is NULL")))
             } else {
-                emit(Response.Error("Error recovering API Data"))
+                emit(Result.failure(Throwable("Error recovering API Data")))
             }
 
         } catch (e: Exception) {
-            emit(Response.Error(e.message!!))
+            emit(Result.failure(Throwable(e.message!!)))
         }
 
 
         emitAll(  albumsDao.getAll().map { list ->
             val mapped = list.map { it.voToAlbumEntity() }
-            Response.Success(mapped)
+            Result.success(mapped)
         })
     }
 
