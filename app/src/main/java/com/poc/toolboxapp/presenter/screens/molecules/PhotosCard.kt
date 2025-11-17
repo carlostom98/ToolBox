@@ -3,6 +3,7 @@ package com.poc.toolboxapp.presenter.screens.molecules
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -18,7 +19,7 @@ import com.poc.toolboxapp.utils.extensions.SpMeasureUtils.SMALL_TEXT_SIZE
 
 @Composable
 fun PhotosCard(photo: PhotosEntity) {
-    Column(modifier = Modifier.wrapContentHeight()) {
+    Column(modifier = Modifier.padding(DpMeasureUtils.SMALL_SPACER.dp).wrapContentHeight()) {
         Text(photo.title, style = TextStyle(
             fontSize = SMALL_TEXT_SIZE.sp,
             fontStyle = FontStyle.Italic
