@@ -1,10 +1,11 @@
 package com.poc.toolboxapp.presenter.navigation
 
+import com.poc.domain.entities.PhotosEntity
 import kotlinx.serialization.Serializable
 
 
 @Serializable
-data object HomeScreen
+data object HomeScreenDestiny
 
 @Serializable
-data class DetailScreen(val message: String)
+data class DetailScreenDestiny(val photosEntity: PhotosEntity)

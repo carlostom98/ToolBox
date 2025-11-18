@@ -7,13 +7,14 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.poc.domain.entities.AlbumDetailedEntity
+import com.poc.domain.entities.PhotosEntity
 import com.poc.domain.entities.Response
 import com.poc.toolboxapp.presenter.screens.atoms.ImageLoader
 import com.poc.toolboxapp.presenter.screens.molecules.Carrousel
 import com.poc.viewmodel.viewintents.crudintent.GetAlbumsDetailsInfoViewModel
 
 @Composable
-fun HomeScreen(getAlbumsDetailsInfoViewModel: GetAlbumsDetailsInfoViewModel) {
+fun HomeScreen(getAlbumsDetailsInfoViewModel: GetAlbumsDetailsInfoViewModel, onItemClick: (PhotosEntity) -> Unit) {
 
     val albumsDetailedInfo: Response<List<AlbumDetailedEntity>> = getAlbumsDetailsInfoViewModel.response.collectAsState().value
 
@@ -27,7 +28,7 @@ fun HomeScreen(getAlbumsDetailsInfoViewModel: GetAlbumsDetailsInfoViewModel) {
             )
         }
         is Response.Success<List<AlbumDetailedEntity>> -> {
-            Carrousel(albumsDetailedInfo.response ?: emptyList())
+            Carrousel(albumsDetailedInfo.response ?: emptyList(), onItemClick)
         }
     }
 }
