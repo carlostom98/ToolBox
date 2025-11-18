@@ -18,7 +18,13 @@ Incluye:
 **Responsabilidad:** Obtener y almacenar información sin lógica de negocio.
 
 🖼️  
-![data module](https://via.placeholder.com/100x60?text=DATA)
+![data module]([https://via.placeholder.com/100x60?text=DATA](https://github.com/carlostom98/ToolBox/tree/main/persistence))
+
+### **1.1 Gradle file Build Types
+
+El archivo de gradle contiene la definición de un BASE_URL diferente para debug y release con la finalidad de realizar pruebas.
+
+![build.gradle persistance](https://github.com/carlostom98/ToolBox/blob/main/persistence/build.gradle.kts)
 
 ---
 
@@ -32,7 +38,7 @@ Incluye:
 **Responsabilidad:** Regla y flujo de negocio.
 
 🖼️  
-![domain module](https://via.placeholder.com/100x60?text=DOMAIN)
+![domain module]([https://via.placeholder.com/100x60?text=DOMAIN](https://github.com/carlostom98/ToolBox/tree/main/domain))
 
 ---
 
@@ -43,10 +49,10 @@ Incluye:
 - Navegación  
 - Configuración general  
 
-**Responsabilidad:** Coordinar módulos y exponer servicios a la UI.
+**Responsabilidad:** Coordinar módulos y exponer servicios a la UI con Jetpack Compose.
 
 🖼️  
-![app module](https://via.placeholder.com/100x60?text=APP)
+![app module](https://github.com/carlostom98/ToolBox/tree/main/app)
 
 ---
 
@@ -60,9 +66,20 @@ Incluye:
 **Responsabilidad:** Actuar como puente entre UI y capas internas.
 
 🖼️  
-![vm module](https://via.placeholder.com/100x60?text=ViewModel)
+![vm module](https://github.com/carlostom98/ToolBox/tree/main/viewmodel)
 
 ---
+
+### **5. `di` (repartir las depndencias de cada módulo)**
+Contiene la lógica específica de inyección de dependencias con dagger hilt.  
+Incluye:  
+- Module data 
+- Module Domain  
+ 
+**Responsabilidad:** Centralizar la inyección de dependencias que necesita cada módulo.
+
+🖼️  
+![vm module](https://github.com/carlostom98/ToolBox/tree/main/viewmodel)
 
 ## 🏗️ Diagrama General de Arquitectura
 
@@ -79,9 +96,16 @@ Incluye:
 
 ---
 
-## 📦 Resumen Final
+## 📦 Resumen Final y Resultado final
 Esta estructura modular mejora la mantenibilidad del proyecto y permite trabajar cada capa de forma autónoma. El flujo de datos es unidireccional:  
 **Data → Domain → App → ViewModel → UI**  
+
+### Home Screen
+
+<img width="624" height="775" alt="Screenshot 2025-11-18 at 1 40 51 PM" src="https://github.com/user-attachments/assets/0869687f-3c3b-4e36-b0a7-b8a865293d7a" />
+
+### Detail Screen
+<img width="495" height="775" alt="Screenshot 2025-11-18 at 1 41 47 PM" src="https://github.com/user-attachments/assets/402fc776-4dff-46ec-9d98-d7c0f8c8577f" />
 
 ---
 
