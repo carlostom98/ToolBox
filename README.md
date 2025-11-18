@@ -98,10 +98,11 @@ Incluye:
 ---
 ### ⭐ Testing
 - The mockoon file for debugging purposes
+
 ![Mockoon file](https://github.com/carlostom98/ToolBox/blob/main/app/placeholder.json)
 - Check api link
 
-![json placeholder](https://jsonplaceholder.typicode.com/guide/)
+![JsonPlaceholder]([https://jsonplaceholder.typicode.com/guide/](https://jsonplaceholder.typicode.com))
 
 ---
 
