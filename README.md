@@ -33,7 +33,8 @@ Capa central independiente del framework.
 Incluye:  
 - Entidades de dominio  
 - Interfaces de repositorios  
-- Casos de uso (UseCases)  
+- Casos de uso (UseCases)
+- Cachear información obtenida mediante API en local DB con Room (a través de repositories de persistance). 
 
 **Responsabilidad:** Regla y flujo de negocio.
 
