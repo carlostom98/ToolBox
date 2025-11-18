@@ -121,6 +121,12 @@ dependencies {
     implementation(project(":viewmodel"))
     implementation(project(":domain"))
 
+    // JetpackMedia
+    implementation(libs.androidx.media.exoplayer)
+    implementation(libs.androidx.media.session)
+    implementation(libs.androidx.media.exoplayer.dash)
+    implementation(libs.androidx.media.ui)
+
 
 
 }
