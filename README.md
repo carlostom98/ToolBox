@@ -102,7 +102,8 @@ Incluye:
 ![Mockoon file](https://github.com/carlostom98/ToolBox/blob/main/app/placeholder.json)
 - Check api link
 
-![JsonPlaceholder]([https://jsonplaceholder.typicode.com/guide/](https://jsonplaceholder.typicode.com))
+  
+https://jsonplaceholder.typicode.com/guide/
 
 ---
 
