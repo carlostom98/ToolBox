@@ -1,0 +1,129 @@
+{
+  "uuid": "cac60152-3542-4a51-b67e-3aea54bc1846",
+  "lastMigration": 33,
+  "name": "Placeholder",
+  "endpointPrefix": "v1",
+  "latency": 0,
+  "port": 3002,
+  "hostname": "",
+  "folders": [],
+  "routes": [
+    {
+      "uuid": "87518877-a818-4a58-986e-f6608a45b697",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "albums",
+      "responses": [
+        {
+          "uuid": "07388cab-22b7-4ca3-9dc0-ba9e50bfa8a1",
+          "body": "\n[\n  { \"userId\": 1, \"id\": 1, \"title\": \"Quidem molestiae enim\" },\n  { \"userId\": 1, \"id\": 2, \"title\": \"Sunt qui excepturi placeat culpa\" },\n  { \"userId\": 1, \"id\": 3, \"title\": \"Omnis laborum odio\" },\n  { \"userId\": 1, \"id\": 4, \"title\": \"Non esse culpa molestiae omnis sed optio\" },\n  { \"userId\": 1, \"id\": 5, \"title\": \"Eaque aut omnis a\" },\n  { \"userId\": 1, \"id\": 6, \"title\": \"Natus impedit quibusdam illo est\" },\n  { \"userId\": 1, \"id\": 7, \"title\": \"Quibusdam autem aliquid et et quia\" },\n  { \"userId\": 1, \"id\": 8, \"title\": \"Qui fuga est a eum\" },\n  { \"userId\": 1, \"id\": 9, \"title\": \"Saepe unde necessitatibus rem\" },\n  { \"userId\": 1, \"id\": 10, \"title\": \"Distinctio laborum impedit quisquam\" },\n  { \"userId\": 1, \"id\": 11, \"title\": \"Velit soluta adipisci molestias reiciendis harum\" },\n  { \"userId\": 1, \"id\": 12, \"title\": \"Omnis pariatur ut et et ratione\" }\n]\n\n",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "be95f13c-4a77-4a91-9097-632418c96b5b",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "photos",
+      "responses": [
+        {
+          "uuid": "c7fc4347-cedd-4a78-8779-2730a6ac8fee",
+          "body": "[\n  { \"albumId\": 1, \"id\": 1,  \"title\": \"Foto 1 del álbum 1\",  \"url\": \"https://picsum.photos/id/101/600\", \"thumbnailUrl\": \"https://picsum.photos/id/101/150\" },\n  { \"albumId\": 1, \"id\": 2,  \"title\": \"Foto 2 del álbum 1\",  \"url\": \"https://picsum.photos/id/102/600\", \"thumbnailUrl\": \"https://picsum.photos/id/102/150\" },\n  { \"albumId\": 1, \"id\": 3,  \"title\": \"Foto 3 del álbum 1\",  \"url\": \"https://picsum.photos/id/103/600\", \"thumbnailUrl\": \"https://picsum.photos/id/103/150\" },\n  { \"albumId\": 1, \"id\": 4,  \"title\": \"Foto 4 del álbum 1\",  \"url\": \"https://picsum.photos/id/104/600\", \"thumbnailUrl\": \"https://picsum.photos/id/104/150\" },\n  { \"albumId\": 1, \"id\": 5,  \"title\": \"Foto 5 del álbum 1\",  \"url\": \"https://picsum.photos/id/105/600\", \"thumbnailUrl\": \"https://picsum.photos/id/105/150\" },\n\n  { \"albumId\": 2, \"id\": 6,  \"title\": \"Foto 1 del álbum 2\",  \"url\": \"https://picsum.photos/id/106/600\", \"thumbnailUrl\": \"https://picsum.photos/id/106/150\" },\n  { \"albumId\": 2, \"id\": 7,  \"title\": \"Foto 2 del álbum 2\",  \"url\": \"https://picsum.photos/id/107/600\", \"thumbnailUrl\": \"https://picsum.photos/id/107/150\" },\n  { \"albumId\": 2, \"id\": 8,  \"title\": \"Foto 3 del álbum 2\",  \"url\": \"https://picsum.photos/id/108/600\", \"thumbnailUrl\": \"https://picsum.photos/id/108/150\" },\n  { \"albumId\": 2, \"id\": 9,  \"title\": \"Foto 4 del álbum 2\",  \"url\": \"https://picsum.photos/id/109/600\", \"thumbnailUrl\": \"https://picsum.photos/id/109/150\" },\n  { \"albumId\": 2, \"id\": 10, \"title\": \"Foto 5 del álbum 2\",  \"url\": \"https://picsum.photos/id/110/600\", \"thumbnailUrl\": \"https://picsum.photos/id/110/150\" },\n  { \"albumId\": 2, \"id\": 11, \"title\": \"Foto 6 del álbum 2\",  \"url\": \"https://picsum.photos/id/111/600\", \"thumbnailUrl\": \"https://picsum.photos/id/111/150\" },\n\n  { \"albumId\": 3, \"id\": 12, \"title\": \"Foto 1 del álbum 3\",  \"url\": \"https://picsum.photos/id/112/600\", \"thumbnailUrl\": \"https://picsum.photos/id/112/150\" },\n  { \"albumId\": 3, \"id\": 13, \"title\": \"Foto 2 del álbum 3\",  \"url\": \"https://picsum.photos/id/113/600\", \"thumbnailUrl\": \"https://picsum.photos/id/113/150\" },\n  { \"albumId\": 3, \"id\": 14, \"title\": \"Foto 3 del álbum 3\",  \"url\": \"https://picsum.photos/id/114/600\", \"thumbnailUrl\": \"https://picsum.photos/id/114/150\" },\n  { \"albumId\": 3, \"id\": 15, \"title\": \"Foto 4 del álbum 3\",  \"url\": \"https://picsum.photos/id/115/600\", \"thumbnailUrl\": \"https://picsum.photos/id/115/150\" },\n  { \"albumId\": 3, \"id\": 16, \"title\": \"Foto 5 del álbum 3\",  \"url\": \"https://picsum.photos/id/116/600\", \"thumbnailUrl\": \"https://picsum.photos/id/116/150\" },\n\n  { \"albumId\": 4, \"id\": 17, \"title\": \"Foto 1 del álbum 4\",  \"url\": \"https://picsum.photos/id/117/600\", \"thumbnailUrl\": \"https://picsum.photos/id/117/150\" },\n  { \"albumId\": 4, \"id\": 18, \"title\": \"Foto 2 del álbum 4\",  \"url\": \"https://picsum.photos/id/118/600\", \"thumbnailUrl\": \"https://picsum.photos/id/118/150\" },\n  { \"albumId\": 4, \"id\": 19, \"title\": \"Foto 3 del álbum 4\",  \"url\": \"https://picsum.photos/id/119/600\", \"thumbnailUrl\": \"https://picsum.photos/id/119/150\" },\n  { \"albumId\": 4, \"id\": 20, \"title\": \"Foto 4 del álbum 4\",  \"url\": \"https://picsum.photos/id/120/600\", \"thumbnailUrl\": \"https://picsum.photos/id/120/150\" },\n  { \"albumId\": 4, \"id\": 21, \"title\": \"Foto 5 del álbum 4\",  \"url\": \"https://picsum.photos/id/121/600\", \"thumbnailUrl\": \"https://picsum.photos/id/121/150\" },\n\n  { \"albumId\": 5, \"id\": 22, \"title\": \"Foto 1 del álbum 5\",  \"url\": \"https://picsum.photos/id/122/600\", \"thumbnailUrl\": \"https://picsum.photos/id/122/150\" },\n  { \"albumId\": 5, \"id\": 23, \"title\": \"Foto 2 del álbum 5\",  \"url\": \"https://picsum.photos/id/123/600\", \"thumbnailUrl\": \"https://picsum.photos/id/123/150\" },\n  { \"albumId\": 5, \"id\": 24, \"title\": \"Foto 3 del álbum 5\",  \"url\": \"https://picsum.photos/id/124/600\", \"thumbnailUrl\": \"https://picsum.photos/id/124/150\" },\n  { \"albumId\": 5, \"id\": 25, \"title\": \"Foto 4 del álbum 5\",  \"url\": \"https://picsum.photos/id/125/600\", \"thumbnailUrl\": \"https://picsum.photos/id/125/150\" },\n  { \"albumId\": 5, \"id\": 26, \"title\": \"Foto 5 del álbum 5\",  \"url\": \"https://picsum.photos/id/126/600\", \"thumbnailUrl\": \"https://picsum.photos/id/126/150\" },\n\n  { \"albumId\": 6, \"id\": 27, \"title\": \"Foto 1 del álbum 6\",  \"url\": \"https://picsum.photos/id/127/600\", \"thumbnailUrl\": \"https://picsum.photos/id/127/150\" },\n  { \"albumId\": 6, \"id\": 28, \"title\": \"Foto 2 del álbum 6\",  \"url\": \"https://picsum.photos/id/128/600\", \"thumbnailUrl\": \"https://picsum.photos/id/128/150\" },\n  { \"albumId\": 6, \"id\": 29, \"title\": \"Foto 3 del álbum 6\",  \"url\": \"https://picsum.photos/id/129/600\", \"thumbnailUrl\": \"https://picsum.photos/id/129/150\" },\n  { \"albumId\": 6, \"id\": 30, \"title\": \"Foto 4 del álbum 6\",  \"url\": \"https://picsum.photos/id/130/600\", \"thumbnailUrl\": \"https://picsum.photos/id/130/150\" },\n  { \"albumId\": 6, \"id\": 31, \"title\": \"Foto 5 del álbum 6\",  \"url\": \"https://picsum.photos/id/131/600\", \"thumbnailUrl\": \"https://picsum.photos/id/131/150\" },\n\n  { \"albumId\": 7, \"id\": 32, \"title\": \"Foto 1 del álbum 7\",  \"url\": \"https://picsum.photos/id/132/600\", \"thumbnailUrl\": \"https://picsum.photos/id/132/150\" },\n  { \"albumId\": 7, \"id\": 33, \"title\": \"Foto 2 del álbum 7\",  \"url\": \"https://picsum.photos/id/133/600\", \"thumbnailUrl\": \"https://picsum.photos/id/133/150\" },\n  { \"albumId\": 7, \"id\": 34, \"title\": \"Foto 3 del álbum 7\",  \"url\": \"https://picsum.photos/id/134/600\", \"thumbnailUrl\": \"https://picsum.photos/id/134/150\" },\n  { \"albumId\": 7, \"id\": 35, \"title\": \"Foto 4 del álbum 7\",  \"url\": \"https://picsum.photos/id/135/600\", \"thumbnailUrl\": \"https://picsum.photos/id/135/150\" },\n  { \"albumId\": 7, \"id\": 36, \"title\": \"Foto 5 del álbum 7\",  \"url\": \"https://picsum.photos/id/136/600\", \"thumbnailUrl\": \"https://picsum.photos/id/136/150\" },\n\n  { \"albumId\": 8, \"id\": 37, \"title\": \"Foto 1 del álbum 8\",  \"url\": \"https://picsum.photos/id/137/600\", \"thumbnailUrl\": \"https://picsum.photos/id/137/150\" },\n  { \"albumId\": 8, \"id\": 38, \"title\": \"Foto 2 del álbum 8\",  \"url\": \"https://picsum.photos/id/101/600\", \"thumbnailUrl\": \"https://picsum.photos/id/138/150\" },\n  { \"albumId\": 8, \"id\": 39, \"title\": \"Foto 3 del álbum 8\",  \"url\": \"https://picsum.photos/id/139/600\", \"thumbnailUrl\": \"https://picsum.photos/id/139/150\" },\n  { \"albumId\": 8, \"id\": 40, \"title\": \"Foto 4 del álbum 8\",  \"url\": \"https://picsum.photos/id/140/600\", \"thumbnailUrl\": \"https://picsum.photos/id/140/150\" },\n  { \"albumId\": 8, \"id\": 41, \"title\": \"Foto 5 del álbum 8\",  \"url\": \"https://picsum.photos/id/141/600\", \"thumbnailUrl\": \"https://picsum.photos/id/141/150\" },\n\n  { \"albumId\": 9, \"id\": 42, \"title\": \"Foto 1 del álbum 9\",  \"url\": \"https://picsum.photos/id/142/600\", \"thumbnailUrl\": \"https://picsum.photos/id/142/150\" },\n  { \"albumId\": 9, \"id\": 43, \"title\": \"Foto 2 del álbum 9\",  \"url\": \"https://picsum.photos/id/143/600\", \"thumbnailUrl\": \"https://picsum.photos/id/143/150\" },\n  { \"albumId\": 9, \"id\": 44, \"title\": \"Foto 3 del álbum 9\",  \"url\": \"https://picsum.photos/id/144/600\", \"thumbnailUrl\": \"https://picsum.photos/id/144/150\" },\n  { \"albumId\": 9, \"id\": 45, \"title\": \"Foto 4 del álbum 9\",  \"url\": \"https://picsum.photos/id/145/600\", \"thumbnailUrl\": \"https://picsum.photos/id/145/150\" },\n  { \"albumId\": 9, \"id\": 46, \"title\": \"Foto 5 del álbum 9\",  \"url\": \"https://picsum.photos/id/146/600\", \"thumbnailUrl\": \"https://picsum.photos/id/146/150\" },\n\n  { \"albumId\": 10, \"id\": 47, \"title\": \"Foto 1 del álbum 10\", \"url\": \"https://picsum.photos/id/147/600\", \"thumbnailUrl\": \"https://picsum.photos/id/147/150\" },\n  { \"albumId\": 10, \"id\": 48, \"title\": \"Foto 2 del álbum 10\", \"url\": \"https://picsum.photos/id/102/600\", \"thumbnailUrl\": \"https://picsum.photos/id/148/150\" },\n  { \"albumId\": 10, \"id\": 49, \"title\": \"Foto 3 del álbum 10\", \"url\": \"https://picsum.photos/id/158/600\", \"thumbnailUrl\": \"https://picsum.photos/id/149/150\" },\n  { \"albumId\": 10, \"id\": 50, \"title\": \"Foto 4 del álbum 10\", \"url\": \"https://picsum.photos/id/103/600\", \"thumbnailUrl\": \"https://picsum.photos/id/150/150\" },\n  { \"albumId\": 10, \"id\": 51, \"title\": \"Foto 5 del álbum 10\", \"url\": \"https://picsum.photos/id/151/600\", \"thumbnailUrl\": \"https://picsum.photos/id/151/150\" },\n\n  { \"albumId\": 11, \"id\": 52, \"title\": \"Foto 1 del álbum 11\", \"url\": \"https://picsum.photos/id/152/600\", \"thumbnailUrl\": \"https://picsum.photos/id/152/150\" },\n  { \"albumId\": 11, \"id\": 53, \"title\": \"Foto 2 del álbum 11\", \"url\": \"https://picsum.photos/id/153/600\", \"thumbnailUrl\": \"https://picsum.photos/id/153/150\" },\n  { \"albumId\": 11, \"id\": 54, \"title\": \"Foto 3 del álbum 11\", \"url\": \"https://picsum.photos/id/154/600\", \"thumbnailUrl\": \"https://picsum.photos/id/154/150\" },\n  { \"albumId\": 11, \"id\": 55, \"title\": \"Foto 4 del álbum 11\", \"url\": \"https://picsum.photos/id/155/600\", \"thumbnailUrl\": \"https://picsum.photos/id/155/150\" },\n  { \"albumId\": 11, \"id\": 56, \"title\": \"Foto 5 del álbum 11\", \"url\": \"https://picsum.photos/id/156/600\", \"thumbnailUrl\": \"https://picsum.photos/id/156/150\" },\n\n  { \"albumId\": 12, \"id\": 57, \"title\": \"Foto 1 del álbum 12\", \"url\": \"https://picsum.photos/id/157/600\", \"thumbnailUrl\": \"https://picsum.photos/id/157/150\" },\n  { \"albumId\": 12, \"id\": 58, \"title\": \"Foto 2 del álbum 12\", \"url\": \"https://picsum.photos/id/158/600\", \"thumbnailUrl\": \"https://picsum.photos/id/158/150\" },\n  { \"albumId\": 12, \"id\": 59, \"title\": \"Foto 3 del álbum 12\", \"url\": \"https://picsum.photos/id/159/600\", \"thumbnailUrl\": \"https://picsum.photos/id/159/150\" },\n  { \"albumId\": 12, \"id\": 60, \"title\": \"Foto 4 del álbum 12\", \"url\": \"https://picsum.photos/id/160/600\", \"thumbnailUrl\": \"https://picsum.photos/id/160/150\" },\n  { \"albumId\": 12, \"id\": 61, \"title\": \"Foto 5 del álbum 12\", \"url\": \"https://picsum.photos/id/161/600\", \"thumbnailUrl\": \"https://picsum.photos/id/161/150\" }\n]\n",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    }
+  ],
+  "rootChildren": [
+    {
+      "type": "route",
+      "uuid": "87518877-a818-4a58-986e-f6608a45b697"
+    },
+    {
+      "type": "route",
+      "uuid": "be95f13c-4a77-4a91-9097-632418c96b5b"
+    }
+  ],
+  "proxyMode": false,
+  "proxyHost": "",
+  "proxyRemovePrefix": false,
+  "tlsOptions": {
+    "enabled": false,
+    "type": "CERT",
+    "pfxPath": "",
+    "certPath": "",
+    "keyPath": "",
+    "caPath": "",
+    "passphrase": ""
+  },
+  "cors": true,
+  "headers": [
+    {
+      "key": "Content-Type",
+      "value": "application/json"
+    },
+    {
+      "key": "Access-Control-Allow-Origin",
+      "value": "*"
+    },
+    {
+      "key": "Access-Control-Allow-Methods",
+      "value": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+    },
+    {
+      "key": "Access-Control-Allow-Headers",
+      "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+    }
+  ],
+  "proxyReqHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "proxyResHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "data": [],
+  "callbacks": []
+}
