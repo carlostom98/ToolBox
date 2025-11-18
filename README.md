@@ -96,6 +96,14 @@ Incluye:
 - Cambios de UI sin afectar el core del sistema  
 
 ---
+### ⭐ Testing
+- The mockoon file for debugging purposes
+![Mockoon file](https://github.com/carlostom98/ToolBox/blob/main/app/placeholder.json)
+- Check api link
+
+![json placeholder](https://jsonplaceholder.typicode.com/guide/)
+
+---
 
 ## 📦 Resumen Final y Resultado final
 Esta estructura modular mejora la mantenibilidad del proyecto y permite trabajar cada capa de forma autónoma. El flujo de datos es unidireccional:  
